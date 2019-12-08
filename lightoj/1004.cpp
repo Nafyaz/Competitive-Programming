@@ -1,35 +1,43 @@
 #include<bits/stdc++.h>
 using namespace std;
-int dia[210][210], n;
+int dia[210][210], dp[210][210], n;
 
-int func(int total, int i, int j)
+int func(int i, int j)
 {
     if(i >= 2*n - 1)
-        return total;
+        return 0;
     if(j < 0)
         return 0;
     if(i < n && j > i)
         return 0;
     if(i >= n && j >= 2*n - 1 - i)
         return 0;
+    if(dp[i][j] != 0)
+        return dp[i][j];
+    if(i == 2*n - 2 && j == 0)
+    {
+        dp[i][j] = dia[i][j];
+        return dp[i][j];
+    }
 
-    total += dia[i][j];
+//    total += dia[i][j];
 
     int p1, p2;
 
     if(i < n - 1)
     {
-        p1 = func(total, i+1, j);
-        p2 = func(total, i+1, j+1);
+        p1 = func(i+1, j);
+        p2 = func(i+1, j+1);
     }
 
     else
     {
-        p1 = func(total, i+1, j-1);
-        p2 = func(total, i+1, j);
+        p1 = func(i+1, j-1);
+        p2 = func(i+1, j);
     }
 
-    return total + max(p1, p2);
+    dp[i][j] = dia[i][j] + max(p1, p2);
+    return dp[i][j];
 }
 
 int main()
@@ -41,6 +49,8 @@ int main()
     while(T--)
     {
         memset(dia, 0, sizeof(dia));
+        memset(dp, 0, sizeof(dp));
+
         cin >> n;
         for(i = 0; i < 2*n - 1; i++)
         {
@@ -56,11 +66,18 @@ int main()
             }
         }
 
-        cout << func(0, 0, 0) << endl;
+        cout << "Case " << ++caseno << ": " << func(0, 0) << endl;
+
+//        for(i = 0; i < 2*n - 1; i++)
+//        {
+//            for(j = 0; j < n; j++)
+//                cout << dia[i][j] << " ";
+//            cout << endl;
+//        }
     }
 }
 /*
-1
+2
 4
 7
 6 4
@@ -69,4 +86,8 @@ int main()
 2 12 7
 8 2
 10
+2
+1
+2 3
+1
 */

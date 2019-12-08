@@ -3,43 +3,26 @@ using namespace std;
 
 int main()
 {
-    int n, m, i, j, k = -1;
+    int n, m, i, j, k = 0;
     string s, t;
 
     set<int> minpos, pos;
     cin >> n >> m >> s >> t;
 
-    vector <int> v[26];
-
-    for(i = 0; i < s.size(); i++)
-    {
-        v[s[i] - 'a'].push_back(i);
-    }
-
     int p, q;
-    for(i = 0; i < t.size(); i++)
+    for(i = 0; i <= t.size() - s.size(); i++)
     {
-        for(auto u : v[t[i] - 'a'])
+        pos.clear();
+        for(j = 0; j < s.size(); j++)
         {
-            if(i < u || t.size() - i < s.size() - u)
-                continue;
+            if(t[i+j] != s[j])
+                pos.insert(j+1);
+        }
 
-            pos.clear();
-            p = i - u;
-            q = 0;
-            while(q < s.size())
-            {
-                if(t[p] != s[q])
-                    pos.insert(q+1);
-                p++;
-                q++;
-            }
-
-            if(k == -1 || minpos.size() > pos.size())
-            {
-                k = 1;
-                minpos = pos;
-            }
+        if(k == 0 || minpos.size() > pos.size())
+        {
+            minpos = pos;
+            k = 1;
         }
     }
 
