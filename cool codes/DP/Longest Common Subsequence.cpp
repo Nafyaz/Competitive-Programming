@@ -35,6 +35,12 @@ int LCS(int len1, int len2)
         }
     }
 
+    for(i = 0; i <= len1; i++)
+    {
+        for(j = 0; j <= len2; j++)
+            cout << arr[i][j] << " ";
+        cout << endl;
+    }
     //now, return the final value
     return arr[len1][len2];
 }

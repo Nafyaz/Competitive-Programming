@@ -1,29 +1,34 @@
+//Thanks to Editorial
 #include<bits/stdc++.h>
 using namespace std;
+
 int main()
 {
-    int n, i, j, x, mx;
-    scanf("%d", &n);
-    int a[n];
+    int n, i, j, x, mx, flag = 0;
+    cin >> n;
+    int a[n+1];
 
-    for(i = 0; i < n; i++)
+    for(i = 1; i <= n; i++)
+        a[i] = n;
+
+    for(i = 1; i <= n; i++)
     {
-        mx = -1;
-        for(j = 0; j < n; j++)
+        mx = 0;
+        for(j = 1; j <= n; j++)
         {
-            scanf("%d", &x);
-            mx = max(mx, x);
+            cin >> x;
+            mx = max(x, mx);
         }
+
         a[i] = mx;
-    }
-    for(i = 0; i < n - 1; i++)
-    {
-        if(a[i] == a[i + 1])
+
+        if(!flag && a[i] == n-1)
         {
-            a[i] ++;
-            break;
+            flag = 1;
+            a[i] = n;
         }
     }
-    for(i = 0; i < n; i++)
-        printf("%d ", a[i]);
+
+    for(i = 1; i <= n; i++)
+        cout << a[i] << " ";
 }
