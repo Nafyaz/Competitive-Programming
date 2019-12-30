@@ -1,66 +1,93 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template<typename T>
-using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-#define ll long long
-#define ff first
-#define ss second
 
-vector<int> parent, depth, heavy, head, pos;
-int cur_pos;
+// Variable to represent block size. This is made global
+// so compare() of sort can use it.
+int block;
 
-int dfs(int v, vector<vector<int>> const& adj) {
-    int size = 1;
-    int max_c_size = 0;
-    for (int c : adj[v]) {
-        if (c != parent[v]) {
-            parent[c] = v, depth[c] = depth[v] + 1;
-            int c_size = dfs(c, adj);
-            size += c_size;
-            if (c_size > max_c_size)
-                max_c_size = c_size, heavy[v] = c;
+// Structure to represent a query range
+struct Query
+{
+    int L, R;
+};
+
+// Function used to sort all queries so that all queries
+// of the same block are arranged together and within a block,
+// queries are sorted in increasing order of R values.
+bool compare(Query x, Query y)
+{
+    // Different blocks, sort by block.
+    if (x.L/block != y.L/block)
+        return x.L/block < y.L/block;
+
+    // Same block, sort by R value
+    return x.R < y.R;
+}
+
+// Prints sum of all query ranges. m is number of queries
+// n is size of array a[].
+void queryResults(int a[], int n, Query q[], int m)
+{
+    // Find block size
+    block = (int)sqrt(n);
+
+    // Sort all queries so that queries of same blocks
+    // are arranged together.
+    sort(q, q + m, compare);
+
+    // Initialize current L, current R and current sum
+    int currL = 0, currR = 0;
+    int currSum = 0;
+
+    // Traverse through all queries
+    for (int i=0; i<m; i++)
+    {
+        // L and R values of current range
+        int L = q[i].L, R = q[i].R;
+
+        // Remove extra elements of previous range. For
+        // example if previous range is [0, 3] and current
+        // range is [2, 5], then a[0] and a[1] are subtracted
+        while (currL < L)
+        {
+            currSum -= a[currL];
+            currL++;
         }
+
+        // Add Elements of current Range
+        while (currL > L)
+        {
+            currSum += a[currL-1];
+            currL--;
+        }
+        while (currR <= R)
+        {
+            currSum += a[currR];
+            currR++;
+        }
+
+        // Remove elements of previous range.  For example
+        // when previous range is [0, 10] and current range
+        // is [3, 8], then a[9] and a[10] are subtracted
+        while (currR > R+1)
+        {
+            currSum -= a[currR-1];
+            currR--;
+        }
+
+        // Print sum of current range
+        cout << "Sum of [" << L << ", " << R
+             << "] is "  << currSum << endl;
     }
-    return size;
 }
 
-void decompose(int v, int h, vector<vector<int>> const& adj) {
-    head[v] = h, pos[v] = cur_pos++;
-    if (heavy[v] != -1)
-        decompose(heavy[v], h, adj);
-    for (int c : adj[v]) {
-        if (c != parent[v] && c != heavy[v])
-            decompose(c, c, adj);
-    }
-}
-
-void init(vector<vector<int>> const& adj) {
-    int n = adj.size();
-    parent = vector<int>(n);
-    depth = vector<int>(n);
-    heavy = vector<int>(n, -1);
-    head = vector<int>(n);
-    pos = vector<int>(n);
-    cur_pos = 0;
-
-    dfs(0, adj);
-    decompose(0, 0, adj);
-}
-
-int query(int a, int b) {
-    int res = 0;
-    for (; head[a] != head[b]; b = parent[head[b]]) {
-        if (depth[head[a]] > depth[head[b]])
-            swap(a, b);
-        int cur_heavy_path_max = segment_tree_query(pos[head[b]], pos[b]);
-        res = max(res, cur_heavy_path_max);
-    }
-    if (depth[a] > depth[b])
-        swap(a, b);
-    int last_heavy_path_max = segment_tree_query(pos[a], pos[b]);
-    res = max(res, last_heavy_path_max);
-    return res;
+// Driver program
+int main()
+{
+    int a[] = {1, 1, 2, 1, 3, 4, 5, 2, 8};
+    int n = sizeof(a)/sizeof(a[0]);
+    Query q[] = {{0, 4}, {1, 3}, {2, 4}};
+    int m = sizeof(q)/sizeof(q[0]);
+    queryResults(a, n, q, m);
+    return 0;
 }

@@ -2,17 +2,18 @@
 using namespace std;
 int main()
 {
-    int n, i;
-    scanf("%d", &n);
-    int a[n];
+    long long n, i, ans;
+    scanf("%lld", &n);
+    long long a[n];
 
     for(i = 0; i < n; i++)
-        scanf("%d", &a[i]);
+        scanf("%lld", &a[i]);
 
     sort(a, a+n);
 
-    int x = upper_bound(a, a+n, a[0]) - a;
-    int y = n - (lower_bound(a, a+n, a[n-1]) - a);
+    long long x = upper_bound(a, a+n, a[0]) - a;
+    long long y = n - (lower_bound(a, a+n, a[n-1]) - a);
 
-    printf("%d %d", a[n-1] - a[0], x*y);
+    ans = (a[n-1] == a[0]? n*(n-1)/2 : x*y);
+    printf("%lld %lld", a[n-1] - a[0], ans);
 }

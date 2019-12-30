@@ -3,18 +3,19 @@ using namespace std;
 #define pi 2*acos(0.0)
 int main()
 {
+//    freopen("out.txt", "w", stdout);
     int t, caseno = 0;
     long double l, l2, h, r, theta, n, C, low, high, x;
-    cin >> t;
+    scanf("%d", &t);
     while(t--)
     {
-        cin >> l >> n >> C;
+        scanf("%Lf %Lf %Lf", &l, &n, &C);
         l2 = (1 + n*C)*l;
 
         low = 0;
         high = l2;
 
-        x = 100;
+        x = 10000;
         while(x--)
         {
             h = (low + high)/2;
@@ -30,6 +31,6 @@ int main()
                 low = h;
         }
 
-        printf("Case %d: %0.10llf\n", ++caseno, h);
+        printf("Case %d: %0.10Lf\n", ++caseno, h);
     }
 }
