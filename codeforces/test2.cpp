@@ -13,35 +13,8 @@ ll ss[3000009], st[3000009], ed[3000009];
 
 int main()
 {
-    ll t, i, j, k, ans, stsum, sum;
-    string s;
-    cin >> t;
+    unsigned int i;
+    std::deque<int> mydeque;
 
-    while(t--)
-    {
-        ans = stsum = sum = 0;
-        cin >> s;
-        for(i = 0; i < s.size(); i++)
-            ss[i] = s[i] - '0';
-        for(i = 0; i < s.size(); i++)
-        {
-            for(j = i; j < s.size(); j++)
-            {
-                for(k = 0; k < s.size(); k++)
-                {
-                    if(k <= j && k >= i)
-                        st[k] = !ss[k];
-                    else
-                        st[k] = ss[k];
-//                    cout << st[k];
-
-                    if(k > 0 && st[k] == st[k-1])
-                        ans++;
-                }
-//                cout << endl;
-            }
-        }
-
-        cout << ans << endl;
-    }
+    std::cout << mydeque.max_size();
 }

@@ -11,5 +11,5 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    cout << ("23" < "3");
+
 }
