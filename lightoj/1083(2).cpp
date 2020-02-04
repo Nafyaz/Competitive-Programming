@@ -1,3 +1,5 @@
+//Previous implementation with stack had an error, still got AC :/
+//fixed it
 #include<bits/stdc++.h>
 using namespace std;
 #include<ext/pb_ds/assoc_container.hpp>
@@ -13,21 +15,29 @@ ll a[30009];
 
 void print(stack<ll> s)
 {
-    cout << "stack: ";
+    stack<ll> s2 = s;
+    cout << "stack:" << endl;
     while(!s.empty())
     {
-        cout << a[s.top()] << " ";
+        cout << setw(3) << s.top();
         s.pop();
+    }
+    cout << endl;
+    while(!s2.empty())
+    {
+        cout << setw(3) << a[s2.top()];
+        s2.pop();
     }
     cout << endl;
 }
 
 int main()
 {
+//    freopen("out.txt", "w", stdout);
     ll t, caseno = 0, n, i, x, mx, temp;
 
     stack<ll> s;
-    cin >> t;
+    scanf("%lld", &t);
 
     while(t--)
     {
@@ -36,23 +46,23 @@ int main()
             s.pop();
         s.push(0);
 
-        cin >> n;
+        scanf("%lld", &n);
 
         for(i = 1; i <= n+1; i++)
         {
             if(i <= n)
-                cin >> a[i];
+                scanf("%lld", &a[i]);
             else
                 a[i] = 0;
 
-            if(s.empty() || a[s.top()] < a[i])
+            if(s.empty() || a[s.top()] <= a[i])
                 s.push(i);
-            else if(a[s.top()] == a[i])
-                continue;
             else
             {
-                while(a[s.top()] >= a[i] && s.top() != 0)
+                while(a[s.top()] > a[i] && s.top() != 0)
                 {
+//                    if(a[s.top()] == a[i])
+//                        break;
                     temp = s.top();
                     s.pop();
                     x = a[temp] * (i - s.top() - 1);
@@ -62,9 +72,10 @@ int main()
                 s.push(i);
             }
 //
+//            cout << "mx: " << mx << endl;
 //            print(s);
         }
 
-        cout << "Case " << ++caseno << ": " << mx << endl;
+        printf("Case %lld: %lld\n", ++caseno, mx);
     }
 }

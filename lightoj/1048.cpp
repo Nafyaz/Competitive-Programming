@@ -1,46 +1,55 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define N 1010
-int primes[N], flag[N];
-
-void sieve()
-{
-    int i, j, val = sqrt(N) + 1;
-    flag[0] = flag[1] = 1;
-
-    for(i = 4; i < N; i += 2)
-        flag[i] = 1;
-    for(i = 3; i < val; i++)
-    {
-        if(!flag[i])
-        {
-            for(j = i*i; j < N; j += 2*i)
-                flag[j] = 1;
-        }
-    }
-    int total = 0;
-    for(i = 2; i < N; i++)
-    {
-        if(!flag[i])
-            primes[total++] = i;
-    }
-}
-
 int main()
 {
-    sieve();
-    int n, i, j;
-    scanf("%d", &n);
-
-    vector <int> v;
-    for(i = 0; primes[i] <= n; i++)
+    int t, caseno = 0, i, ans;
+    int a[1009] = {0}, pre[1009] = {0}, n, k, mn;
+    scanf("%d", &t);
+    while(t--)
     {
-        for(j = primes[i]; j <= n; j *= primes[i])
-            v.push_back(j);
-    }
+        mn = INT_MAX;
+        scanf("%d %d", &n, &k);
+        n++;
+        k++;
 
-    printf("%d\n", v.size());
-    for(i = 0; i < v.size(); i++)
-        printf("%d ", v[i]);
+        for(i = 1; i <= n; i++)
+        {
+            scanf("%d", &a[i]);
+            pre[i] = pre[i-1] + a[i];
+        }
+
+        int pos, prepos, low, high, mid, cnt;
+        vector<int> v;
+        low = 1;
+        high = pre[n];
+        while(low <= high)
+        {
+            v.clear();
+            mid = (low + high)>>1;
+            cnt = 0;
+//            cout << "mid: " << mid << endl;
+            prepos = pos = 0;
+            while(pos <= n)
+            {
+                pos = upper_bound(pre, pre+n+1, mid + pre[prepos]) - pre - 1;
+//                cout << prepos << " " << pos << " " << mid + pre[prepos] << endl;
+                if(pos == prepos)
+                    break;
+                v.push_back(pre[pos] - pre[prepos]);
+                prepos = pos;
+                cnt++;
+            }
+            if(prepos != n || cnt > k)
+                low = mid+1;
+            else
+            {
+                high = mid-1;
+                ans = mid;
+            }
+        }
+        printf("Case %d: %d\n", ++caseno, ans);
+        for(auto u : v)
+            printf("%d\n", u);
+    }
 }

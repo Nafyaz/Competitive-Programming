@@ -11,5 +11,20 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    cout << 0%5;
+    int n,a,b,i;
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        scanf("%d",&a);
+        for(b=0;a!=0;b++)
+        {
+        b=a%10;
+        a=a/10;
+        printf("%d",b);
+
+
+        }
+        printf("\n");
+    }
+    return 0;
 }

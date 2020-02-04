@@ -20,8 +20,6 @@ void build(int node, int s, int e)
 
 void updateRange(int node, int s, int e, int l, int r, int val)
 {
-    if(s > r || e < l)
-        return;
     if(lazy[node] != 0)
     {
         tree[node] += (e - s + 1) * lazy[node];
@@ -32,6 +30,9 @@ void updateRange(int node, int s, int e, int l, int r, int val)
         }
         lazy[node] = 0;
     }
+
+    if(s > r || e < l)
+        return;
 
     if(s >= l && e <= r)
     {
@@ -51,8 +52,6 @@ void updateRange(int node, int s, int e, int l, int r, int val)
 
 int queryRange(int node, int s, int e, int l, int r)
 {
-    if(s > r || e < l)
-        return 0;
     if(lazy[node] != 0)
     {
         tree[node] += (e - s + 1) * lazy[node];
@@ -63,6 +62,10 @@ int queryRange(int node, int s, int e, int l, int r)
         }
         lazy[node] = 0;
     }
+
+    if(s > r || e < l)
+        return 0;
+
     if(s >= l and e <= r)
         return tree[node];
     int mid = (s + e) / 2;

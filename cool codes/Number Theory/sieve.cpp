@@ -11,7 +11,7 @@ int sieve()
     for(i = 3; i <= N; i += 2)
         flag[i] = 1;
 
-    for(i = 3; i < val; i++)
+    for(i = 3; i < val; i+=2)
     {
         if(flag[i])
         {

@@ -5,7 +5,7 @@ int n, a[100009], sparse[100009][20];
 
 int main()
 {
-    int i, j, k;
+    int i, j, k, q, l, r;
     cin >> n;
 
     for(i = 0; i < n; i++)
@@ -15,7 +15,7 @@ int main()
 
     k = log2(n) + 1;
     for(i = 0; i < n; i++)
-        sparse[i][[0] = a[i];
+        sparse[i][0] = a[i];
     for(j = 1; (1 << j) <= n; j++)
     {
         for(i = 0; i + (1 << j) - 1 < n; i++)
@@ -24,5 +24,11 @@ int main()
         }
     }
 
-    for()
+    cin >> q;
+    while(q--)
+    {
+        cin >> l >> r;
+        k = log2(r-l+1);
+        cout << min(sparse[l][k], sparse[r-(1<<k)+1][k]) << endl;
+    }
 }
