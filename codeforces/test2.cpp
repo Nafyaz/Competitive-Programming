@@ -11,15 +11,7 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    freopen("in.txt", "w", stdout);
-    int n, m, k;
-    n = 10;
-    m = rand()%n;
-    k = rand()%n;
-
-    cout << n << " " << m << " " << k << endl;
-    for(int i = 0; i < n; i++)
-    {
-        cout << rand()%30 << " ";
-    }
+    vector<int> v(10);
+    vector<int> v[10];
+    vector<vector<int> > v;
 }

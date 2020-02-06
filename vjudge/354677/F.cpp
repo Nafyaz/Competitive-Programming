@@ -11,18 +11,39 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    int t, n, i;
+    int t, n, k, i, j, ans[109][109];
     cin >> t;
     while(t--)
     {
         cin >> n;
-        if(n == 2)
+        if((n*(n-1)/2) % n != 0)
         {
             cout << "NO" << endl;
             continue;
         }
+
         cout << "YES" << endl;
-        for(i = 1; i <= n; i++)
-            cout << string(i%n, '0') + '1' + string(n - i%n - 1, '0') << endl;
+        for(i = 0; i < n; i++)
+        {
+            ans[i][i] = 0;
+            k = (n-1)/2;
+            for(j = (i+1)%n; j != i; j = (j+1)%n)
+            {
+                if(k)
+                {
+                    ans[i][j] = 1;
+                    k--;
+                }
+                else
+                    ans[i][j] = 0;
+            }
+        }
+
+        for(i = 0; i < n; i++)
+        {
+            for(j = 0; j < n; j++)
+                cout << ans[i][j];
+            cout << endl;
+        }
     }
 }

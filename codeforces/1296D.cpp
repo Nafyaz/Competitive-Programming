@@ -41,9 +41,9 @@ int main()
     {
         x = *ms.begin();
         reqhit = (x+a-1)/a;
-        if(k >= max(1LL, reqhit-1))
+        if(k >= reqhit - 1)
         {
-            k -= max(1LL, reqhit-1);
+            k -= reqhit - 1;
             ans++;
             ms.erase(ms.begin());
         }

@@ -35,14 +35,7 @@ int main()
     int mx = INT_MIN;
     for(i = 0; i < n; i++)
         mx = max(mx, col[i]);
-
-    if(mx > 2)
-        cout << "NO" << endl;
-    else
-    {
-        cout << "YES" << endl;
-        for(i = 0; i < n; i++)
-            cout << col[i] - 1;
-    }
-
+    cout << mx << endl;
+    for(i = 0; i < n; i++)
+        cout << col[i] << " ";
 }
