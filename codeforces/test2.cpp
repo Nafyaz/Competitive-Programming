@@ -11,7 +11,5 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    vector<int> v(10);
-    vector<int> v[10];
-    vector<vector<int> > v;
+
 }
