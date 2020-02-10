@@ -9,19 +9,8 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 #define ff first
 #define ss second
 
-
 int main()
 {
-    int i, n, a[100009];
-    cin >> n;
-    for(i = 0; i < n; i++)
-        cin >> a[i];
-
-    int ans = a[0];
-    for(i = 1; i < n; i++)
-    {
-        ans = (ans|a[i]) - a[i];
-    }
-cout << ans;
 
 }
+

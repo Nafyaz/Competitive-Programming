@@ -13,7 +13,7 @@ class teams
 {
 public:
 
-    int p, wins, lose, goalsc, goalag, played;
+    ll p, wins, lose, goalsc, goalag, played;
     string name;
 
     teams()
@@ -39,9 +39,9 @@ bool cmp(teams a, teams b)
 
 int main()
 {
-    int t, teamno, i, j, G, u, ugoal, v, vgoal;
+    ll t, teamno, i, j, G, u, ugoal, v, vgoal;
     string trname, teamname, game, temp;
-    map<string, int> mp;
+    map<string, ll> mp;
     cin >> t;
     cin.ignore();
     while(t--)
