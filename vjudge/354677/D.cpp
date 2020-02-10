@@ -34,18 +34,33 @@ bool cmp(teams a, teams b)
         return a.goalsc > b.goalsc;
     if(a.played != b.played)
         return a.played < b.played;
-    return a.name < b.name;
+
+    char x, y;
+    for(int i = 0; i < a.name.size() && i < b.name.size(); i++)
+    {
+        x = tolower(a.name[i]);
+        y = tolower(b.name[i]);
+
+        if(x != y)
+            return x < y;
+    }
+
+    return a.name.size() < b.name.size();
 }
 
 int main()
 {
-    ll t, teamno, i, j, G, u, ugoal, v, vgoal;
+//    freopen("out.txt", "w", stdout);
+    ll t, teamno, i, j, G, u, ugoal, v, vgoal, cnt = 0;
     string trname, teamname, game, temp;
     map<string, ll> mp;
     cin >> t;
     cin.ignore();
     while(t--)
     {
+        cnt++;
+        if(cnt != 1)
+            cout << endl;
         getline(cin, trname);
         cin >> teamno;
         cin.ignore();
@@ -120,10 +135,40 @@ int main()
 
         for(i = 1; i <= teamno; i++)
         {
-            cout << i << ")" << obj[i].name << " " << obj[i].p << "p, ";
+            cout << i << ") " << obj[i].name << " " << obj[i].p << "p, ";
             cout << obj[i].played << "g (" << obj[i].wins << "-" << obj[i].played - obj[i].wins - obj[i].lose << "-" << obj[i].lose << "), ";
             cout << obj[i].goalsc - obj[i].goalag << "gd (" << obj[i].goalsc << "-" << obj[i].goalag << ")" << endl;
         }
-        cout << endl;
+//        cout << endl;
     }
 }
+
+/*
+2
+World Cup 1998 - Group A
+4
+Brazil
+Norway
+Morocco
+Scotland
+6
+Brazil#2@1#Scotland
+Norway#2@2#Morocco
+Scotland#1@1#Norway
+Brazil#3@0#Morocco
+Morocco#3@0#Scotland
+Brazil#1@2#Norway
+Some strange tournament
+5
+Team A
+Team B
+Team C
+Team D
+Team E
+5
+Team A#1@1#Team B
+Team A#2@2#Team C
+Team A#0@0#Team D
+Team E#2@1#Team C
+Team E#1@2#Team D
+*/
