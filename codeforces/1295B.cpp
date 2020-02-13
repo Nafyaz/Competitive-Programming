@@ -20,9 +20,11 @@ int main()
         maxdiff = INT_MIN;
         mindiff = INT_MAX;
         cin >> n >> x >> s;
+        cout << "s: " << s << endl;
 
         mp.clear();
 
+        mp[0] = 1;
         for(i = 0; i < n; i++)
         {
             if(i > 0)
@@ -45,78 +47,32 @@ int main()
 
             mp[diff[i]]++;
         }
-
+//
 //        for(auto u : mp)
 //            cout << u.ff << " " << u.ss << endl;
 
-        if(x == 0 && diff[n-1] != 0)
+        if(diff[n-1] == 0 && (x > maxdiff || x < mindiff))
         {
-            cout << 1 + mp[0] << endl;
+            cout << 0 << endl;
             continue;
         }
-        if(diff[n-1] == 0 && x >= mindiff && x <= maxdiff)
+        else if(diff[n-1] == 0)
         {
             cout << -1 << endl;
             continue;
         }
-        if(x > maxdiff && diff[n-1] <= 0)
-        {
-            cout << 0 << endl;
-            continue;
-        }
-        if(x < mindiff && diff[n-1] >= 0)
-        {
-            cout << 0 << endl;
-            continue;
-        }
 
 
-        ans = 0;
-        if(diff[n-1] > 0 && x > 0)
+        ans = (x == 0);
+        for(auto u : mp)
         {
-            k = x%diff[n-1];
-            x = diff[n-1] * min(x/diff[n-1], maxdiff/diff[n-1]) + k;
-            while(x >= mindiff)
+            if((x - u.ff)%diff[n-1] == 0 && (x - u.ff)/diff[n-1] >= 0)
             {
-//                cout << x << " " << ans << endl;
-                ans += mp[x];
-                x -= diff[n-1];
+                ans += u.ss;
             }
-            cout << ans << endl;
-            continue;
         }
 
-        if(diff[n-1] < 0 && x < 0)
-        {
-            k = x%diff[n-1];
-            x = diff[n-1] * min(x/diff[n-1], mindiff/diff[n-1]) + k;
-            while(x <= maxdiff)
-            {
-                ans += mp[x];
-                x -= diff[n-1];
-            }
-            cout << ans << endl;
-            continue;
-        }
-        if(diff[n-1] > 0 && x < 0)
-        {
-            while(x <= maxdiff)
-            {
-                ans += mp[x];
-                x += diff[n-1];
-            }
-            cout << ans << endl;
-            continue;
-        }
-        if(diff[n-1] < 0 && x > 0)
-        {
-            while(x >= mindiff)
-            {
-                ans += mp[x];
-                x += diff[n-1];
-            }
-            cout << ans << endl;
-            continue;
-        }
+        cout << ans << endl;
+
     }
 }
