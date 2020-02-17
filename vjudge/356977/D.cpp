@@ -42,8 +42,8 @@ int main()
 
 //    cout << "ok" << endl;
 //
-//    for(auto u : v)
-//        cout << u.ff.ff << " " << u.ff.ss << " " << u.ss << endl;
+    for(auto u : v)
+        cout << ar[u.ss] << " " << u.ff.ff << " " << u.ff.ss << " " << u.ss << endl;
 
     sort(v.begin(), v.end(), cmp);
 
