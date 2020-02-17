@@ -1,3 +1,5 @@
+//thanks to DrSwad
+
 #include<bits/stdc++.h>
 using namespace std;
 #include<ext/pb_ds/assoc_container.hpp>
@@ -11,62 +13,45 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 
 int main()
 {
-    int t, n, i, j, k, mx[109], mn[109], low, high, templow;
+    int t, n, i, j, k, mx[200009], mn[200009], low, high, templow;
     string s;
     cin >> t;
     while(t--)
     {
         cin >> n >> s;
-        mx[0] = 0;
-        low = -1;
-        high = 1;
-        for(i = 1; i < n; i++)
-        {
-            if(s[i-1] == '>')
-            {
-                mx[i] = low;
-                low--;
-            }
-            else
-            {
-                mx[i] = high;
-                high++;
-            }
-        }
+        iota(mn, mn+n, 1);
+        iota(mx, mx+n, 1);
+        reverse(mn, mn+n);
 
 
-        templow = low;
-        i = 0;
-        while(i < n)
+        for(i = 0; i < n-1; i++)
         {
-            if(mx[i] >= 0)
-            {
-                mn[i] = mx[i];
-                i++;
+            if(s[i] == '>')
                 continue;
-            }
             j = i;
-
-            while(mx[j] < 0 && j < n)
-            {
+            while(j < n-1 && s[j] == '<')
                 j++;
-            }
-            k = j;
-            j--;
-
-            while(j >= i)
-            {
-                low++;
-                mn[j] = low;
-                j--;
-            }
-            i = k;
+            reverse(mn+i, mn+j+1);
+            i = j;
         }
+
+        for(i = 0; i < n-1; i++)
+        {
+            if(s[i] == '<')
+                continue;
+            j = i;
+            while(j < n-1 && s[j] == '>')
+                j++;
+            reverse(mx+i, mx+j+1);
+            i = j;
+        }
+
         for(i = 0; i < n; i++)
-            cout << mx[i] - templow<< " ";
+            cout << mn[i] << " ";
         cout << endl;
         for(i = 0; i < n; i++)
-            cout << mn[i] - templow<< " ";
+            cout << mx[i] << " ";
         cout << endl;
+
     }
 }

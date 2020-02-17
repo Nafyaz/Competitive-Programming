@@ -1,61 +1,22 @@
-    #include<bits/stdc++.h>
-    using namespace std;
+#include<bits/stdc++.h>
+using namespace std;
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<typename T>
+using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+#define ll long long
+#define ff first
+#define ss second
 
-    map<string,int>mapp;
-    map<string,int>::iterator it;
-    list<string>l;
-    list<string>:: iterator a;
+bitset<10> sp;
 
-    int main(void)
-    {
-        int n,m,ans=0,i,j;
-        cin >> n >> m;  getchar();
-        string s[n],x;
-        for(i=0;i<n;i++)
-        {
-            cin >> s[i] ;
-            x=s[i];
-            reverse(x.begin(),x.end());
-            if(s[i]==x)
-            {
-                if(mapp.find(s[i])==mapp.end())mapp[s[i]]=1;
-                else mapp[s[i]]++;
-            }
-        }
+int main()
+{
+    cout << sp << endl;
+    sp[1] = sp[5] = sp[9] = 1;
+    cout << sp;
 
-        for(it=mapp.begin();it!=mapp.end();it++)
-        {
-            if(it->second==1){ans=m;l.push_back(it->first);break;}
-        }
-
-        for(i=0;i<n-1;i++)
-        {
-            if(s[i].empty());
-            else
-            {
-                for(j=i+1;j<n;j++)
-                {
-                    x=s[j];
-                    reverse(x.begin(),x.end());
-                    if(s[i]==x)
-                    {
-                        l.push_front(s[i]);
-                        s[i]="";
-                        l.push_back(s[j]);
-                        s[j]="";
-                        ans=ans+2*m;
-                        break;
-                    }
-                }
-            }
-        }
-
-        cout << ans << endl;
-        for(a=l.begin();a!=l.end();a++)
-        {
-            cout << *a;
-        }
-
-        return 0;
-    }
-
+    for(auto u : sp)
+        cout << u << endl;
+}
