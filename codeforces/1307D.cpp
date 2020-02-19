@@ -1,107 +1,69 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template<typename T>
-using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-#define ll long long
-#define ff first
-#define ss second
 
-bitset<200009>sp(0);
-int a[200009], dis[200009];
-int par[200009];
-vector<int> adj[200009];
+const int INF=1e9+7;
 
-int bfs(int src, int des, int type)
+int N;
+int as[200005];
+
+vector<int> edges[200005];
+
+int dist[2][200005];
+int q[200005];
+
+void bfs(int* dist,int s)
 {
-    par[src] = -1;
-    dis[src] = 0;
-
-    int node;
-    queue<int> q;
-
-    q.push(src);
-
-    while(!q.empty())
+    fill(dist,dist+N,INF);
+    int qh=0,qt=0;
+    q[qh++]=s;
+    dist[s]=0;
+    while(qt<qh)
     {
-        node = q.front();
-        q.pop();
-        for(auto u : adj[node])
+        int x=q[qt++];
+        for(int y:edges[x])
         {
-            cout << "node: " << node << " u: " << u << endl;
-            if(u == par[node])
-                continue;
-            if(u == des)
-                return dis[node] + 1;
-            if(type & sp[u])
-                return u;
-
-            q.push(u);
-            par[u] = node;
-            dis[u] = dis[node] + 1;
-
+            if(dist[y]==INF)
+            {
+                dist[y]=dist[x]+1;
+                q[qh++]=y;
+            }
         }
     }
 }
 
-
 int main()
 {
-    int n, m, k, i, j;
-    cin >> n >> m >> k;
-
-    for(i = 0; i < k; i++)
+    int M,K;
+    scanf("%d %d %d",&N,&M,&K);
+    for(int i=0; i<K; i++)
     {
-        cin >> a[i];
-        sp[a[i]] = 1;
+        scanf("%d",&as[i]);
+        as[i]--;
     }
-
-    int u, v, flag = 0;
-
-    while(m--)
+    sort(as,as+K);
+    for(int i=0; i<M; i++)
     {
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-
-        if(sp[u] == 1 && sp[v] == 1)
-        {
-            flag = 1;
-        }
+        int X,Y;
+        scanf("%d %d",&X,&Y);
+        X--,Y--;
+        edges[X].push_back(Y);
+        edges[Y].push_back(X);
     }
-
-    if(flag)
+    bfs(dist[0],0);
+    bfs(dist[1],N-1);
+    vector<pair<int,int> > data;
+    for(int i=0; i<K; i++)
     {
-        cout << bfs(1, n, 0);
-        return 0;
+        data.emplace_back(dist[0][as[i]]-dist[1][as[i]],as[i]);
     }
-
-    int ans = -1;
-    for(i = 0; i < k; i++)
+    sort(data.begin(),data.end());
+    int best=0;
+    int mx=-INF;
+    for(auto it:data)
     {
-        u = a[i];
-        v = bfs(u, -1, 1);
-        cout <<"lol" <<  u << " " << v << endl;
-        for(j = 1; j <= n; j++)
-            cout << dis[j] << " ";
-        cout << endl;
-
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-
-        cout << "ok" << endl;
-        ans = max(ans, bfs(1, n, 0));
-        cout << "ans: " << ans << endl;
-        cout << "dis: " << endl;
-        for(j = 1; j <= n; j++)
-            cout << dis[j] << " ";
-        cout << endl;
-
-        adj[u].pop_back();
-        adj[v].pop_back();
+        int a=it.second;
+        best=max(best,mx+dist[1][a]);
+        mx=max(mx,dist[0][a]);
     }
-
-    cout << ans;
+    printf("%d\n",min(dist[0][N-1],best+1));
 }
