@@ -1,69 +1,105 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+using namespace __gnu_pbds;
+template<typename T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
+#define ll long long
+#define ff first
+#define ss second
 
-const int INF=1e9+7;
+bitset<200009> sp, vis;
+int a[200009], dist[2][200009];
+vector<int> adj[200009];
 
-int N;
-int as[200005];
-
-vector<int> edges[200005];
-
-int dist[2][200005];
-int q[200005];
-
-void bfs(int* dist,int s)
+void bfs(int x, int src)
 {
-    fill(dist,dist+N,INF);
-    int qh=0,qt=0;
-    q[qh++]=s;
-    dist[s]=0;
-    while(qt<qh)
+    dist[x][src] = 0;
+    vis[src] = 1;
+
+    queue<int> q;
+    q.push(src);
+
+    while(!q.empty())
     {
-        int x=q[qt++];
-        for(int y:edges[x])
+        int node = q.front();
+        q.pop();
+
+        for(auto u : adj[node])
         {
-            if(dist[y]==INF)
+            if(!vis[u])
             {
-                dist[y]=dist[x]+1;
-                q[qh++]=y;
+                dist[x][u] = dist[x][node] + 1;
+                q.push(u);
+                vis[u] = 1;
             }
         }
     }
 }
 
+
 int main()
 {
-    int M,K;
-    scanf("%d %d %d",&N,&M,&K);
-    for(int i=0; i<K; i++)
+    int i, n, m, k, u, v, flag = 0;
+    cin >> n >> m >> k;
+    for(i = 0; i < k; i++)
     {
-        scanf("%d",&as[i]);
-        as[i]--;
+        cin >> a[i];
+        sp[a[i]] = 1;
     }
-    sort(as,as+K);
-    for(int i=0; i<M; i++)
+
+    for(i = 0; i < m; i++)
     {
-        int X,Y;
-        scanf("%d %d",&X,&Y);
-        X--,Y--;
-        edges[X].push_back(Y);
-        edges[Y].push_back(X);
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+
+        if(sp[u] && sp[v])
+            flag = 1;
     }
-    bfs(dist[0],0);
-    bfs(dist[1],N-1);
-    vector<pair<int,int> > data;
-    for(int i=0; i<K; i++)
+
+    vis = 0;
+    bfs(0, 1);
+    vis = 0;
+    bfs(1, n);
+
+    if(flag)
     {
-        data.emplace_back(dist[0][as[i]]-dist[1][as[i]],as[i]);
+        cout << dist[0][n];
+        return 0;
     }
-    sort(data.begin(),data.end());
-    int best=0;
-    int mx=-INF;
-    for(auto it:data)
-    {
-        int a=it.second;
-        best=max(best,mx+dist[1][a]);
-        mx=max(mx,dist[0][a]);
-    }
-    printf("%d\n",min(dist[0][N-1],best+1));
+
+    vector<pair<int, int> > diff;
+    for(i = 0; i < k; i++)
+        diff.push_back({dist[0][a[i]] - dist[1][a[i]], a[i]});
+
+    sort(diff.begin(), diff.end());
+
+    int mxdistn[k + 1];
+    mxdistn[k] = INT_MIN;
+    for(i = k-1; i>= 0; i--)
+        mxdistn[i] = max(mxdistn[i+1], dist[1][diff[i].ss]);
+
+    int mx = -1;
+    for(i = 0; i < k-1; i++)
+        mx = max(mx, dist[0][diff[i].ss] + mxdistn[i+1] + 1);
+
+    cout << min(mx, dist[0][n]);
 }
+
+/*
+6 5 3
+
+2 4 5
+
+1 2
+
+2 3
+
+3 4
+
+4 6
+
+5 6
+*/
