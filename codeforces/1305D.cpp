@@ -10,11 +10,20 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics
 #define ff first
 #define ss second
 
+bitset<1009> ontree;
+vector<int> adj[1009];
+
 int main()
 {
-    bitset<5> b;
-    while(b)
+    int n, i, j, u, v;
+    cin >> n;
+    for(i = 1; i < n; i++)
     {
-        cout << "lol";
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+        ontree[u] = ontree[v] = 1;
     }
+
+    for(i = )
 }
