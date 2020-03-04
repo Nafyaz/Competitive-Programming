@@ -3,9 +3,13 @@ using namespace std;
 
 int main()
 {
-    int n = 7;
-    int i, j, a[n] = {3, 4, -1, 0, 6, 2, 3};
+    int n;
+    cin >> n;
+    int i, j, a[n];
     int x[n];
+
+    for(i = 0; i < n; i++)
+        cin >> a[i];
 
     for(i = 0; i < n; i++)
         x[i] = 1;

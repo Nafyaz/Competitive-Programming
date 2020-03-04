@@ -7,9 +7,11 @@ template<typename T>
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 #define ld long double
 #define ll long long
+#define ld long double
 #define ff first
 #define ss second
 
+<<<<<<< HEAD
 ld f(ld x)
 {
     return 3*x*x + 2*x + 5;
@@ -31,4 +33,13 @@ int main()
 //    {
 //        cout <<
 //    }
+=======
+int main()
+{
+    bitset<5> b;
+    while(b)
+    {
+        cout << "lol";
+    }
+>>>>>>> 0d8fb2884b68b487a141121e6b6a15ab5e611aeb
 }
