@@ -5,23 +5,30 @@ using namespace std;
 using namespace __gnu_pbds;
 template<typename T>
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
+#define ld long double
 #define ll long long
 #define ff first
 #define ss second
 
+ld f(ld x)
+{
+    return 3*x*x + 2*x + 5;
+}
 
 int main()
 {
-    int i, n, a[100009];
-    cin >> n;
-    for(i = 0; i < n; i++)
-        cin >> a[i];
-
-    int ans = a[0];
-    for(i = 1; i < n; i++)
+    long double x, h, i;
+    cout << fixed;
+    for(i = -10; i <= 10; i += .1)
     {
-        ans = (ans|a[i]) - a[i];
+        cout << setprecision(1) << i << ": " << setprecision(3) << setw(5) << f(i) << "; ";
     }
-cout << ans;
 
+    cout << endl << endl;
+
+    h = 0.0000001;
+//    for(i = -10; i <= 10; i += .1)
+//    {
+//        cout <<
+//    }
 }
