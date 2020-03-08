@@ -12,22 +12,12 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 
 bool cmp(pair<int, int> a, pair<int, int> b)
 {
-    return a.ss < b.ss;
+    if((a.ff + a.ss -1)/a.ss != (b.ff + b.ss -1)/b.ss)
+        return (a.ff + a.ss -1)/a.ss <= (b.ff + b.ss -1)/b.ss;
+    return a.ff <= b.ff;
 }
 
 int main()
 {
-    priority_queue<pair<int, int>, cmp> p;
-    p.push({1, 2});
-    p.push({4, 5});
-    p.push({1, 1});
-    p.push({12, 6});
-    p.push({10, 21});
-    p.push({21, 62});
-
-    while(!p.empty())
-    {
-        cout << p.top().ff << "  " << p.top().ss << endl;
-        p.pop();
-    }
+   cout << __gcd(2002 + 2, 2002*2002 + 2);
 }
