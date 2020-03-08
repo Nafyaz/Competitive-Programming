@@ -3,43 +3,31 @@ using namespace std;
 #include<ext/pb_ds/assoc_container.hpp>
 #include<ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
-template<typename T>
-using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-#define ld long double
+template <typename T>
+using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define ll long long
-#define ld long double
+#define ld lond double
 #define ff first
 #define ss second
 
-<<<<<<< HEAD
-ld f(ld x)
+bool cmp(pair<int, int> a, pair<int, int> b)
 {
-    return 3*x*x + 2*x + 5;
+    return a.ss < b.ss;
 }
 
 int main()
 {
-    long double x, h, i;
-    cout << fixed;
-    for(i = -10; i <= 10; i += .1)
-    {
-        cout << setprecision(1) << i << ": " << setprecision(3) << setw(5) << f(i) << "; ";
-    }
+    priority_queue<pair<int, int>, cmp> p;
+    p.push({1, 2});
+    p.push({4, 5});
+    p.push({1, 1});
+    p.push({12, 6});
+    p.push({10, 21});
+    p.push({21, 62});
 
-    cout << endl << endl;
-
-    h = 0.0000001;
-//    for(i = -10; i <= 10; i += .1)
-//    {
-//        cout <<
-//    }
-=======
-int main()
-{
-    bitset<5> b;
-    while(b)
+    while(!p.empty())
     {
-        cout << "lol";
+        cout << p.top().ff << "  " << p.top().ss << endl;
+        p.pop();
     }
->>>>>>> 0d8fb2884b68b487a141121e6b6a15ab5e611aeb
 }
