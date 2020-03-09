@@ -10,6 +10,8 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define ff first
 #define ss second
 
+bitset<10> b;
+
 bool cmp(pair<int, int> a, pair<int, int> b)
 {
     if((a.ff + a.ss -1)/a.ss != (b.ff + b.ss -1)/b.ss)
@@ -19,5 +21,10 @@ bool cmp(pair<int, int> a, pair<int, int> b)
 
 int main()
 {
-   cout << __gcd(2002 + 2, 2002*2002 + 2);
+   bitset<10> a[12];
+
+   b = 13;
+
+   a[3] = b;
+   cout << a[3] + b;
 }
