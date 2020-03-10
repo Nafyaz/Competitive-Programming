@@ -21,10 +21,6 @@ bool cmp(pair<int, int> a, pair<int, int> b)
 
 int main()
 {
-   bitset<10> a[12];
+   set<pair<int, int>> s;
 
-   b = 13;
-
-   a[3] = b;
-   cout << a[3] + b;
 }
