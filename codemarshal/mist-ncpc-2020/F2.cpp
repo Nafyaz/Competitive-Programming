@@ -50,7 +50,7 @@ int main()
 
 //        reverse(sticks.begin(), sticks.end());
 
-        cout << "Case " << ++caseno << ": \n";
+        cout << "Case " << ++caseno << ":\n";
         int q, s;
         cin >> q;
         while(q--)

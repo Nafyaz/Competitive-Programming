@@ -21,6 +21,18 @@ bool cmp(pair<int, int> a, pair<int, int> b)
 
 int main()
 {
-   set<pair<int, int>> s;
+   ordered_set<double> s;
+   s.insert(1);
+   s.insert(4);
+   s.insert(1);
+   s.insert(69.5);
+   s.insert(10);
+
+   for(auto u : s)
+        cout << u << " ";
+   cout << endl;
+
+    cout << *s.find_by_order(2) << endl;
+    cout << s.order_of_key(100) << endl;
 
 }

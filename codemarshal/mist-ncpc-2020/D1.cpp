@@ -78,7 +78,7 @@ int main()
 //                    cout << "lol1";                for(it = myset.lower_bound({st[u], -1}); it != myset.end() && x--; it++)
                 {                    p = (*it);
 //                    cout << st[p.ss] << " " << et[u] << "\n";
-                    if(st[p.ss] > et[u])
+                    if(st[p.ss] > et[u] || st[p.ss] < st[u])
                         break;
                     filled[p.ss] = 1;
                     myqueue.push(p);
@@ -96,6 +96,14 @@ int main()
                 cin >> u;
                 cout << filled[u] << "\n";
             }
+
+//            cout << "ans" << endl;
+//            for(i = 1; i <= n; i++)
+//                cout << setw(i) << i << " ";
+//            cout << endl;
+//            for(i = 1; i <= n; i++)
+//                cout << setw(i) << filled[i] << " ";
+//            cout << endl;
 
 //            for(auto u : myset)
 //                cout << "{" << u.ff << ", " << u.ss << "} ";
@@ -134,4 +142,15 @@ int main()
 1 1 4
 2 3
 2 10
+*/
+
+/*
+1
+6
+1 2
+1 3
+3 6
+2 4
+2 5
+
 */
