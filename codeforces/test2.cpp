@@ -21,18 +21,5 @@ bool cmp(pair<int, int> a, pair<int, int> b)
 
 int main()
 {
-   int i, j, a[6][6];
-
-//   cout << (1) + (1 << 8) + (1 << 16) + (1 << 24);
-   memset(a, 0xf, sizeof(a));
-
-//   for(i = 0; i < 6; i++)
-//    cout << a[0][i] << " ";
-
-   for(int i = 0; i < 6; i++)
-   {
-       for(auto u : a[i])
-        cout << u << " ";
-       cout << endl;
-   }
+   cout << log2(150009);
 }

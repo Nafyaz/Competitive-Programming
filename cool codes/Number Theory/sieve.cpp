@@ -1,11 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define N 1000
-bool flag[N + 5];
-int total, primes[N + 5];
-int sieve()
+#define ll long long
+#define N 1000009
+bool flag[N];
+vector<ll> primes;
+void sieve()
 {
-    int i, j, val = sqrt(N) + 1;
+    ll i, j, val = sqrt(N) + 1;
 
     flag[2] = 1;
     for(i = 3; i <= N; i += 2)
@@ -23,14 +24,6 @@ int sieve()
     for(i = 2; i <= N; i++)
     {
         if(flag[i])
-            primes[total++] = i;
+            primes.push_back(i);
     }
-}
-int main()
-{
-    int i;
-    sieve();
-    printf("%d\n", total);
-    for(i = 0; i < total; i++)
-        printf("%d %d\n", i+1, primes[i]);
 }

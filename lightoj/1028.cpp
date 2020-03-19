@@ -1,55 +1,63 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define N 1000010
+#define ll long long
+#define N 1000009
 bool flag[N];
-long long primes[N];
-long long total;
-long long sieve()
+vector<ll> primes;
+void sieve()
 {
-    int i, j, val = sqrt(N) + 1, total = 0;
-    flag[0] = flag[1] = 1;
-    for(i = 4; i < N; i += 2)
+    ll i, j, val = sqrt(N) + 1;
+
+    flag[2] = 1;
+    for(i = 3; i <= N; i += 2)
         flag[i] = 1;
-    for(i = 3; i < val; i++)
+
+    for(i = 3; i < val; i+=2)
     {
-        if(!flag[i])
+        if(flag[i])
         {
-            for(j = i*i; j < N; j += 2*i)
-                flag[j] = 1;
+            for(j = i*i; j <= N; j += 2*i)
+                flag[j] = 0;
         }
     }
-    for(i = 2; i < N; i++)
+
+    for(i = 2; i <= N; i++)
     {
-        if(!flag[i])
-            primes[total++] = i;
+        if(flag[i])
+            primes.push_back(i);
     }
-    return total;
 }
-long long nod(long long n)
+
+ll NOD(ll n)
 {
-    long long i, c, sum = 1, val = sqrt(n) + 1;
-    for(i = 0; primes[i] < val && i < total; i++)
+    ll i, c, sum = 1;
+
+    for(i = 0; primes[i]*primes[i] <= n; i++)
     {
-        for(c = 0; n%primes[i] == 0; c++)
+        for(c = 0; n % primes[i] == 0; c++)
             n /= primes[i];
-        sum *= (c + 1);
+        sum *= (c+1);
     }
+
     if(n > 1)
-        sum *= 2;
+        sum = sum << 1;
     return sum;
 }
+
 int main()
 {
-    long long T, caseno = 0, i, j, val;
-    long long n;
-    total = sieve();
-    scanf("%I64d", &T);
+//    freopen("out.txt", "w", stdout);
+
+    ll T, caseno = 0, i, j, val;
+    ll n;
+    sieve();
+    scanf("%lld", &T);
     while(T--)
     {
-        scanf("%I64d", &n);
+        scanf("%lld", &n);
         if(n == 1)
-            printf("Case %I64d: 0\n", ++caseno);
+            printf("Case %lld: 0\n", ++caseno);
         else
-            printf("Case %I64d: %I64d\n", ++caseno, nod(n) - 1);
+            printf("Case %lld: %lld\n", ++caseno, NOD(n) - 1);
     }
 }
