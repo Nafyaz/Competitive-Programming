@@ -11,7 +11,7 @@ long long root(long long p)
 }
 int main()
 {
-    fastio;
+//    fastio;
     long long a=0,b=0,c,d,e,f=0,l,g,m,n,k,i,j,t,p,q;
     while(cin>>n>>m)
     {
@@ -24,6 +24,7 @@ int main()
             sz[i]=1;
             sz[i+n]=1;
         }
+        cout << x[5];
         for(i=0; i<m; i++)
         {
             cin>>g;

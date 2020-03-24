@@ -32,7 +32,7 @@ int main()
     cin >> p >> t;
     Z = p + '#' + t;
 
-    KMP);
+    KMP();
 
     int i, cnt = 0;
 
