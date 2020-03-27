@@ -1,25 +1,26 @@
 #include<bits/stdc++.h>
+#define fast ios_base::sync_with_stdio(NULL); cin.tie(NULL); cout.tie(NULL);
 using namespace std;
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template <typename T>
-using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define ll long long
-#define ld lond double
-#define ff first
-#define ss second
-
-bitset<10> b;
-
-bool cmp(pair<int, int> a, pair<int, int> b)
+vector<string> s;
+void permute(string str,int k)
 {
-    if((a.ff + a.ss -1)/a.ss != (b.ff + b.ss -1)/b.ss)
-        return (a.ff + a.ss -1)/a.ss <= (b.ff + b.ss -1)/b.ss;
-    return a.ff <= b.ff;
+    sort(str.begin(), str.end());
+    do {
+       s.push_back(str);
+    } while (next_permutation(str.begin(), str.end()));
+    cout << s[k-1] << endl;
 }
-
 int main()
 {
-   cout << log2(150009);
+    int t;
+    cin >> t;
+    while(t--){
+        int a,b;
+        scanf("%d %d",&a,&b);
+        string str;
+        str+=string(a-2,'a');
+        str+=string(2,'b');
+        permute(str,b);
+    }
 }
