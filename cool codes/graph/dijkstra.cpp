@@ -61,7 +61,6 @@ int main()
         }
 
         scanf("%d", &s);
-        init();
         dijkstra(s);
 
         for(i = 0; i < n; i++)

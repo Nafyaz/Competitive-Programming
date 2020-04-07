@@ -1,12 +1,20 @@
 #include<bits/stdc++.h>
 using namespace std;
+typedef pair<int, int> pi;
+#define ff first
+#define ss second
 
 int main()
 {
-    int a[] = {-2, -1, 0, 1, 2, 3};
-//    for(int i = 0; i < 6; i++)
-//        cout <<  << " ";
+   priority_queue<pi, vector<pi>, greater<pi>> pq;
+   pq.push({1, 2});
+   pq.push({5, 2});
+   pq.push({3, 8});
+   pq.push({2, 1});
 
-    cout << (0 || 0);
-
+   while(!pq.empty())
+   {
+       cout << pq.top().ff << " " << pq.top().ss << endl;
+       pq.pop();
+   }
 }
