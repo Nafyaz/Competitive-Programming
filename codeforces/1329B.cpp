@@ -8,23 +8,28 @@ int main()
     cin >> t;
     while(t--)
     {
-        x[1] = 1%m;
+        memset(x, 0, sizeof x);
+        x[1] = 1;
         total = x[1];
         cin >> d >> m;
         n = log2(d) + 1;
         for(i = 2; i <= n; i++)
         {
             if(i == n)
-                x[i] = (d - total + m)%m;
+                x[i] = (d - total + m);
             else
-                x[i] = (x[i-1] << 1)%m;
-            total = (total + x[i])%m;
+                x[i] = (x[i-1] << 1);
+            total = (total + x[i]);
         }
-        ans = 0;
 
+        ans = 1;
 
+        for(i = 0; i < 35; i++)
+        {
+//            cout << x[i] << " ";
+            ans = ans*(x[i] + 1)%m;
+        }
 
-
-        cout << ans << endl;
+        cout << (m==1? 0 : (ans - 1 + m)%m) << endl;
     }
 }

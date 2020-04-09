@@ -1,78 +1,72 @@
 #include<bits/stdc++.h>
 using namespace std;
-int main()
+
+long long a[100005],b[100005],sum1[100005] ,sum2[100005];
+
+main()
 {
-    string s, s2, s3;
-    cin >> s;
-    int i, p=0, sum=0;
-    for (i = 0; i<s.size(); i++)
+    int t;
+    cin >> t;
+    while(t--)
     {
-        if(s[i]=='e')
+        //a[100005]={},b[100005]={},sum1[100005]={},sum2[100005]={};
+        memset(a, 0, sizeof a);
+        memset(b, 0, sizeof b);
+        memset(sum1, 0, sizeof sum1);
+        memset(sum2, 0, sizeof sum2);
+        long long n,mew=1;
+        cout << sum1[0] << endl;
+        cin >> n;
+        for(int i=0;i<n;i++)
         {
-            break;
+            cin >> a[i];
+            if(a[i]==1)
+            {
+                sum1[i]++;
+                cout << "hello" << endl;
+                if(i)sum2[i]=sum2[i-1];
+            }
+            else if(a[i]==(-1))
+            {
+                sum2[i]--;
+                if(i)sum1[i]=sum1[i-1];
+            }
+            else
+            {
+                if(i)sum2[i]=sum2[i-1];
+                if(i)sum1[i]=sum1[i-1];
+            }
+            cout << "*" << i << " " <<sum1[i] << endl;
         }
-        else
+        for(int i=0;i<n;i++)
         {
-            s2+=s[i];
+            cin >> b[i];
+            if(i>0 && mew==1)
+            {
+                if(b[i]>0 && b[i]!=a[i])
+                {
+                    if(sum1[i-1]>0)mew=1;
+                    else mew=0;
+                    cout << "*" << sum1[i-1] << endl;
+                }
+                else if(b[i]<0 && b[i] !=a[i])
+                {
+                    if(sum2[i-1]<0)mew=1;
+                    else mew=0;
+                }
+                else if(b[i]==0 && b[i]!=a[i])
+                {
+                    if(sum1[i-1]>0 && sum2[i-1]<0 )mew=1;
+                    else mew=0;
+                }
+            }
+            else
+            {
+                if(a[i]!=b[i])mew=0;
+            }
         }
+        //cout << mew<<endl;
+        if(mew)cout << "YES" << endl;
+        else cout << "NO" << endl;
     }
-    for(i=i+1; i<s.size(); i++)
-    {
-        s3+=s[i];
-    }
-    for(int j=s3.size()-1; j>=0 ; j--)
-    {
-        sum+=(s3[j]-'0')*pow(10, p) ;
-        p++;
-    }
-
-    //cout << sum<<endl;
-    if (sum>s2.size()-2)
-    {
-        int h=sum-s2.size()+2;
-        while(h--)
-        {
-            s2+='0';
-        }
-    }
-    int v=1;
-    //cout <<s2<<endl;
-    while (sum)
-    {
-        if(s2[v]=='.')
-        {
-            swap (s2[v+1], s2[v]);
-            sum--;
-            v++;
-        }
-    }
-
-    int l= s2.size();
-    if(s2[l-1]=='.')
-    {
-        s2.erase(l-1);
-    }
-
-    while(s2[0]==0 && s[1]!='.' )
-    {
-        s2.erase(0,1);
-    }
-    int z=0;
-
-
-    if(int g=2 ; g<s2.size() ; g++)
-    {
-        if(s2[g]!=0)
-        {
-            z++;
-        }
-    }
-    if(z==0)
-    {
-        cout << s[0];
-        return 0;
-    }
-    cout << s2;
-
-
 }
