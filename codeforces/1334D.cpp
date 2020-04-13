@@ -1,3 +1,4 @@
+//Modified a little bit
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -9,20 +10,17 @@ int main()
 
     ll n, t, l, r, i, j, pos, part[100009];
     part[0] = 0;
-//    pre[0] = 0;
+
     cin >> t;
     while(t--)
     {
         cin >> n >> l >> r;
-        for(i = n-1; i > 0; i--)
+        for(i = 1; i < n; i++)
         {
-            part[n-i] = part[n-i-1] + i;
-//            pre[n-i] = pre[n-i-1] + part[n-i];
+            part[i] = part[i-1] + n - i;
+
         }
 
-//        for(i = 0; i < n; i++)
-//            cout << part[i] << " ";
-//        cout << endl;
         for(i = l; i <= r; i++)
         {
             if(i == n*(n-1)+1)

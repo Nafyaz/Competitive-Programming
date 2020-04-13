@@ -1,46 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long MAXX 100007
-bool vis[MAXX], AP[MAXX];
-int parent[MAXX], disc[MAXX], low[MAXX], disc[MAXX], tim;
-vector<int> adj[MAXX];
-void ini()
+int n, m, tin;
+int disc[1009], low[1009], vis[1009], par[1009], AP[1009];
+vector<int> adj[1009];
+
+void init()
 {
-    int i;
-    for(i = 0; i < MAXX; i++)
+    tin = 0;
+    for(i = 0; i <= n; i++)
     {
-        vis[i] = AP[i] = false; // Initializing AP and vis array as false
-        parent[i] = -1;         // Initializing parent of each vertex to -1
-        adj[i].clear();        // clearing the adjacency list.
-        low[i] = 0;
+        disc[i] = -1;
+        low[i] = -1;
+        vis[i] = 0;
+        par[i] = -1;
+        Ap[i] = 0;
     }
-    tim = 0;                    // initializing tim to 0
 }
 
-void dfs(int u)
+dfs(int s)
 {
-    vis[u] = true;
-    int i;
-    low[u] = disc[u] = (++tim);
-    int child = 0;
-    for(i = 0; i < adj[u].size(); i++)
-    {
-        int v = adj[u][i];
-        if(vis[v] == false)
-        {
-            child++;
-            parent[v] = u;
-            dfs(v);
+    init();
 
-            low[u] = min(low[u], low[v]);
-            if(parent[u] != -1 and low[v] >= disc[u])
-                AP[u] = true;
-            if(parent[u] == -1 and child > 1)
-                AP[u] = true;
-        }
-        else if(v != parent[u])
-            low[u] = min(low[u], disc[v]);
+    vis[s] = 1;
+    tin++;
+    disc[s] = low[s] = tin;
+
+
+}
+
+int main()
+{
+    int i, j, u, v;
+    cin >> n >> m;
+    for(i = 0; i < m; i++)
+    {
+        cin >> u >> v;
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
+
 
 }
