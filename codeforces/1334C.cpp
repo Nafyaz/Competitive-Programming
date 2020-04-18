@@ -1,3 +1,4 @@
+//A subtle bug was there. although it won't effect the output.
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -20,9 +21,7 @@ int main()
         for(i = 0; i < n; i++)
         {
             cin >> a[i] >> b[i];
-            mn = min(mn, b[i]);
-            if(a[i] < b[i])
-                mn = min(mn, a[i]);
+            mn = min({mn, b[i], a[i]});
         }
 
         for(i = 0; i < n; i++)

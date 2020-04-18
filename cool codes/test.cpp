@@ -1,15 +1,26 @@
-#include<bits/stdc++.h>
-using namespace std;
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template<typename T>
-using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
-#define ll long long
-#define ff first
-#define ss second
-
-int main()
+time = 0
+function DFS(adj[][], disc[], low[], visited[], parent[], AP[], vertex, V)
 {
-
+    visited[vertex] = true
+    disc[vertex] = low[vertex] = time+1
+    child = 0
+    for i = 0 to V
+    {
+        if adj[vertex][i] == true
+        {
+            if visited[i] == false
+            {
+                child = child + 1
+                parent[i] = vertex
+                DFS(adj, disc, low, visited, parent, AP, i, n, time+1)
+                low[vertex] = minimum(low[vertex], low[i])
+                if parent[vertex] == nil and child > 1
+                        AP[vertex] = true
+                if parent[vertex] != nil and low[i] >= disc[vertex]
+                        AP[vertex] = true
+            }
+            else if parent[vertex] != i
+                    low[vertex] = minimum(low[vertex], disc[i])
+        }
+    }
 }

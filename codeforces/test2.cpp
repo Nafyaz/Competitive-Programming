@@ -1,57 +1,40 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include <bits/stdc++.h>
+#define maxn 200005
 
-bool f1(int a, int b, int c)
+vector<int>conj[maxn];
+int n,k,u,v,depth[maxn]= {0},size[maxn]= {0},det[maxn];
+long long ans=0;
+
+int cmp(int a,int b)
 {
-    if(a == 2 && b != 9 && c != 1)
-        return 1;
-    if(a != 2 && b == 9 && c != 1)
-        return 1;
-    if(a != 2 && b != 9 && c == 1)
-        return 1;
-    return 0;
+    return a>b;
 }
-bool f2(int a, int b, int c)
+int dfs(int u,int f)
 {
-    int x = 2, y = 4, z = 5;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    x = 2, y = 5, z = 4;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    x = 4, y = 2, z = 5;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    x = 4, y = 5, z = 2;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    x = 5, y = 2, z = 4;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    x = 5, y = 4, z = 2;
-    if(a == y && (b != x || c != x || b != z || c != z))
-        return 1;
-    return 0;
-}
-bool f3(int a, int b, int c)
-{
-    int a[3] = {4, 6, 3};
-    do
+    depth[u]=depth[f]+1;
+    size[u]=1;
+    for (int i=0; i<conj[u].size(); ++i)
     {
-        if()
+        if ((v=conj[u][i])==f)
+            continue;
+        size[u]+=dfs(v,u);
     }
+    det[u]=size[u]-depth[u];
+    return size[u];
 }
-
 int main()
 {
-    int a, b, c;
-    for(a = 1; a <= 9; a++)
+    scanf("%d%d",&n,&k);
+    for (int i=1; i<n; ++i)
     {
-        for(b = 1; b <= 9; b++)
-        {
-            for(c = 1; c <= 9; c++)
-                if(f1(a, b, c) && f2(a, b, c) && f3(a, b, c) && f4(a, b, c))
-                    cout << a << " " << b << " " << c << endl;
-        }
+        scanf("%d%d",&u,&v);
+        conj[u].push_back(v);
+        conj[v].push_back(u);
     }
+    dfs(1,0);
+    nth_element(det+1,det+n-k,det+n+1,cmp);
+    for (int i=1; i<=n-k; ++i)
+        ans+=det[i];
+    cout<<ans;
+    return 0;
 }

@@ -1,50 +1,66 @@
-#define GODSPEED ios_base::sync_with_stdio(false); cin.tie(NULL);cout.tie(NULL);
-#define pb push_back
-#define f(i,x,n) for(i=x;i<n;i++)
-#define rf(i,x,n) for(i=n;i>x;i--)
-#define ll long long
-#define GCD(a,b) __gcd(a,b);
-#define adios return 0;
-
-
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define ff first
+#define ss second
+
+int n, m;
+vector<pair<int, int> > v;
+vector<int> x[2], inter;
+
+void func(int a, int type)
+{
+    for(int i = 0; i < m; i++)
+    {
+        if(v[i].ff != a && v[i].ss != a)
+            x[type].push_back(i);
+    }
+}
 
 int main()
 {
-    GODSPEED;
-    ll t,n,a,b,c,d,s=0,i,j,flag;
-    string x;
-    while(getline(cin,x))
-    {
-        n=x.size();
-        string a1="`";
-        string a2="'";
-        f(i,0,n)
-        {
-            if(x[i]=='"')
-            {
-                s++;
-                if(s%2==1)
-                {
-                    x[i]=96;
-                    x.insert(i,a1);
-                }
-                else if(s%2==0)
-                {
-                    x[i]=39;
-                    x.insert(i,a2);
-                }
-            }
-        }
+    int i, a, b;
+    cin >> n >> m;
 
-        cout<<x<<endl;
+    for(i = 0; i < m; i++)
+    {
+        cin >> a >> b;
+        v.push_back({a, b});
     }
-    adios;
+
+    //fixing x
+    x[0].clear();
+    func(v[0].ss, 0);
+
+    if(x[0].size() == 0)
+    {
+        cout << "YES";
+        return 0;
+    }
+
+    //fixing y
+    x[1].clear();
+    func(v[x[0][0]].ss, 1);
+    if(x[1].size() == 0)
+    {
+        cout << "YES";
+        return 0;
+    }
+
+    for(i = 0; i < x[0].size(); i++)
+        cout << x[0][i] << " ";
+    cout << endl;
+    for(i = 0; i < x[1].size(); i++)
+        cout << x[1][i] << " ";
+    cout << endl;
+
+    set_intersection(x[0].begin(), x[0].end(), x[1].begin(), x[1].end(), back_inserter(inter));
+
+    cout << inter.size();
+    for(i = 0; i < inter.size(); i++)
+        cout << inter[i] << " ";
+if(inter.size() == 0)
+    {
+        cout << "YES";
+        return 0;
+    }
 }
-/*
-"To be or not to be," quoth the Bard, "that
-is the question".
-The programming contestant replied: "I must disagree.
-To `C' or not to `C', that is The Question!"
-*/
