@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, m;
-bool vis[10009];
-int tin[10009], low[10009], timer;
-vector<int> adj[10009];
+int n;
+bool vis[109];
+int tin[109], low[109], timer;
+vector<int> adj[109];
 set<int> AP;
 
 void dfs(int v, int p = -1)
@@ -14,6 +14,7 @@ void dfs(int v, int p = -1)
     tin[v] = low[v] = timer;
 
     int child = 0;
+
     for(auto to : adj[v])
     {
         if(to == p)
@@ -23,6 +24,7 @@ void dfs(int v, int p = -1)
             child++;
             dfs(to, v);
             low[v] = min(low[v], low[to]);
+
             if(low[to] >= tin[v] && p != -1)
                 AP.insert(v);
         }
@@ -36,8 +38,8 @@ void dfs(int v, int p = -1)
 
 void findAP()
 {
-    AP.clear();
     timer = 0;
+    AP.clear();
     int i;
     for(i = 1; i <= n; i++)
     {
@@ -55,16 +57,44 @@ void findAP()
 
 int main()
 {
-    int i, j, u, v;
-    cin >> n >> m;
-    for(i = 0; i < m; i++)
+    string s;
+    int u, v, i;
+    while(1)
     {
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        cin >> n;
+        if(!n)
+            break;
+
+        for(i = 1; i <= n; i++)
+            adj[i].clear();
+
+        while(1)
+        {
+            cin >> u;
+            if(!u)
+                break;
+            getline(cin, s);
+            stringstream ss(s);
+            while(ss >> s)
+            {
+                v = stoi(s);
+                adj[u].push_back(v);
+                adj[v].push_back(u);
+            }
+        }
+
+        findAP();
+
+        cout << AP.size() << endl;
     }
-
-    findAP();
-
-    cout << AP.size();
 }
+/*
+5
+5  1  2  3  4
+0
+6
+2  1  3
+5  4  6  2
+0
+0
+*/

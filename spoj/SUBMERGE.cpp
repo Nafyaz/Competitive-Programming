@@ -55,16 +55,26 @@ void findAP()
 
 int main()
 {
-    int i, j, u, v;
-    cin >> n >> m;
-    for(i = 0; i < m; i++)
+    int i, a, b;
+    while(1)
     {
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
+        cin >> n >> m;
+        if(!n && !m)
+            break;
+
+        for(i = 1; i <= n; i++)
+            adj[i].clear();
+
+        for(i = 1; i <= m; i++)
+        {
+            cin >> a >> b;
+            adj[a].push_back(b);
+            adj[b].push_back(a);
+        }
+
+        findAP();
+
+//        cout << *AP.begin();
+        cout << AP.size() << endl;
     }
-
-    findAP();
-
-    cout << AP.size();
 }

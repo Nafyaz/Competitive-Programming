@@ -5,7 +5,7 @@ int n, m;
 bool vis[10009];
 int tin[10009], low[10009], timer;
 vector<int> adj[10009];
-set<int> AP;
+vector<int> bridge[10009];
 
 void dfs(int v, int p = -1)
 {
@@ -23,20 +23,20 @@ void dfs(int v, int p = -1)
             child++;
             dfs(to, v);
             low[v] = min(low[v], low[to]);
-            if(low[to] >= tin[v] && p != -1)
-                AP.insert(v);
+            if(low[to] > tin[v])
+            {
+                bridge[v].push_back(to);
+                bridge[to].push_back(v);
+            }
         }
         else
             low[v] = min(low[v], tin[to]);
     }
-
-    if(p == -1 && child > 1)
-        AP.insert(v);
 }
 
-void findAP()
+void findBR()
 {
-    AP.clear();
+    bridge.clear();
     timer = 0;
     int i;
     for(i = 1; i <= n; i++)
@@ -64,7 +64,7 @@ int main()
         adj[v].push_back(u);
     }
 
-    findAP();
+    findBR();
 
-    cout << AP.size();
+    cout << bridge.size();
 }

@@ -1,26 +1,26 @@
-time = 0
-function DFS(adj[][], disc[], low[], visited[], parent[], AP[], vertex, V)
+#include<bits/stdc++.h>
+using namespace std;
+int main()
 {
-    visited[vertex] = true
-    disc[vertex] = low[vertex] = time+1
-    child = 0
-    for i = 0 to V
+    char a[1000];
+
+    int n,i,p=0;
+    cin>>n;
+    fflush(stdin);
+    gets(a);
+    cout << a;
+    strcpy(a,strlwr(a));
+    sort(a,a+n);
+
+
+    for(i=0; i<n; i++)
     {
-        if adj[vertex][i] == true
-        {
-            if visited[i] == false
-            {
-                child = child + 1
-                parent[i] = vertex
-                DFS(adj, disc, low, visited, parent, AP, i, n, time+1)
-                low[vertex] = minimum(low[vertex], low[i])
-                if parent[vertex] == nil and child > 1
-                        AP[vertex] = true
-                if parent[vertex] != nil and low[i] >= disc[vertex]
-                        AP[vertex] = true
-            }
-            else if parent[vertex] != i
-                    low[vertex] = minimum(low[vertex], disc[i])
-        }
+        if(a[i]=='a'+p)
+            p=p+1;
     }
+
+    if(p==26)
+        cout<<"YES";
+    else
+        cout<<"NO";
 }
