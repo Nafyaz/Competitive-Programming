@@ -1,34 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, a[100009], sparse[100009][20];
+int a[100009], sparse[100009][20], Log[100009];
 
 int main()
 {
-    int i, j, k, q, l, r;
+    int n, i, j;
     cin >> n;
 
-    for(i = 0; i < n; i++)
-    {
-        cin >> a[i];
-    }
+    Log[1] = 0;
+    for(i = 2; i <= n; i++)
+        Log[i] = Log[i>>1] + 1;
 
-    k = log2(n) + 1;
+    for(i = 0; i < n; i++)
+        cin >> a[i];
+
     for(i = 0; i < n; i++)
         sparse[i][0] = a[i];
-    for(j = 1; (1 << j) <= n; j++)
+
+    for(j = 1; j <= Log[n] + 1; j++)
     {
-        for(i = 0; i + (1 << j) - 1 < n; i++)
-        {
+        for(i = 0; i + (1<<(j-1)) < n; i++)
             sparse[i][j] = min(sparse[i][j-1], sparse[i + (1 << (j-1))][j-1]);
-        }
     }
 
+    int q, k;
     cin >> q;
+
     while(q--)
     {
-        cin >> l >> r;
-        k = log2(r-l+1);
-        cout << min(sparse[l][k], sparse[r-(1<<k)+1][k]) << endl;
+        cin >> i >> j;
+        k = Log[j-i+1];
+        cout << min(sparse[i][k], sparse[j - (1 << k) + 1][k]) << endl;
     }
 }
