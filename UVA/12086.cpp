@@ -25,7 +25,7 @@ void update(int i, int d)
 
 int main()
 {
-    freopen("out.txt", "w", stdout);
+//    freopen("out.txt", "w", stdout);
     int i, j, x, y, r, a[200009], caseno = 0;
     string s;
 
@@ -54,6 +54,7 @@ int main()
             {
                 cin >> x >> r;
                 update(x, r-a[x]);
+                a[x] = r;
             }
             else
             {
@@ -63,3 +64,11 @@ int main()
         }
     }
 }
+/*
+M 1 1
+M 1 2
+M 1 3
+M 2 2
+M 2 3
+M 3 3
+*/

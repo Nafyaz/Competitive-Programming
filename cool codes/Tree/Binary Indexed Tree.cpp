@@ -1,23 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int BIT[100005];
-int query(int idx)
+int BIT[100009], a[100009], n;
+
+int query(int i)
 {
     int sum=0;
-    while(idx>0)
+    while(i>0)
     {
-        sum += BIT[idx];
-        idx -= idx & (-idx);
+        sum += BIT[i];
+        i -= i & (-i);
     }
     return sum;
 }
-void update(int idx,int val,int n)
+void update(int i,int d)
 {
-    while(idx<=n)
+    while(i<=n)
     {
-        BIT[idx]+=val;
-        idx += idx & (-idx);
+        BIT[i]+=d;
+        i += i & (-i);
     }
 }
 

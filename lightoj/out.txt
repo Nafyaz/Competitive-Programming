@@ -1,100 +1,64 @@
-Case 1: 
-Case 2: 
-Case 3: 
-Case 4: 
-Case 5: 
-Case 6: occ
-Case 7: 
-Case 8: 
-Case 9: 
-Case 10: e
-Case 11: 
-Case 12: 
-Case 13: dis
-Case 14: 
-Case 15: can
-Case 16: pen
-Case 17: 
-Case 18: e
-Case 19: cla
-Case 20: 
-Case 21: 
-Case 22: 
-Case 23: 
-Case 24: 
-Case 25: cat
-Case 26: 
-Case 27: 
-Case 28: oc
-Case 29: ang
-Case 30: 
-Case 31: 
-Case 32: 
-Case 33: 
-Case 34: 
-Case 35: tn
-Case 36: 
-Case 37: 
-Case 38: 
-Case 39: te
-Case 40: 
-Case 41: 
-Case 42: 
-Case 43: 
-Case 44: ea
-Case 45: 
-Case 46: 
-Case 47: 
-Case 48: s
-Case 49: 
-Case 50: fi
-Case 51: 
-Case 52: ae
-Case 53: 
-Case 54: 
-Case 55: 
-Case 56: auti
-Case 57: 
-Case 58: 
-Case 59: 
-Case 60: ree
-Case 61: 
-Case 62: a
-Case 63: 
-Case 64: 
-Case 65: 
-Case 66: ine
-Case 67: 
-Case 68: 
-Case 69: 
-Case 70: 
-Case 71: ca
-Case 72: shon
-Case 73: 
-Case 74: 
-Case 75: 
-Case 76: 
-Case 77: 
-Case 78: e
-Case 79: 
-Case 80: 
-Case 81: i
-Case 82: 
-Case 83: dr
-Case 84: 
-Case 85: 
-Case 86: ti
-Case 87: 
-Case 88: 
-Case 89: 
-Case 90: 
-Case 91: 
-Case 92: 
-Case 93: 
-Case 94: poss
-Case 95: 
-Case 96: 
-Case 97: 
-Case 98: 
-Case 99: ret
-Case 100: 
+Case 1:
+5
+5
+0
+0
+38
+0
+0
+0
+Case 2:
+218
+378
+17
+283
+20
+131
+64
+66
+42
+28
+Case 3:
+52
+100
+71
+244
+50
+15
+215
+57
+58
+58
+16
+45
+25
+98
+Case 4:
+60
+63
+54
+10
+63
+63
+10
+4
+37
+0
+53
+175
+53
+52
+22
+71
+41
+22
+0
+Case 5:
+65
+53
+521
+748
+36
+3
+7
+0
