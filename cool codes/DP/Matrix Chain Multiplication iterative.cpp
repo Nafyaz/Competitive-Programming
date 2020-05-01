@@ -17,7 +17,7 @@ int main()
     int len, cost;
 	for (len = 2; len <= n; len++)
 	{
-		for (i = 1; i + len - 1 <= n; i++)
+		for (i = 1; i + len - 1 < n; i++)
 		{
 			j = i + len - 1;
 			mcm[i][j] = INT_MAX;

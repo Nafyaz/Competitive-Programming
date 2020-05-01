@@ -1,15 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int BIT[100][100];
+int mx = 100, my = 100;
+BIT[mx][my];
 
 void update(int x, int y, int val)
 {
     int y1;
-    while (x <= max_x)
+    while (x <= mx)
     {
         y1 = y;
-        while (y1 <= max_y)
+        while (y1 <= my)
         {
             BIT[x][y1] += val;
             y1 += (y1 & -y1);

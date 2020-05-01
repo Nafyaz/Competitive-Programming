@@ -6,15 +6,8 @@ typedef pair<int, int> pi;
 
 int main()
 {
-   priority_queue<pi, vector<pi>, greater<pi>> pq;
-   pq.push({1, 2});
-   pq.push({5, 2});
-   pq.push({3, 8});
-   pq.push({2, 1});
-
-   while(!pq.empty())
-   {
-       cout << pq.top().ff << " " << pq.top().ss << endl;
-       pq.pop();
-   }
+    bitset<16> s;
+    int x;
+    cout << sizeof x << endl;
+    cout << sizeof s;
 }
