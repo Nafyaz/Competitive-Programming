@@ -1,37 +1,36 @@
-    #include<bits/stdc++.h>
-    using namespace std;
-    #define ll long long
-    ll ara[100005];
-    int dp1[100005];
-    int dp2[100005];
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    int pos1=0,pos2=0;
+    char dummy;
+    string command = {0};
+    int n;
 
+    cin >> n;
+    //dummy = getchar();
+    cin >> command;
 
-    int main()
+    for (int i = 0; i < n; i++)
     {
-        ios_base::sync_with_stdio(0);
-        cin.tie(0);
-        int n;
-        cin>>n;
-        int maxv=0;
-        for(int i=1;i<=n;i++) cin>>ara[i];
-        for(int i=1;i<=n;i++){
-            if(ara[i]>ara[i-1]) dp1[i]=dp1[i-1]+1;
-            else dp1[i]=1;
-            if(i!=n) maxv=max(maxv,dp1[i]+1);
-        }
-        for(int i=n;i>=1;i--){
-            if(ara[i]<ara[i+1]) dp2[i]=dp2[i+1]+1;
-            else dp2[i]=1;
-            if(i!=1) maxv=max(maxv,dp2[i]+1);
-        }
-        //for(int i=1;i<=n;i++) cout<<dp1[i]<<" ";
-        //cout<<endl;
-        //for(int i=1;i<=n;i++) cout<<dp2[i]<<" ";
-        //cout<<endl;
-
-        for(int i=1;i<=n;i++){
-            if(ara[i+1]-ara[i-1]>=2LL) maxv=max(maxv,1+dp1[i-1]+dp2[i+1]);
-        }
-        if(n==1) maxv=1;
-        cout<<maxv;
+        if (command[i] == 'L')
+            pos1--;
+        else if (command[i] == 'R')
+            pos2++;
     }
+
+    cout << pos1 << " " << pos2;
+
+//    if (pos1 == 0 || pos2 == 0)
+//    {
+//        cout << abs(pos1) + abs(pos2);
+//    }
+//    else if(pos1 != 0 && pos2 != 0)
+//    {
+//        cout << abs(pos2 - pos1) + 1;
+//    }
+
+
+    return 0;
+}
