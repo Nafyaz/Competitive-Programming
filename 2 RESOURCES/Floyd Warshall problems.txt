@@ -1,0 +1,27 @@
+
+    UVA: Page Hopping
+    SPOJ: Possible Friends
+    CODEFORCES: Greg and Graph
+    SPOJ: CHICAGO - 106 miles to Chicago
+    UVA 10724 - Road Construction
+    UVA 117 - The Postal Worker Rings Once
+    Codeforces - Traveling Graph
+    UVA - 1198 - The Geodetic Set Problem
+    UVA - 10048 - Audiophobia
+    UVA - 125 - Numbering Paths
+    LOJ - Travel Company
+    UVA 423 - MPI Maelstrom
+    UVA 1416 - Warfare And Logistics
+    UVA 1233 - USHER
+    UVA 10793 - The Orc Attack
+    UVA 10099 The Tourist Guide
+    UVA 869 - Airline Comparison
+    UVA 13211 - Geonosis
+    SPOJ - Defend the Rohan
+    Codeforces - Roads in Berland
+    Codeforces - String Problem
+    GYM - Manic Moving (C)
+    SPOJ - Arbitrage
+    UVA - 12179 - Randomly-priced Tickets
+    LOJ - 1086 - Jogging Trails
+    SPOJ - Ingredients

@@ -14,5 +14,7 @@ int func(int a,int b,int m)
 }
 int main()
 {
-    printf("%d",func(5,0,2));
+//    printf("%d",func(5,0,2));
+    int a = (15 << 32);
+    cout << a;
 }
