@@ -1,46 +1,47 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ff first
+#define ss second
 
 int n;
 vector <pair<int, int>> adj[505];
-int dis[505], vis[505];
+int dis[505], p[505];
 
 void init()
 {
     for(int i = 0; i < n; i++)
+    {
         dis[i] = INT_MAX;
-    for(int i = 0; i < n; i++)
-        vis[i] = 0;
+        p[i] = -1;
+    }
 }
 
 void dijkstra(int s)
 {
     init();
 
-    multiset <pair<int, int> > ms;
-    pair <int, int> p;
+    set <pair<int, int> > q;
     int node;
 
     dis[s] = 0;
-    ms.insert({0, s});
+    q.insert({0, s});
 
-    while(!ms.empty())
+    while(!q.empty())
     {
-        p = *ms.begin();
-        ms.erase(ms.begin());
+        node = q.begin()->ss;
+        q.erase(q.begin());
 
-        node = p.second;
-
-        if(vis[node])
-            continue;
-        vis[node] = 1;
-
-        for(auto i : adj[node])
+        for (auto u : adj[node])
         {
-            if(dis[i.second] > dis[node] + i.first)
+            int to = u.ff;
+            int len = u.ss;
+
+            if (dis[node] + len < dis[to])
             {
-                dis[i.second] = dis[node] + i.first;
-                ms.insert(i);
+                q.erase({dis[to], to});
+                dis[to] = dis[node] + len;
+                q.insert({dis[to], to});
+                p[to] = node;
             }
         }
     }

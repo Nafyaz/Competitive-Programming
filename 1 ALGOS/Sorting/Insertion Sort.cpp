@@ -3,7 +3,7 @@ using namespace std;
 
 int a[100], n;
 
-void Insort()
+void insertion_sort()
 {
     int i, j, key;
     for(i = 1; i < n; i++)
@@ -22,7 +22,7 @@ int main()
     for(i = 0; i < n; i++)
         cin >> a[i];
 
-    Insort();
+    insertion_sort();
 
     for(i = 0; i < n; i++)
         cout << a[i] << " ";

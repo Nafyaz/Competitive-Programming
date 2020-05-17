@@ -9,7 +9,7 @@ ll dis[10009][10009];
 
 int main()
 {
-    ll i, j, k, m, u, v, w, s;
+    ll i, j, k, m, u, v, w;
 
     cin >> n >> m;
 
@@ -26,7 +26,6 @@ int main()
     {
         cin >> u >> v >> w;
         adj[u].push_back({w, v});
-        adj[v].push_back({w, u});
         dis[u][v] = w;
     }
 

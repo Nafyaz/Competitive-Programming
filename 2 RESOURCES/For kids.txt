@@ -1,0 +1,11 @@
+ 1. https://a2oj.com/
+ 2. https://play.google.com/store/apps/details?id=com.limitskyapps.CodingCalendar
+ 3. https://codeforces.com/blog/entry/57282
+ 4. for visualization: http://www.pythontutor.com/visualize.html#mode=edit
+ 5. for real kids: https://codeforces.com/group/MWSDmqGsZm/contests
+ 6. https://www.youtube.com/playlist?list=PLllx_3tLoo4csmLveWHpjcRTXVMCcvvmc
+ 7. https://github.com/fsshakkhor
+ 8. https://github.com/me-shaon/bangla-programming-resources
+ 9. https://www.mathsisfun.com/activity/index.html
+10. https://www.codechef.com/certification/data-structures-and-algorithms/prepare#foundation
+11. https://docs.microsoft.com/en-us/quantum/?view=qsharp-preview

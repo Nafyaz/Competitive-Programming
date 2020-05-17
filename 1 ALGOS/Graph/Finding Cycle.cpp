@@ -1,7 +1,9 @@
+#include<bits/stdc++.h>
+using namespace std;
+
 int n;
 vector<vector<int>> adj;
-vector<char> color;
-vector<int> parent;
+vector<int> color, parent;
 int cycle_start, cycle_end;
 
 bool dfs(int v)
