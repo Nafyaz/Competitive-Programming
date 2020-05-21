@@ -1,72 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
-struct Node
-{
-    int data;
-    Node *next;
-};
-Node *head=NULL;
-void Append(int data)
-{
-    Node *new_Node=new Node;
 
-    new_Node->data=data;
-    new_Node->next=NULL;
+#define INF (1<<29)
+#define SET(a) memset(a,-1,sizeof(a))
+#define ALL(a) a.begin(),a.end()
+#define CLR(a) memset(a,0,sizeof(a))
+#define FILL(a,v) memset(a,v,sizeof(a))
+#define PB push_back
+#define FOR(i,n) for(int i = 0;i<n;i++)
+#define PI acos(-1.0)
+#define EPS 1e-9
+#define MP(a,b) make_pair(a,b)
+#define min3(a,b,c) min(a,min(b,c))
+#define max3(a,b,c) max(a,max(b,c))
+#define READ(f) freopen(f, "r", stdin)
+#define WRITE(f) freopen(f, "w", stdout)
+#define LL long long
+#define MX 100000
+#define MOD 1000000007
 
-    if(head==NULL)
-    {
-        head=new_Node;
-        return;
-    }
 
-    Node *Temp=head;
-    while(Temp->next!=NULL)
-        Temp=Temp->next;
 
-    Temp->next=new_Node;
-}
-Node* Insert(Node* head,int data)
-{
-    Node* Temp = head;
-    Node* Temp2;
-    if(head == NULL)
-    {
-    Temp2 = new Node;
-    Temp2 -> data = data;
-    Temp2 -> next = NULL;
-    head = Temp2;
-    //Temp -> next = Temp2;
-    return head;
-    }
-    while(Temp->next != NULL) {
+    string s[MX];
 
-        Temp=Temp->next;
-    }
-    Temp2 = new Node;
-    Temp2 -> data = data;
-    Temp2 -> next = NULL;
-    //head = Temp2;
-    Temp -> next = Temp2;
-    return head;
-}
-void Print(Node* head)
-{
-    Node *temp=head;
-    while(temp!=NULL)
-    {
-        printf("%d ",temp->data);
-        temp=temp->next;
-    }
-    printf("\n");
-}
 int main()
 {
-    Append(3);
-    Append(5);
-    Append(1);
-    Append(17);
+    map<char,int>mp;
+    char c;
+    int cnt=0;
+    while(cin>>s[cnt++])
+        if(s[cnt-1]=="#")
+            break;
 
-    head=Insert(head,50);
-    Print(head);
+    for(int i=0;i<20;i++)
+        for(int j=0;j<cnt-1;j++)
+            if(i<s[j].length())
+                {
+                    c=s[j][i];
+                    if(mp[c]!=1)
+                    {
+                        cout<<c;
+                        mp[c]=1;
+                    }
+                }
+    cout<<endl;
 
+return 0;
 }

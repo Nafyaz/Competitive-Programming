@@ -1,71 +1,72 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<bits/stdc++.h>
 
-/*
- * This stores the total number of books in each shelf.
- */
-int* total_number_of_books;
+using namespace std;
+#define white 0
+#define gray 1
+#define black 2
 
-/*
- * This stores the total number of pages in each book of each shelf.
- * The rows represent the shelves and the columns represent the books.
- */
-int** total_number_of_pages;
+vector<int>adj[100000];
+bool visited[100000]= {false};
+int dis[100000]= {0},fin[100000]= {0},tim=0;
+stack<int>st;
+int color[100000]={0};
+bool hasCycle=false;
+bool compare(int a,int b)
+{
+    if(a>b) return true;
+    return false;
+}
+void dfs(int x)
+{
+    if(visited[x]) return;
+    visited[x] = true;
+    color[x]=gray;
+    tim++;
+    dis[x]=tim;
+    for(int i=0;i<adj[x].size();i++)
+    {
+        int u=adj[x][i];
+        if(visited[u]&&color[u]==gray&&color[x]==gray){
+            hasCycle=true;
+        }
+        else if(!visited[u]) dfs(adj[x][i]);
+    }
+    color[x]=black;
+    tim++;
+    fin[x]=tim;
+    st.push(x);
+}
+
 int main()
 {
-    int total_number_of_shelves;
-    scanf("%d", &total_number_of_shelves);
-
-    int i;
-    total_number_of_books = (int*)calloc(total_number_of_shelves, sizeof(int));
-    total_number_of_pages = (int**)calloc(total_number_of_shelves, sizeof(int));
-    for(i = 0; i < total_number_of_shelves; i++)
-        total_number_of_pages[i] = (int*)calloc(1200, sizeof(int));
-
-    int total_number_of_queries;
-    scanf("%d", &total_number_of_queries);
-
-    while (total_number_of_queries--) {
-        int type_of_query;
-        scanf("%d", &type_of_query);
-
-        if (type_of_query == 1)
-        {
-            /*
-             * Process the query of first type here.
-             */
-            int x, y;
-            scanf("%d %d", &x, &y);
-
-            total_number_of_books[x]++;
-            total_number_of_pages[x][total_number_of_books[x]-1] = y;
-
-
-        }
-        else if (type_of_query == 2) {
-            int x, y;
-            scanf("%d %d", &x, &y);
-            printf("%d\n", *(*(total_number_of_pages + x) + y));
-        } else {
-            int x;
-            scanf("%d", &x);
-            printf("%d\n", *(total_number_of_books + x));
-        }
+    int n,m,i,u,v;
+    cin>>n>>m;
+    while(!st.empty())
+        st.pop();
+    for(i=0; i<m; i++)
+    {
+        cin>>u>>v;
+        adj[u].push_back(v);
+    }
+    for(i=1; i<=n; i++)
+    {
+        sort(adj[i].begin(),adj[i].end(),compare);
+    }
+    for(i=n; i>=1; i--)
+    {
+        if(!visited[i])
+            dfs(i);
+    }
+    if(hasCycle)
+        cout<<"Sandro fails."<<endl;
+    else{
+        for(i=0; i<n-1; i++)
+    {
+        cout<<st.top()<<" ";
+        st.pop();
+    }
+    cout<<st.top()<<endl;
     }
 
-    if (total_number_of_books) {
-        free(total_number_of_books);
-    }
 
-    for (int i = 0; i < total_number_of_shelves; i++) {
-        if (*(total_number_of_pages + i)) {
-            free(*(total_number_of_pages + i));
-        }
-    }
-
-    if (total_number_of_pages) {
-        free(total_number_of_pages);
-    }
-
-    return 0;
 }
