@@ -1,35 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-vector <int> adj[10010];
-int n, vis[10010], in_degree[10010];
-queue <int> q;
+vector <int> adj[10010], path;
+int n, vis[10010];
 
-void bfs()
-{
-    int node;
-    while(!q.empty())
-    {
-        node = q.front();
-        q.pop();
-        vis[node] = 1;
-
-        for(auto i : adj[node])
-        {
-            if(vis[i] == 0)
-                q.push(i);
-        }
-    }
-}
-
-void dfs(int s)
+void dfs(int s, bool f)
 {
     vis[s] = 1;
     for(auto node : adj[s])
     {
         if(vis[node] == 0)
-            dfs(node);
+            dfs(node, f);
     }
+    if(f)
+        path.push_back(s);
 }
 
 
@@ -39,49 +23,37 @@ int main()
     scanf("%d", &t);
     while(t--)
     {
-        memset(vis, 0, sizeof(vis));
-        memset(in_degree, 0, sizeof(in_degree));
-
         scanf("%d %d", &n, &m);
+
+        for(i = 1; i <= n; i++)
+            adj[i].clear();
+        memset(vis, 0, sizeof(vis));
+
         for(i = 0; i < m; i++)
         {
             scanf("%d %d", &u, &v);
             adj[u].push_back(v);
         }
 
+        path.clear();
         for(i = 1; i <= n; i++)
         {
-            for(auto j : adj[i])
-                in_degree[j]++;
+            if(!vis[i])
+                dfs(i, 1);
         }
 
         int ans = 0;
-
-        for(i = 1; i <= n; i++)
+        memset(vis, 0, sizeof vis);
+        for(i = n-1; i >= 0; i--)
         {
-            if(in_degree[i] == 0)
+            int v = path[i];
+            if(!vis[v])
             {
-                q.push(i);
-                ans++;
-                vis[i] = 1;
-            }
-        }
-
-        bfs();
-
-        for(i = 1; i <= n; i++)
-        {
-            if(vis[i] == 0)
-            {
-                dfs(i);
+                dfs(v, 0);
                 ans++;
             }
         }
 
         printf("Case %d: %d\n", ++caseno, ans);
-
-        for(i = 1; i <= n; i++)
-            adj[i].clear();
     }
-    return 0;
 }

@@ -1,6 +1,6 @@
 Classic :
-(done)339D - Xenia and Bit Operations
-(done)356A - Knight Tournament
+339D - Xenia and Bit Operations
+356A - Knight Tournament
 459D - Pashmak and Parmida's problem
 61E - Enemy is weak
 380C - Sereja and Brackets
