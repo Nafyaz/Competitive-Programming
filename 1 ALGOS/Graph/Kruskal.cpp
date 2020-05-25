@@ -16,8 +16,9 @@ int Find(int a)
 
 void Union(int a, int b)
 {
-    int x = Find(a), y = Find(b);
-    parent[x] = y;
+    a = Find(a);
+    b = Find(b);
+    parent[a] = b;
 }
 
 int kruskal()

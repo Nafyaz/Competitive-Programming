@@ -6,8 +6,7 @@ typedef pair<int, int> pi;
 
 int main()
 {
-    bitset<16> s;
-    int x;
-    cout << sizeof x << endl;
-    cout << sizeof s;
+    vector<int> v(5, 4);
+    for(auto u : v)
+        cout << u<< " ";
 }
