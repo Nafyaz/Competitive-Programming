@@ -1,9 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define N 100009
+#define N 1000009
+
 bool flag[N];
 vector<ll> primes;
+
 void sieve()
 {
     ll i, j;
@@ -28,9 +30,30 @@ void sieve()
     }
 }
 
+ll SOD(ll n)
+{
+    ll i, c, ret = 1;
+
+    for(i = 0; primes[i]*primes[i] <= n; i++)
+    {
+        int p = 1;
+        for(c = 0; n % primes[i] == 0; c++)
+        {
+            n /= primes[i];
+            p = p * primes[i];
+        }
+        ret *= (p * primes[i] - 1) / (primes[i] - 1);
+    }
+
+    if(n > 1)
+        ret *= (n*n - 1) / (n - 1);
+    return ret;
+}
+
 int main()
 {
     sieve();
-    for(auto u : primes)
-        cout << u << " ";
+    cout << SOD(8);
 }
+
+

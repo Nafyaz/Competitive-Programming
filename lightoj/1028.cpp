@@ -55,9 +55,9 @@ int main()
     while(T--)
     {
         scanf("%lld", &n);
-        if(n == 1)
-            printf("Case %lld: 0\n", ++caseno);
-        else
-            printf("Case %lld: %lld\n", ++caseno, NOD(n) - 1);
+//        if(n == 1)
+//            printf("Case %lld: 0\n", ++caseno);
+//        else
+        printf("Case %lld: %lld\n", ++caseno, NOD(n) - 1);
     }
 }

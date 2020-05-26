@@ -14,7 +14,5 @@ int func(int a,int b,int m)
 }
 int main()
 {
-//    printf("%d",func(5,0,2));
-    int a = (15 << 32);
-    cout << a;
+cout << (1 + 3 - 1) / 3 * 3;
 }
