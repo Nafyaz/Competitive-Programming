@@ -1,47 +1,49 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long
 #define ff first
 #define ss second
 
-int n;
-vector <pair<int, int>> adj[505];
-int dis[505], p[505];
+ll n;
+vector <pair<ll, ll>> adj[505];
+ll dis[505], par[505];
 
 void init()
 {
-    for(int i = 0; i < n; i++)
+    for(ll i = 1; i <= n; i++)
     {
         dis[i] = INT_MAX;
-        p[i] = -1;
+        par[i] = -1;
     }
 }
 
-void dijkstra(int s)
+void dijkstra(ll s)
 {
     init();
 
-    set <pair<int, int> > q;
-    int node;
+    set <pair<ll, ll> > q;
 
     dis[s] = 0;
     q.insert({0, s});
 
     while(!q.empty())
     {
-        node = q.begin()->ss;
+        pair<ll, ll> p = *q.begin();
         q.erase(q.begin());
+
+        ll node = p.ss;
+        if(p.ff > dis[node])
+            continue;
 
         for (auto u : adj[node])
         {
-            int to = u.ff;
-            int len = u.ss;
-
+            ll len = u.ff;
+            ll to = u.ss;
             if (dis[node] + len < dis[to])
             {
-                q.erase({dis[to], to});
                 dis[to] = dis[node] + len;
                 q.insert({dis[to], to});
-                p[to] = node;
+                par[to] = node;
             }
         }
     }
@@ -49,22 +51,34 @@ void dijkstra(int s)
 
 int main()
 {
-    int t, caseno = 0, i, m, u, v, w, s;
-    scanf("%d", &t);
-    while(t--)
+    ll i, m, s;
+
+    cin >> n >> m;
+    for(i = 0; i < m; i++)
     {
-        scanf("%d %d", &n, &m);
-        for(i = 0; i < m; i++)
-        {
-            scanf("%d %d %d", &u, &v, &w);
-            adj[u].push_back({w, v});
-            adj[v].push_back({w, u});
-        }
-
-        scanf("%d", &s);
-        dijkstra(s);
-
-        for(i = 0; i < n; i++)
-            printf("%d: %d\n", i, dis[i]);
+        ll a, b, c;
+        cin >> a >> b >> c;
+        adj[a].push_back({c, b});
+        adj[b].push_back({c, a});
     }
+
+    cin >> s;
+    dijkstra(s);
+
+    for(i = 1; i <= n; i++)
+        cout << i << ": " << dis[i] << endl;
 }
+/*
+9 11
+1 2 1
+2 3 1
+3 4 1
+5 6 1
+5 7 1
+5 8 1
+5 9 1
+1 5 7
+2 5 5
+3 5 3
+4 5 1
+*/
