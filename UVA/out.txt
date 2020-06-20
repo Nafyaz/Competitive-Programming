@@ -1,12 +1,6 @@
-Scenario #1
-Frog Distance = 1.000
-
-Scenario #2
-Frog Distance = 3.000
-
-Scenario #3
-Frog Distance = 1.414
-
-Scenario #4
-Frog Distance = 2.000
-
+Back to jail
+909
+222
+Back to jail
+1147
+22

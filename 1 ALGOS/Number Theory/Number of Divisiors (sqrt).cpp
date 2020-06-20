@@ -23,9 +23,10 @@ void sieve()
         }
     }
 
-    for(i = 2; i < N; i++)
+    primes.push_back(2);
+    for(i = 3; i < N; i += 2)
     {
-        if(flag[i])
+        if(!flag[i])
             primes.push_back(i);
     }
 }

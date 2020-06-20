@@ -14,5 +14,5 @@ int func(int a,int b,int m)
 }
 int main()
 {
-cout << (1 + 3 - 1) / 3 * 3;
+    cout << INF;
 }

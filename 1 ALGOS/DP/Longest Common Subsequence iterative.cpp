@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+int lcs[3009][3009];
+
 int main()
 {
-    int i, j, n, m, lcs[100][100];
     string a, b;
+    int i, j, n, m;
     cin >> a >> b;
 
     n = a.size();
@@ -26,5 +28,21 @@ int main()
         }
     }
 
-    cout << lcs[n][m];
+    i = n, j = m;
+    string ans;
+    while(i > 0 && j > 0)
+    {
+        if(a[i-1] == b[j-1])
+        {
+            ans = a[i-1] + ans;
+            i--;
+            j--;
+        }
+        else if(lcs[i-1][j] >= lcs[i][j-1])
+            i--;
+        else
+            j--;
+    }
+
+    cout << lcs[n][m] << endl << ans;
 }
