@@ -2,6 +2,7 @@
 using namespace std;
 #define ll long long
 #define N 1000009
+
 bool flag[N];
 vector<ll> primes;
 void sieve()
@@ -31,6 +32,20 @@ void sieve()
 int main()
 {
     sieve();
-    for(auto u : primes)
-        cout << u << " ";
+
+    ll t, i, n, k, a, b;
+    cin >> t;
+    while(t--)
+    {
+        cin >> n >> k;
+        a = b = 0;
+        for(i = 0; primes[i] * primes[i] <= n; i++)
+        {
+            a++;
+            if(primes[i] * primes[i] > k)
+                b++;
+        }
+
+        cout << a << " " << b << endl;
+    }
 }
