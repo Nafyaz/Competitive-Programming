@@ -11,7 +11,7 @@ void sieve()
     ll i, j;
 
     flag[2] = 1;
-    for(i = 3; i < N; i += 2)
+    for(i = 4; i < N; i += 2)
         flag[i] = 1;
 
     for(i = 3; i * i < N; i+=2)
@@ -44,11 +44,12 @@ ll NOD(ll n)
 
     if(n > 1)
         ret = ret << 1;
+
     return ret;
 }
 
 int main()
 {
     sieve();
-    cout << NOD(8);
+    cout << NOD(18);
 }
