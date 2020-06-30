@@ -33,29 +33,14 @@ void segsieve(ll L, ll R)
     }
 }
 
-ll mulmod(ll a, ll b, ll mod)
-{
-    if(a < b)
-        swap(a, b);
-    ll ret = 0;
-    while(b)
-    {
-        if(b&1)
-            ret = (ret + a) % mod;
-        a = (a + a) % mod;
-        b /= 2;
-    }
-    return ret;
-}
-
-ll bigmod(ll a, ll b, ll mod)
+ll bigmod(ll a, ll b)
 {
     ll ret = 1;
     while(b)
     {
         if(b&1)
-            ret = mulmod(ret, a, mod);
-        a = mulmod(a, a, mod);
+            ret = ret * a;
+        a = a * a;
         b >>= 1;
     }
 
@@ -64,14 +49,23 @@ ll bigmod(ll a, ll b, ll mod)
 
 ll func(ll p1, ll p2)
 {
-    ll i, k = log10(p1) + 1;
-    ll m = bigmod(10, k, 100000000000LL);
-    ll inv = bigmod(m, p2 - 2, p2);
-    ll x = (-mulmod(p1, inv, p2) + p2) % p2;
+//    ll i, k = log10(p1) + 1;
+//    ll m = bigmod(10, k, 100000000000LL);
+//    ll inv = bigmod(m, p2 - 2, p2);
+//    ll x = (-mulmod(p1, inv, p2) + p2) % p2;
+//
+////    cout << mulmod(-p1, inv, p2) << endl;
+////    cout << p1 << " " << p2 << " " << k << " " << m << " " << inv << " " << x << " " << x * m + p1 << endl;
 
-//    cout << mulmod(-p1, inv, p2) << endl;
-//    cout << p1 << " " << p2 << " " << k << " " << m << " " << inv << " " << x << " " << x * m + p1 << endl;
-    return x * m + p1;
+    ll ret = p1, k = log10(p1) + 1, m = bigmod(10, k);
+
+    while(ret%p2 != 0)
+    {
+
+        m *= 10;
+    }
+
+    return ret;
 }
 
 int main()

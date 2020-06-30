@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 void func()
@@ -9,5 +9,5 @@ void func()
 int main()
 {
     cout << "lol";
-    func;
+    func();
 }
