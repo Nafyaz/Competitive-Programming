@@ -29,5 +29,36 @@ ll bigmod2(ll a, ll b, ll mod)
 
 ll invmod(ll a, ll m)
 {
-    return bigmod(a, m-2, m);
+    return bigmod(a, m-2, m); //works only if m is prime and gcd(a, m) = 1
+}
+
+ll egcd(ll a, ll m, ll& x, ll& y)
+{
+    if(m == 0)
+    {
+        x = 1;
+        y = 0;
+        return a;
+    }
+
+    ll x1, y1;
+    ll d = egcd(m, a%m, x1, y1);
+
+    x = y1;
+    y = x1 - y1*(a/m);
+
+    return d;
+}
+
+ll invmod2(ll a, ll m)
+{
+    ll x, y;
+    egcd(a, m, x, y);
+
+    return (x%m + m) % m;
+}
+
+int main()
+{
+    cout << invmod2(2, 5);
 }
