@@ -1,19 +1,44 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-
 int main()
 {
-    string s;
-    int b1, b2, dec = 0;
-    cin >> s >> b1 >> b2; //123AB34    17    25
-    for(int i = 0; i < s.size(); i++)
+    int N, i, j, x = 0, Ans = 0;
+
+    cin >> N;
+
+    int A[N];
+
+    for(i = 0; i < N; ++i)
+        cin >> A[i];
+
+    sort(A, A + N);
+
+    for(i = 0; i < N; i++)
     {
-        if(s[i] >= '0' && s[i] <= '9')
-            dec = b1*dec + (s[i] - '0');
-        else
-            dec = b1*dec + (s[i] - 'A' + 10);
+        x = 0;
+
+        for(j = i + 1; j < N; ++j)
+        {
+            if(A[i] == A[j])
+            {
+                x++;
+                cout << x << endl;
+            }
+
+            else
+            {
+                i = j;
+                break;
+            }
+
+        }
+
+        if((x + 1)  % 2 != 0)
+            Ans++;
     }
 
-    cout << dec;
+    cout << Ans << endl;
+
+    return 0;
 }

@@ -1,12 +1,31 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
-#define ll long long
 
 int main()
 {
-    freopen("in.txt", "w", stdout);
-    cout << 1 << endl;
-    cout << 300000 << endl;
-    for(int i = 1; i <= 300000; i++)
-        cout << i << " ";
+//    if(cuts[i] && counter < valid - 1)
+//    {
+//        printf("%lld (%lld) * ",i, cuts[i]);
+//        counter ++;
+//    }
+//    else if(cuts[i])
+//    {
+//        printf("%lld (%lld)",i, cuts[i]);
+//    }
+//
+//
+//    ////////////////////////////////////////
+//
+//
+//    printf("%lld (%lld) * ",i, cuts[i]);
+//    counter ++;
+//    if(counter == valid-1)
+//    {
+//        printf("\b");
+//    }
+//
+    printf("abc\b");
+    printf("\n");
+    printf("abc\bdef");
+
 }

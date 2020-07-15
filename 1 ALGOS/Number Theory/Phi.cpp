@@ -4,6 +4,7 @@ using namespace std;
 #define N 100009
 bool flag[N];
 vector<int> primes;
+ll phi[N];
 
 void sieve()
 {
@@ -27,7 +28,7 @@ void sieve()
     }
 }
 
-ll phi(ll n)
+ll PHI(ll n)
 {
     ll i, cnt, ret = n;
     for(i = 0; primes[i] * primes[i] <= n; i++)
@@ -45,8 +46,31 @@ ll phi(ll n)
 
 }
 
+void sievephi()
+{
+    ll i, j;
+    for(i = 1; i < N; i++)
+        phi[i] = i;
+
+    for(i = 2; i < N; i++)
+    {
+        if(phi[i] == i)
+        {
+            for(j = i; j < N; j += i)
+                phi[j] = phi[j] / i * (i - 1);
+        }
+    }
+}
+
 int main()
 {
     sieve();
-    cout << phi(7);
+
+    int n;
+    cin >> n;
+    cout << PHI(n) << endl;
+
+    sievephi();
+    for(int i = 1; i <= n; i++)
+        cout << phi[i] << " ";
 }
