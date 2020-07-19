@@ -30,7 +30,10 @@ void sieve()
 
 ll PHI(ll n)
 {
-    ll i, cnt, ret = n;
+    if(phi[n] != 0)
+        return phi[n];
+
+    ll i, cnt, ret = n, temp = n;
     for(i = 0; primes[i] * primes[i] <= n; i++)
     {
         for(cnt = 0; n % primes[i] == 0; cnt++)
@@ -42,8 +45,8 @@ ll PHI(ll n)
 
     if(n > 1)
         ret = ret / n * (n - 1);
-    return ret;
 
+    return phi[temp] = ret;
 }
 
 void sievephi()
@@ -59,6 +62,38 @@ void sievephi()
             for(j = i; j < N; j += i)
                 phi[j] = phi[j] / i * (i - 1);
         }
+    }
+}
+
+void segsievephi(ll a, ll b)
+{
+    ll i, j, cnt;
+
+    for(i = a; i <= b; i++)
+    {
+        phi[i-a] = i;
+        val[i-a] = i;
+    }
+
+    for(auto p : primes)
+    {
+        if(p * p > b)
+            break;
+
+        for(i = (a + p - 1) / p * p; i <= b; i += p)
+        {
+            for(cnt = 0; val[i - a] % p == 0; cnt++)
+                val[i - a] /= p;
+
+            if(cnt)
+                phi[i - a] = phi[i - a] / p * (p - 1);
+        }
+    }
+
+    for(i = a; i <= b; i++)
+    {
+        if(val[i - a] > 1)
+            phi[i - a] = phi[i - a] / val[i - a] * (val[i - a] - 1);
     }
 }
 

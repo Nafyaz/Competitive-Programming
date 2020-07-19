@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
+#define N 100007
+ll inv[N];
 
 ll bigmod(ll a, ll p, ll m)
 {
@@ -27,9 +29,9 @@ ll bigmod2(ll a, ll b, ll mod)
     return res;
 }
 
-ll invmod(ll a, ll m)
+ll invmod(ll a, ll m)  //only if m is prime and gcd(a, m) = 1
 {
-    return bigmod(a, m-2, m); //works only if m is prime and gcd(a, m) = 1
+    return bigmod(a, m-2, m);
 }
 
 ll egcd(ll a, ll m, ll& x, ll& y)
@@ -50,12 +52,20 @@ ll egcd(ll a, ll m, ll& x, ll& y)
     return d;
 }
 
-ll invmod2(ll a, ll m)
+ll invmod2(ll a, ll m)  //when gcd(a, m) = 1
 {
     ll x, y;
     egcd(a, m, x, y);
 
     return (x%m + m) % m;
+}
+
+void allinvmod()  //when N is prime
+{
+    ll i;
+    inv[1] = 1;
+    for(i = 2; i < N; i++)
+        inv[i] = ((-N/i*inv[N%i]) % N + N) % N;
 }
 
 int main()
