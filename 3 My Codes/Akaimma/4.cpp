@@ -14,5 +14,7 @@ int func(int a,int b,int m)
 }
 int main()
 {
-    cout << INF;
+    int a[4] = {1, 2, 3, 4};
+    for(v : a)
+        cout << v;
 }

@@ -1,0 +1,370 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[landscape,a4paper]{geometry}
+\geometry{top=0.6in,bottom=0.3in,left=0.2in,right=0.2in}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% adding fontspec pkg and kalpurush font
+\usepackage{fontspec}
+\newfontface{\bn}{kalpurush.ttf}
+
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Pg \thepage/\pageref{LastPage}}
+\lhead{\bn{সমাহিত} -- Bangladesh University of Engineering and Technology}
+
+\usepackage{titlesec}
+\titlespacing\section{0pt}{0pt plus 2pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+\usepackage{multicol}
+\setlength{\columnseprule}{1pt}
+\def\columnseprulecolor{\color{black}}
+
+\usepackage{minted}
+\usemintedstyle{borland}
+\setminted{frame=bottomline,framesep=1mm,fontsize=\normalsize,tabsize=2,breaklines,baselinestretch=0.9}
+
+\title{\vspace{-4em}\bn{সমাহিত} (BUET)}
+\author{\vspace{-3cm}
+    \href{https://codeforces.com/profile/halfblindprince}{halfblindprince},
+    \href{https://codeforces.com/profile/solaimanope}{solaimanope},
+    \href{https://codeforces.com/profile/upobir}{upobir}}
+\date{\vspace{-3em}February 2020}
+
+\begin{document}
+\begin{multicols}{3}[
+	\maketitle
+    \begin{center}
+        \rule{\textwidth}{2pt}
+    \end{center}
+]
+% \tableofcontents
+
+\section{Aho Corasick}
+\inputminted{cpp}{src/AhoKorasick.cpp}
+
+\section{Aliens' Trick}
+You are given an array $v$ of integers (possibly negative) of length $N (\le 10^5)$ and a number $K (\le N)$. Select at most $K$ disjoint subarrays of the initial sequence such that the sum of the elements included in the subarrays is maximized. \\
+The trick behind the ``aliens optimization" is that we can add a cost (penalty) which we will denote by $\lambda$ for each taken subarray. If $\lambda=0$ the solution would be taking a subarray for each positive element, but by increasing the value of $\lambda$, the optimum solution shifts to taking fewer subarrays. Now we just have to find a $\lambda$ that allows us to take as many subarrays as possible, but still fewer than $K$.\\
+To do a small recap, $\lambda$ is the cost we assign to adding a new subarray, and increasing $\lambda$ will decrease the number of subarrays in an optimal solution or keep it the same, but never increase it. That suggests that we could just binary search the smallest value of $\lambda$ that yields an optimal solution with less than $K$ elements.
+\begin{equation*}
+	dp_{\lambda}[n] = \max \{ dp_{\lambda}[n-1], \max\limits_{i=1}^{n-1} \{ (\sum\limits_{k=i}^{n} v_k) + dp_{\lambda}[i-1] - \lambda \} \}
+\end{equation*}
+Besides just the dp, we will store another auxiliary array:\\
+$cnt_{\lambda}[n]$ = [``How many subarrays does $dp_{\lambda}[n]$ employ in its solution"]\\
+These recurrences are implementable in $O(N)$. The pseudocode of the solution would look like this:
+\begin{minted}[frame=none]{python}
+minbound = 0, maxbound = 1e18
+while maxbound - minbound > 1e-6:
+    lambda = (maxbound - minbound) / 2
+    #compute dp and aux for lambda
+    if cnt[n] <= k:
+        minbound = lambda
+    else:
+        maxbound = lambda
+#compute dp and cnt for the final lambda
+return dp[n] + cnt[n] * lambda #if there are less than k positive values, then cnt[n] < k
+\end{minted}
+Let's denote by $ans[k]$ the answer for the problem, but using exactly $k$ subarrays. The key observation in proving that our solving method is correct is that the $ans[k]$ sequence is concave, that is $ans[k] - ans[k - 1]\le ans[k - 1] - ans[k - 2]$. A more natural way of thinking about this and the actual way most people ``feel" the concavity/convexity is by interpreting it as \textit{if I have $k$ subarrays and add another one, it will help me more than if I had $k+1$ subarrays and added one more.} \vspace{0.2cm} \hrule \vspace{0.5cm}
+
+\section{Articulation}
+\inputminted{cpp}{src/Articulation.cc}
+
+\section{Berlekamp Massey}
+\inputminted{cpp}{src/BerlekampMassey.cpp}
+
+\section{Bipartite Matching: Kuhn}
+\inputminted{cpp}{src/BipartiteMatchingKuhn.cc}
+
+\section{Binary Indexed Tree}
+\inputminted{cpp}{src/BIT.cc}
+
+\section{Centroid Decomposition}
+\inputminted{cpp}{src/CentroidDecomposition.cpp}
+
+\section{Convex Hull}
+\inputminted{cpp}{src/ConvexHull.cc}
+
+\section{Convex Hull Trick: Dynamic}
+\inputminted{cpp}{src/CHTDynamic.cc}
+
+\section{Convex Hull Trick: Special}
+For lines with non-increasing slope, a bunch of sorted queries can be answered in constant time on the fly.
+\begin{equation*}
+		dp(i) = \min\limits_{j<i} \{dp(j) + b(j) \cdot a(i)\}
+\end{equation*}
+Condition: $b(j) \geq b(j+1)$ and $a(i) \leq a(i+1)$ \\
+Complexity: $O(n)$ \\
+\begin{equation*}
+		dp(i, j) = \min\limits_{k<j} \{dp(i-1, k) + b(k) \cdot a(j)\}
+\end{equation*}
+Condition: $b(k) \geq b(k+1)$ and $a(j) \leq a(j+1)$ \\
+Complexity: $O(kn)$
+\inputminted{cpp}{src/CHTLinear.cc}
+
+\section{Discrete Log}
+\inputminted{cpp}{src/DiscreteLog.cpp}
+
+\section{Divide \& Conquer Optimization}
+\begin{equation*}
+		dp(i, j) = \min \limits_{k \leq j} \{ dp(i-1, k) + C(, j) \} 
+\end{equation*}
+Let $opt(i,j)$ be the value of k that minimizes the above expression. If $opt(i, j) \leq opt(i, j+1)$, we can optimize to $O(nm \log n)$ from $O(nm^2)$ where $1 \leq i \leq n$ and $1 \leq j \leq m$.
+\inputminted{cpp}{src/DivideConquerDP.cc}
+
+\section{Directed MST}
+\inputminted{cpp}{src/DirectedMST.cc}
+
+\section{Dominator Tree}
+\inputminted{cpp}{src/DominatorTree.cc}
+
+\section{Euler Path, Circuit}
+\inputminted{cpp}{src/EulerCircuit.cc}
+
+\section{Extended GCD}
+\inputminted{cpp}{src/EGCD.cpp}
+
+\section{Fast Fourier Transform}
+\inputminted{cpp}{src/FFT.cpp}
+
+\section{Fast Fourier Transform: 2D}
+\inputminted{cpp}{src/FFT2D.cpp}
+
+\section{Fast IO}
+\inputminted{cpp}{src/FastIO.cc}
+
+\section{Fast Walsh Hadamard Transform}
+\inputminted{cpp}{src/FWHT.cpp}
+
+\section{Gaussian}
+\inputminted{cpp}{src/Gaussian.cpp}
+
+\section{Geometry: 2D}
+\inputminted{cpp}{src/Geometry2D.cc}
+
+\section{Geometry: 3D}
+\inputminted{cpp}{src/Geometry3D.cc}
+
+\section{Gomory Hu Tree}
+\inputminted{cpp}{src/GomoryHu.cc}
+
+\section{Half Plane Intersection: Largest Circle in Convex Polygon}
+\inputminted{cpp}{src/HalfPlaneIntersection.cc}
+
+\section{Hashing: String}
+\inputminted{cpp}{src/Hash.cc}
+
+\section{Hash Table}
+\inputminted{cpp}{src/HashTable.cc}
+
+\section{Heavy Light Decomposition}
+\inputminted{cpp}{src/HLD.cpp}
+
+\section{Hungarian}
+\inputminted{cpp}{src/Hungarian.cc}
+
+\section{Java IO}
+\inputminted{java}{src/JavaIO.java}
+
+\section{KMP}
+\inputminted{cpp}{src/KMP.cc}
+
+\section{Li Chao Tree}
+\inputminted{cpp}{src/LiChaoTree.cc}
+
+\section{Linear Sieve}
+\inputminted{cpp}{src/LinearSieve.cc}
+
+\section{Link Cut Tree}
+\inputminted{cpp}{src/LinkCutTree.cpp}
+
+\section{Manacher}
+\inputminted{cpp}{src/Manacher.cpp}
+
+\section{Matroid: Colorful $\cap$ Graphic}
+\inputminted{cpp}{src/MatroidColorGraph.cpp}
+
+\section{Matroid: Colorful $\cap$ Linear}
+\inputminted{cpp}{src/MatroidColorfulLinear.cpp}
+
+\section{Max Flow: Dinic}
+In a network flow $G = (V, E)$, every edge now has a demand function $d(e)$ which tells us that at least this much flow should be passed through this edge. Obviously $d(e) \leq f(e) \leq c(e)$; $f(e)$ is the flow and $c(e)$ is the capacity of edge $e$. To check whether such a flow can be found, we add a new source $s'$ and a new sink $t'$ besides the old $s, t$. Our capacity function:
+\begin{itemize}
+    \item $c'((s', v)) = \sum_{u \in V} d((u, v))$
+    \item $c'((v, t')) = \sum_{w \in V} d((v, w))$
+    \item $c'((u, v)) = c((u, v)) - d((u, v)) \ \forall \ (u, v) \in E$
+    \item $c'((t, s)) = \infty$
+\end{itemize}
+There's a feasible flow if maximum flow from $s'$ to $t'$ saturates every outgoing edge from $s'$ and every incoming edge of $t'$.\\
+Finding Maximal Flow: Find any feasible flow. Run a max flow from old $s$ to $t$ in the augmented graph. This flow is the maximal flow.\\
+Finding Minimal Flow: Notice that the edge $(t, s)$ with capacity $\infty$ carries the entire flow in the old graph. Binary search on it's capacity and check for the minimal capacity that still makes the network feasible. That capacity is the minimal flow.
+\inputminted{cpp}{src/MaxFlowDinic.cc}
+
+\section{Min Cost Max Flow}
+\inputminted{cpp}{src/MinCostMaxFlow.cc}
+
+\section{Minimum Enclosing Circle}
+\inputminted{cpp}{src/MinimumEnclosingCircle.cpp}
+
+\section{MO}
+\inputminted{cpp}{src/MO.cc}
+
+\section{MO with Dancing Links}
+\inputminted{cpp}{src/MOWithDancingLinks.cpp}
+
+\section{Mod Multiplication}
+\inputminted{cpp}{src/ModMultiplication.cpp}
+
+\section{NTT}
+\inputminted{cpp}{src/NTT.cpp}
+
+\section{NTT: Any Mod}
+\inputminted{cpp}{src/NTTanymod.cpp}
+
+\section{Order Statistics Tree}
+\inputminted{cpp}{src/OST.cc}
+
+\section{Palindromic Tree}
+\inputminted{cpp}{src/PalindromicTree.cpp}
+
+\section{Persistent Segment Tree: Lazy}
+\inputminted{cpp}{src/PersistentSegmentTreeLazy.cpp}
+
+\section{Polar Sort}
+\inputminted{cpp}{src/PolarSort.cc}
+
+\section{Pollard Rho}
+\inputminted{cpp}{src/PollardRho.cc}
+
+\section{Polygon Stabbing: Extreme PTs}
+\inputminted{cpp}{src/PolygonStabbingConvex.cc}
+
+\section{Polynomial Interpolation}
+Given a set of $k + 1$ data points $(x_0, y_0),.. (x_j, y_j), .., (x_k, y_k)$ where no two $x_j$ are the same, the interpolation polynomial in the Lagrange form is a linear combination
+\begin{equation*}
+	L(x) := \sum\limits_{j=0}^{k} y_j l_j(x)
+\end{equation*}
+of Lagrange basis polynomials
+\begin{equation*}
+	l_j(x) :=  \prod\limits_{0 \le m \le k, m \neq j} \frac{x-x_m}{x_j-x_m}
+\end{equation*}
+where $0\leq j\leq k$.
+\inputminted{cpp}{src/PolynomialInterpolation.cc}
+
+\section{Random}
+\inputminted{cpp}{src/Random.cc}
+
+\section{Rotating Calipers}
+\inputminted{cpp}{src/RotatingCalipers.cc}
+
+\section{Script}
+\inputminted{bash}{src/Script.sh}
+
+\section{Segment Tree: Lazy}
+\inputminted{cpp}{src/SegmentTree.cpp}
+
+\section{SOS DP}
+\inputminted{cpp}{src/SOSDP.cc}
+
+\section{Suffix Array, Tree}
+\inputminted{cpp}{src/SuffixArrayTree.cpp}
+
+\section{Suffix Automaton}
+\inputminted{cpp}{src/SuffixAutomaton.cpp}
+
+\section{Treap: Implicit}
+\inputminted{cpp}{src/ImplicitTreap.cpp}
+
+\section{Trie}
+\inputminted{cpp}{src/Trie.cc}
+
+\section{Two-SAT, SCC}
+\inputminted{cpp}{src/TwoSAT.cpp}
+
+\section{Voronoi Diagram}
+\inputminted{cpp}{src/VoronoiDiagram.cc}
+
+\section{Z Algorithm}
+\inputminted{cpp}{src/ZAlgo.cpp}
+
+\section{Cheat Sheet}
+
+\subsection{Fibonacci}
+\begin{equation*}
+    \sum \limits_{i = 1}^{n} F_i = F_{n+2} - 1
+\end{equation*}
+\begin{equation*}
+    \sum \limits_{i = 1}^{n} F_i^2 = F_{n}F_{n+1}
+\end{equation*}
+\begin{equation*}
+    F_{n+m} = F_nF_{m+1} + F_{n-1}F_m
+\end{equation*}
+\begin{equation*}
+    F_{2n} = F_n(F_{n+1} + F_{n-1})
+\end{equation*}
+\begin{equation*}
+    F_{2n+1} = F_n^2 + F_{n+1}^2
+\end{equation*}
+
+‌\subsection{Binomial}
+\begin{equation*}
+    {\binom{n}{r}} + {\binom{n}{r+1}} = {\binom{n+1}{r+1}}
+\end{equation*}
+\begin{equation*}
+    {\binom{n}{r}}{\binom{r}{k}} = {\binom{n}{k}}{\binom{n-k}{r-k}}
+\end{equation*}
+\begin{equation*}
+    {\binom{n}{r}} = (-1)^r {\binom{r-1-n}{r}} , (n < 0)
+\end{equation*}
+
+\subsection{Stirling}
+\begin{equation*}
+    \left\{ \substack{n\\k} \right\} = \frac{1}{k!} \sum \limits_{i=0}^k (-1)^i {\binom{k}{i}}(k-i)^n
+\end{equation*}
+\begin{equation*}
+    \left\{ \substack{n+1\\k} \right\} = k \left\{ \substack{n\\k} \right\} + \left\{ \substack{n\\k-1} \right\}
+\end{equation*}
+\begin{equation*}
+    \sum \limits_{i = 0}^n \left\{ \substack{n\\i} \right\} = B_n
+\end{equation*}
+
+\subsection{Catalan Number}
+\begin{equation*}
+    C_n = \frac{1}{n+1} {\binom{2n}{n}}
+\end{equation*}
+\begin{equation*}
+    C_{n+1} = \sum \limits_{i=0}^n C_i C_{n-i}
+\end{equation*}
+
+\subsection{Generating Function}
+\begin{equation*}
+    \frac{1}{1-ax} = 1 + ax + a^2x^2 + a^3x^3 + \cdots
+\end{equation*}
+\begin{equation*}
+    \frac{x}{(1-x)^2} = 0 + x + 2x^2 + 3x^3 + \cdots
+\end{equation*}
+
+\subsection{Euler Number}
+\begin{equation*}
+    \left< \substack{n\\k} \right> = (k+1) \left< \substack{n-1\\k} \right> + (n-k) \left< \substack{n-1\\k-1} \right>
+\end{equation*}
+\begin{equation*}
+    x^n = \sum\limits_{k=0}^{n} \left< \substack{n\\k} \right> \left( \substack{x+k\\n} \right)
+\end{equation*}
+\begin{equation*}
+    \left< \substack{n\\m} \right> = \sum\limits_{k=0}^{m} \left( \substack{n+1\\k} \right) (m+1-k)^n (-1)^k
+\end{equation*}
+\hrule
+
+\end{multicols}
+
+\begin{center}
+    \rule{\textwidth}{2pt}
+\end{center}
+
+\end{document}
