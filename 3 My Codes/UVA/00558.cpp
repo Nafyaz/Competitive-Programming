@@ -6,9 +6,6 @@ vector<pair<long long, long long>> adj[1009];
 
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-
     long long t, i, j, k, u, v, w, flag;
     cin >> t;
     while(t--)

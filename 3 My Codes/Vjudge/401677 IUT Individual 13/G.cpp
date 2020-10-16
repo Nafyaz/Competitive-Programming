@@ -22,37 +22,42 @@ ll bigmod(ll a, ll b, ll mod)
     while (b)
     {
         if (b & 1)
-            res = (res * a)%mod;
-        a = (a * a)%mod;
+            res = mulmod(res, a, mod);
+        a = mulmod(a, a, mod);
         b >>= 1;
     }
     return res;
 }
 
-bool check_composite(ll n, ll a, ll d, int s) {
+bool check_composite(ll n, ll a, ll d, ll s)
+{
     ll x = bigmod(a, d, n);
     if (x == 1 || x == n - 1)
-        return false;
-    for (int r = 1; r < s; r++) {
+        return 0;
+    for (ll r = 1; r < s; r++)
+    {
         x = mulmod(x, x, n);
         if (x == n - 1)
-            return false;
+            return 0;
     }
-    return true;
+    return 1;
 };
 
-bool MillerRabin(ll n) { // returns true if n is prime, else returns false.
+bool MillerRabin(ll n)   // returns true if n is prime, else returns false.
+{
     if (n < 2)
         return 0;
 
-    int r = 0;
+    ll r = 0;
     ll d = n - 1;
-    while ((d & 1) == 0) {
+    while ((d & 1) == 0)
+    {
         d >>= 1;
         r++;
     }
 
-    for (int a : {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}) {
+    for (ll a : {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37})
+    {
         if (n == a)
             return 1;
         if (check_composite(n, a, d, r))
@@ -61,3 +66,21 @@ bool MillerRabin(ll n) { // returns true if n is prime, else returns false.
     return 1;
 }
 
+int main()
+{
+    ll t, n;
+    cin >> t;
+    while(t--)
+    {
+        cin >> n;
+        while(1)
+        {
+            n++;
+            if(MillerRabin(n))
+            {
+                cout << n << "\n";
+                break;
+            }
+        }
+    }
+}
