@@ -6,7 +6,7 @@ string a, b, ans;
 
 int call(int i, int j)
 {
-    if(i == a.size() || j == b.size())
+    if(i == (int)a.size() || j == (int)b.size())
         return 0;
     if(lcs[i][j] != -1)
         return lcs[i][j];
@@ -19,7 +19,7 @@ int call(int i, int j)
 
 string call2(int i, int j)
 {
-    if(i == a.size() || j == b.size())
+    if(i == (int)a.size() || j == (int)b.size())
         return "";
     if(a[i] == b[j])
         return a[i] + call2(i+1, j+1);

@@ -1,31 +1,46 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int main()
+int a[100], p[100], n, last;
+
+int lis()
 {
-    int n;
-    cin >> n;
-    int i, j, a[n];
-    int x[n];
+    int i, j;
 
     for(i = 0; i < n; i++)
-        cin >> a[i];
-
-    for(i = 0; i < n; i++)
-        x[i] = 1;
+        dp[i] = 1;
 
     for(i = 1; i < n; i++)
     {
         for(j = 0; j < i; j++)
         {
-            if(a[j] <= a[i])
-                x[i] = max(x[i], x[j] + 1);
+            if(a[j] <= a[i] && dp[i] < dp[j] + 1)
+            {
+                dp[i] = dp[j];
+                p[i] = j;
+            }
         }
     }
 
-    int ans = 0;
+    int ret = 0, last = -1;
     for(i = 0; i < n; i++)
-        ans = max(ans, x[i]);
+    {
+        if(ret < dp[i])
+        {
+            ret = dp[i];
+            last = i;
+        }
+    }
 
-    cout << ans;
+    return ret;
+}
+
+int main()
+{
+    cin >> n;
+
+    for(int i = 0; i < n; i++)
+        cin >> a[i];
+
+    cout << lis();
 }
