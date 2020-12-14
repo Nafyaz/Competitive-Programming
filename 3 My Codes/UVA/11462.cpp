@@ -21,7 +21,6 @@ int main()
         for(i = 0; i < n; i++)
             cout << a[i] << (i != n-1? " " : "");
 
-        cout << "\n";
+        cout << endl;
     }
 }
-

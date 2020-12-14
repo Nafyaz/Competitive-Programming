@@ -28,11 +28,26 @@ int lps(int i, int j)
 
 int main()
 {
-    cin >> s;
+    int i, j, n, t;
 
-    memset(dp, -1, sizeof dp);
+    cin >> t;
+    getline(cin, s);
 
-    cout << lps(0, (s.size() - 1)) << "\n";
+    while(t--)
+    {
+        getline(cin, s);
+        n = s.size();
+
+        if(!n)
+        {
+            cout << "0\n";
+            continue;
+        }
+
+        memset(dp, -1, sizeof dp);
+
+        cout << lps(0, (s.size() - 1)) << "\n";
+    }
 }
 
 

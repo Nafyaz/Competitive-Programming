@@ -6,7 +6,7 @@ int lps[3009][3009];
 int main()
 {
     string a, ans;
-    int i, j, n, m;
+    int i, j, n;
     cin >> a;
     n = a.size();
 

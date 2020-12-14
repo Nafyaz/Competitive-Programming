@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define mod 10e9 + 7
+
 bool toss()
 {
     return rand()%2;
@@ -32,7 +34,5 @@ int main()
         sum = sum + (1LL << x);
     }
 
-    cout << mx << "\n";
-    cout << fixed;
-    cout << setprecision(6) << (double)sum / n;
+    cout << mod;
 }
