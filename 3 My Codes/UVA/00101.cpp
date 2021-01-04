@@ -8,6 +8,9 @@ void moveonto(int a, int b)
 {
     int i, posa = cur[a], posb = cur[b];
 
+    if(posa == posb)
+        return;
+
     for(i = 0; i < (int)v[posa].size(); i++)
     {
         if(v[posa][i] == a)
@@ -33,6 +36,9 @@ void moveover(int a, int b)
 {
     int i, posa = cur[a], posb = cur[b];
 
+    if(posa == posb)
+        return;
+
     for(i = 0; i < (int)v[posa].size(); i++)
     {
         if(v[posa][i] == a)
@@ -49,41 +55,70 @@ void moveover(int a, int b)
 
 void pileonto(int a, int b)
 {
-    int i, posa = cur[a], posb = cur[b], bi;
+    int i, posa = cur[a], posb = cur[b], bidx, aidx;
+
+    if(posa == posb)
+        return;
 
     for(i = 0; i < (int)v[posb].size(); i++)
     {
         if(v[posb][i] == b)
-            bi = i;
+            bidx = i;
     }
-
     for(i = 0; i < (int)v[posa].size(); i++)
     {
-        v[posb].insert(v[posb].begin() + bi, v[posa][i]);
-        cur[v[posa][i]] = posb;
+        if(v[posa][i] == a)
+            aidx = i;
     }
 
-    v[posb].clear();
+    stack<int> st;
+    for(i = (int)v[posa].size() - 1; i >= aidx; i--)
+    {
+        st.push(v[posa][i]);
+        cur[v[posa][i]] = posb;
+        v[posa].pop_back();
+    }
 
+    while(!st.empty())
+    {
+        v[posb].insert(v[posb].begin() + bidx, st.top());
+        st.pop();
+    }
 }
 
 void pileover(int a, int b)
 {
-    int i, posa = cur[a], posb = cur[b];
+    int i, posa = cur[a], posb = cur[b], aidx;
+
+    if(posa == posb)
+        return;
 
     for(i = 0; i < (int)v[posa].size(); i++)
     {
-        v[posb].push_back(v[posa][i]);
-        cur[v[posa][i]] = posb;
+        if(v[posa][i] == a)
+            aidx = i;
     }
 
-    v[posa].clear();
+    stack<int> st;
+    for(i = (int)v[posa].size() - 1; i >= aidx ; i--)
+    {
+        st.push(v[posa][i]);
+        cur[v[posa][i]] = posb;
+        v[posa].pop_back();
+    }
+
+    while(!st.empty())
+    {
+        v[posb].push_back(st.top());
+        st.pop();
+    }
 }
 
 
 int main()
 {
-    int n, i, j, a, b;
+//    freopen("out.txt", "w", stdout);
+    int n, i, a, b;
     string x1, x2;
 
     cin >> n;
@@ -118,5 +153,14 @@ int main()
                 cout << u << " ";
             cout << "\n";
         }
+    }
+
+    for(i = 0; i < n; i++)
+    {
+        cout << i << ": ";
+
+        for(auto u : v[i])
+            cout << u << " ";
+        cout << "\n";
     }
 }

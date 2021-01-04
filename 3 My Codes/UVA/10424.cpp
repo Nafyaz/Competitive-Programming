@@ -41,3 +41,4 @@ int main()
         printf("%0.2lf %%\n",100*min(double(sa)/sb,double(sb)/sa));
     }
 }
+
