@@ -1,81 +1,78 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define N 25
 
-double mat[20][20];
-double before[20], now[20];
-stack<int> st;
+double dp[N][N][N],p[N][N][N];
 int n;
 
-bool call(int level)
+void print_path(int i,int j, int s)
 {
-    if(level == n+1)
-        return -1;
-
-    int i, j, mxidx[20];
-    for(i = 0; i < n; i++)
+    if(s==0)
     {
-        for(j = 0; j < n; j++)
+        cout << i;
+        return;
+    }
+
+    print_path(i, p[i][j][s],s-1);
+    cout << " " << j;
+
+    return;
+}
+void DP()
+{
+    int s, m, i, j, k;
+    for(s=2; s<=n; s++)
+    {
+        for(k=1; k<=n; k++)
         {
-            if(now[i] < before[j] * mat[j][i])
+            for(i=1; i<=n; i++)
             {
-                now[i] = before[j] * mat[j][i];
-                mxidx[i] = j;
+                for(j=1; j<=n; j++)
+                {
+                    if( dp[i][j][s] < dp[i][k][s-1]*dp[k][j][1])
+                    {
+                        dp[i][j][s]=dp[i][k][s-1]*dp[k][j][1];
+                        p[i][j][s]=k;
+                    }
+                }
             }
+        }
+
+        for(i=1; i<=n; i++)
+        {
+            if(dp[i][i][s]>1.01)
+            {
+                m = i;
+                break;
+            }
+            if(i<=n)
+                break;
         }
     }
 
-    if(now[0] > 1.01)
-    {
-        st.push(mxidx[0]);
-        return 1;
-    }
-
-    for(i = 0; i < n; i++)
-    {
-        before[i] = now[i];
-        now[i] = 0;
-    }
-
-    int ret = call(level + 1);
-
-    if(ret != -1)
-    {
-        st.push(mxidx[ret]);
-        return mxidx[ret];
-    }
+    if(s>n)
+        printf("no arbitrage sequence exists");
     else
-        return ret;
-}
+        print_path(m, m, s);
 
+    printf("\n");
+}
 int main()
 {
-    int i, j;
-
-    while(cin >> n)
+    while(scanf("%d",&n)!=EOF)
     {
-        for(i = 0; i < n; i++)
-        {
-            for(j = 0; j < n; j++)
+        memset(dp,0,sizeof(dp));
+        memset(p,0,sizeof(p));
+        for(int i=1; i<=n; i++)
+            for(int j=1; j<=n; j++)
             {
-                if(i == j)
-                    mat[i][j] = 1;
+                if(i==j)
+                    dp[i][j][1]=1;
                 else
-                    cin >> mat[i][j];
+                    scanf("%lf",&dp[i][j][1]);
+                p[i][j][1]=j;
             }
-        }
-
-        memset(before, 0, sizeof before);
-        memset(now, 0, sizeof now);
-        st.push(1);
-
-        now[0] = 1;
-
-        st.push(call(0));
-
-        while(!st.empty())
-        {
-            cout << st.top() << " ";
-            st.pop();
-        }
+        DP();
     }
+    return 0;
 }
