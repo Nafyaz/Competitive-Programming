@@ -36,3 +36,4 @@ int main()
         cout << "Peter should buy books whose prices are " << b1 << " and " << b2 << "." << endl << endl;
     }
 }
+

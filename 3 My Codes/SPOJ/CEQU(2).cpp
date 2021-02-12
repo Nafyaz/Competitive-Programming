@@ -30,7 +30,8 @@ int egcd2(int a, int b, int& x, int& y)
     return a1;
 }
 
-bool LDE(int a, int b, int c, int &x0, int &y0, int &d) {
+bool LDE(int a, int b, int c, int &x0, int &y0, int &d)
+{
     d = egcd(abs(a), abs(b), x0, y0);
     if (c % d)
         return 0;
@@ -42,21 +43,16 @@ bool LDE(int a, int b, int c, int &x0, int &y0, int &d) {
     return 1;
 }
 
-bool LDEall(int a, int b, int c, int t, int &x, int &y)
-{
-    int d;
-    if(LDE(a, b, c, x, y, d))
-    {
-        x = x + b*t;
-        y = y - a*t;
-        return 1;
-    }
-
-    return 0;
-}
-
 int main()
 {
-    int a, b;
-    cout <<
+    int t, caseno = 0, a, b, c, x, y, d;
+
+    cin >> t;
+
+    while(t--)
+    {
+        cin >> a >> b >> c;
+        cout << "Case " << ++caseno << ": " << (LDE(a, b, c, x, y, d)? "Yes\n" : "No\n");
+    }
 }
+
