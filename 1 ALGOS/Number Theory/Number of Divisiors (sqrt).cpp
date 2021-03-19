@@ -11,7 +11,7 @@ void sieve()
     ll i, j;
 
     flag[2] = 1;
-    for(i = 4; i < N; i += 2)
+    for(i = 3; i < N; i += 2)
         flag[i] = 1;
 
     for(i = 3; i * i < N; i+=2)
@@ -26,7 +26,7 @@ void sieve()
     primes.push_back(2);
     for(i = 3; i < N; i += 2)
     {
-        if(!flag[i])
+        if(flag[i])
             primes.push_back(i);
     }
 }
@@ -51,5 +51,6 @@ ll NOD(ll n)
 int main()
 {
     sieve();
-    cout << NOD(18);
+
+    cout << NOD(36);
 }

@@ -26,5 +26,6 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistic
 
 int main()
 {
-
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 }

@@ -31,6 +31,6 @@ void sieve()
 int main()
 {
     sieve();
-    for(auto u : primes)
-        cout << u << " ";
+    for(int i = 0; i < 10; i++)
+        cout << primes[i] << " ";
 }

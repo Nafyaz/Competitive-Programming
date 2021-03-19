@@ -7,6 +7,9 @@ ll bigmod(ll a, ll b, ll mod)
 {
     if(b == 0)
         return 1%mod;
+    if(b == 1)
+        return a%mod;
+
     ll res = bigmod(a, b>>1, mod);
     res = (res*res)%mod;
     if(b&1)
