@@ -6,7 +6,6 @@ int myfun(int n)
 
 }
 
-
 int main()
 {
     int a, b, i, ilast, j;

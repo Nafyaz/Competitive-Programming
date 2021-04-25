@@ -24,6 +24,19 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistic
 #define ss second
 #define pb push_back
 
+struct point
+{
+    ll x, y;
+
+    point(ll _x=0, ll _y=0) {x=_x, y=_y;}
+
+    point operator+(const point &p) {return {x+p.x, y+p.y};}
+    point operator-(const point &p) {return {x-p.x, y-p.y};}
+    ll operator^(const point &p) {return x*p.y - y*p.x;}
+    bool operator<(const point &p) {return x<p.x || (x==p.x && y < p.y);}
+    ll distSqr(const point &p) {return (x-p.x)*(x-p.x) + (y-p.y)*(y-p.y);}
+};
+
 int main()
 {
     ios_base::sync_with_stdio(false);

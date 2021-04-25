@@ -15,11 +15,13 @@ bool cmp(pii a, pii b)
 bool clockWise(pii a, pii b, pii c)
 {
     return a.ff*(b.ss-c.ss)+b.ff*(c.ss-a.ss)+c.ff*(a.ss-b.ss) <= 0;
+    //being !clockWise and being anticlockWise aren't same. look at "<="
 }
 
-bool antiClockWise(pii a, pii b, pii c)
+bool anticlockWise(pii a, pii b, pii c)
 {
     return a.ff*(b.ss-c.ss)+b.ff*(c.ss-a.ss)+c.ff*(a.ss-b.ss) >= 0;
+    //being !clockWise and being anticlockWise aren't same. look at ">="
 }
 
 void convex_hull()
@@ -43,7 +45,7 @@ void convex_hull()
                 up.pop_back();
             up.push_back(v[i]);
         }
-        if (i == v.size() - 1 || antiClockWise(p1, v[i], p2))
+        if (i == v.size() - 1 || anticlockWise(p1, v[i], p2))
         {
             while(down.size() >= 2 && !antiClockWise(down[down.size()-2], down[down.size()-1], v[i]))
                 down.pop_back();
