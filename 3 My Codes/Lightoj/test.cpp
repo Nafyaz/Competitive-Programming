@@ -1,38 +1,56 @@
-#include<bits/stdc++.h>
-using namespace std;
-int freq[100005];
-int pr[100005];
-int diff[100005];
-int main()
+//18321047
+//method1
+//Nuren
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+
+int iter=0;
+
+double f(double x)
 {
-    int n, i;
-    scanf("%d", &n);
-    int a[n+1];
-    for(i=1; i<=n; i++)
+    //double y=26*x+5*sin(2*x)-12*(cos(2*x))+12;
+    //printf("%x %f\n",y);
+    return 26*x+5*sin(2*x)-12*(cos(2*x))+12;
+}
+
+double method1(double xl,double xu, double tol)
+{
+    double xold=xl;
+    while(1)
     {
-        scanf("%d", &a[i]);
-        freq[a[i]]++;
-        if(freq[a[i]]>1)
-        {
-            int temp=i-pr[a[i]];
-            if((diff[a[i]]==0) || (diff[a[i]]==temp))
-                diff[a[i]]=temp;
-            else
-                freq[a[i]]=-5;
-        }
-        pr[a[i]]=i;
+        double xr=(xu+xl)/2;
+        iter++;
+        if(f(xr)*f(xu)>0)
+            xu=xr;
+        else if(f(xr)*f(xu)<0)
+            xl=xr;
+        else
+            return xr;
+        double error=abs((xr-xold/xr))*100;
+        if(error<tol)
+            return xr;
+        else
+            xold=xr;
     }
-    vector <pair <int,int> > ans;
-    ans.reserve(n+5);
-    for(i=1; i<=n; i++)
-        if(freq[a[i]]>0)
-        {
-            ans.push_back(make_pair(a[i], diff[a[i]]));
-            freq[a[i]]=-5;
-        }
-    sort(ans.begin(), ans.end());
-    printf("%d\n", ans.size());
-    for(i=0; i<ans.size(); i++)
-        printf("%d %d\n", ans[i].first, ans[i].second);
-    return 0;
+}
+
+int main(void)
+{
+    double xl, xu , tol=1E-4, root;
+    while(1)
+    {
+        printf("Please enter the lower limit xl from [-200,-100]: ");
+        scanf("%lf", &xl);
+        printf("Please enter the upper limit xu from [100,200]: ");
+        scanf("%lf", &xu);
+        //break;
+        if(abs(xu-xl) < 1e-7 || f(xl)*f(xu)>0)
+            printf("Invalid input data.\n");
+        else
+            break;
+    }
+
+    root= method1(xl,xu,tol);
+    printf("Root of the equation %f and no of iteration %d\n", root, iter);
 }
