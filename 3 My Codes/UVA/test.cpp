@@ -3,12 +3,35 @@ using namespace std;
 
 int main()
 {
-    string s = "abcdae";
-    set<char> schar;
+    int i, o, valid, valid_count = 0, cnt;
+    string s = "iiiioooo";
 
-    for(auto u : s)
-        schar.insert(u);
+    for(cnt = 0; ; cnt++)
+    {
+        valid = 1;
+        i = o = 0;
+        for(auto u : s)
+        {
+            if(u == 'i')
+                i++;
+            else
+                o++;
 
-    for(auto u : schar)
-        cout << u << " ";
+            if(i < o)
+                valid = 0;
+        }
+
+        if(valid)
+        {
+            cout << cnt << ": " << s << " (Valid)\n";
+            valid_count++;
+        }
+        else
+            cout << cnt << ": " << s << " (Invalid)\n";
+
+        if(next_permutation(s.begin(), s.end()) == 0)
+            break;
+    }
+
+    cout << "Total Valid Count: " << valid_count;
 }

@@ -35,3 +35,4 @@ int main()
         cout << "Case " << ++caseno << ": " << ans << "\n";
     }
 }
+

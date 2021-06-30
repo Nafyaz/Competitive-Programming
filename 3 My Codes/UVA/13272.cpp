@@ -5,7 +5,7 @@ using namespace std;
 
 bool nxtbrckt(char a, char b)
 {
-    return (a == '(' && b == ')') || (a == '{' && b == '}') || (a == '<' && b == '>');
+    return (a == '(' && b == ')') || (a == '{' && b == '}') || (a == '[' && b == ']') || (a == '<' && b == '>');
 }
 
 int main()
@@ -45,6 +45,6 @@ int main()
         cout << "Case " << ++caseno << ":\n";
         for(i = 0; i < s.size(); i++)
             cout << ans[i] << "\n";
-
     }
 }
+

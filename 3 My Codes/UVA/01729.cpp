@@ -27,3 +27,4 @@ int main()
         cout << "Case " << ++caseno << ": " << mn << "\n";
     }
 }
+
