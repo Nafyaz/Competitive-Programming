@@ -1,36 +1,31 @@
+/*
+Check and remove this section while coding
+1. Get rid of toolbars except compiler and main. Enable only logs and status.
+2. Use C++17 in global compiler settings.
+3. Turn on Wall, Wextra, Wshadow in warnings.
+4. Make tab spout 4 spaces
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
-int a[100009], sparse[100009][20], Log[100009];
-
 int main()
 {
-    int n, i, j;
-    cin >> n;
+//    int i;
+//    double d;
+//    char c;
+////
+////    cin >> i >> d >> c;
+////
+////    cout << i << " " << d << " " << c;
+//
+//    char s[10] = "abcesdf";
+//
+//    memset(s, 'a', );
+//
+//    cout << s;
 
-    Log[1] = 0;
-    for(i = 2; i <= n; i++)
-        Log[i] = Log[i>>1] + 1;
+    int a[5] = {2, 2, 2, 2, 2};
 
-    for(i = 0; i < n; i++)
-        cin >> a[i];
-
-    for(i = 0; i < n; i++)
-        sparse[i][0] = a[i];
-
-    for(j = 1; j <= Log[n] + 1; j++)
-    {
-        for(i = 0; i + (1 << (j-1)) < n; i++)
-            sparse[i][j] = min(sparse[i][j-1], sparse[i + (1 << (j-1))][j-1]);
-    }
-
-    int q, k;
-    cin >> q;
-
-    while(q--)
-    {
-        cin >> i >> j;
-        k = Log[j-i+1];
-        cout << min(sparse[i][k], sparse[j - (1 << k) + 1][k]) << endl;
-    }
+    cout << accumulate(a, a+5, 0);
 }

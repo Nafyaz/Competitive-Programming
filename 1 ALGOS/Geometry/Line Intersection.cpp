@@ -1,33 +1,52 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+struct point
+{
+    ll x, y;
+};
+
+bool intersect(point p1, point p2, point p3, point p4)
+{
+    ll a1, b1, c1;
+    a1 = p1.y - p2.y;
+    b1 = p2.x - p1.x;
+    c1 = p2.x*p1.y - p1.x*p2.y;
+
+//    cout << a1 << " " << b1 << " " << c1 << "\n";
+
+    ll a2, b2, c2;
+    a2 = p3.y - p4.y;
+    b2 = p4.x - p3.x;
+    c2 = p4.x*p3.y - p3.x*p4.y;
+
+//    cout << a2 << " " << b2 << " " << c2 << "\n";
+
+    ll det = a1*b2 - b1*a2;
+
+//    cout << det << "\n";
+
+    if(!det)
+        return 0;
+
+    ll px = (b2*c1 - b1*c2);
+    ll py = (a1*c2 - a2*c1);
+
+//    cout << px << " " << py << "\n";
+
+    if(px < min(p1.x*det, p2.x*det) || px > max(p1.x*det, p2.x*det) || py < min(p1.y*det, p2.y*det) || py > max(p1.y*det, p2.y*det))
+        return 0;
+    if(px < min(p3.x*det, p4.x*det) || px > max(p3.x*det, p4.x*det) || py < min(p3.y*det, p4.y*det) || py > max(p3.y*det, p4.y*det))
+        return 0;
+
+    return 1;
+}
+
 int main()
 {
-    double x[4], y[4], a[2], b[2], c[2], det, px, py;
+    point p1{10, 0}, p2{0, 20}, p3{5, 5}, p4{10009, 10009};
 
-    if((y[1]-y[0])*(x[3]-x[2]) == (y[3]-y[2])*(x[1]-x[0]))
-    {
-        if((y[2]-y[0])*(x[1]-x[0]) == (y[1]-y[0])*(x[2]-x[0]))
-            cout << "SAME LINE\n";
-        else
-            cout << "PARALLEL\n";
-    }
-    else
-    {
-        cout << "POINT ";
-
-        a[0] = y[0]-y[1];
-        b[0] = x[1]-x[0];
-        c[0] = a[0]*x[0] + b[0]*y[0];
-
-        a[1] = y[2]-y[3];
-        b[1] = x[3]-x[2];
-        c[1] = a[1]*x[2] + b[1]*y[2];
-
-        det = a[0]*b[1]-a[1]*b[0];
-        px = (c[0]*b[1]-c[1]*b[0])/det;
-        py = (a[0]*c[1]-a[1]*c[0])/det;
-
-        cout << px << " " << py << "\n";
-    }
+//    cout << p1.x << " " << p1.y << "\n" << p2.x << " " << p2.y << "\n";
+//    cout << p3.x << " " << p3.y << "\n" << p4.x << " " << p4.y << "\n";
+    cout  << intersect(p1, p2, p3, p4);
 }
