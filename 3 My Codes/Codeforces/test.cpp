@@ -1,38 +1,24 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define mod 10e9 + 7
+int n, rMat[50009][6];
 
-bool toss()
+bool isSup(int i, int j)
 {
-    return rand()%2;
-}
-
-long long cnt()
-{
-    long long i = 0;
-    while(1)
+    int cnt = 0;
+    for(int k = 1; k <= 5; k++)
     {
-        i++;
-        if(toss())
-            break;
+        if(rMat[i][k] < rMat[j][k])
+            cnt++;
     }
-    return i;
+
+    return cnt >= 3;
 }
 
 int main()
 {
-    srand (time(NULL));
+    long long x = 10e9+7;
 
-    long long n = 78, sum = 0, x, mx = 0;
+    cout << x;
 
-    for(long long i = 0; i < n; i++)
-    {
-        x = cnt();
-        mx = max(x, mx);
-        cout << x << "\n";
-        sum = sum + (1LL << x);
-    }
-
-    cout << mod;
 }

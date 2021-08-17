@@ -24,12 +24,11 @@ void lca_init()
     int i, j;
     for(i = 1; i <= n; i++)
     {
-        for(j = 0; j <= 20; j++)
+        anc[i][0] = parent[i];
+
+        for(j = 1; j <= 20; j++)
             anc[i][j] = 1;
     }
-//    cout << anc[7][4] << "lol" << endl;
-    for(i = 1; i <= n; i++)
-        anc[i][0] = parent[i];
 
     for(j = 1; (1<<j) <= n; j++)
     {

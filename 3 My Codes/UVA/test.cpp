@@ -1,13 +1,12 @@
 #include <bits/stdc++.h>
-
-#define fastIO ios_base::sync_with_stdio(false);cin.tie(NULL)
-#define nl <<'\n'
-#define debug 0
-
 using namespace std;
+
+void go()
+{
+    go();
+}
 
 int main()
 {
-    bitset<64> b(-1);
-    cout << b;
+     go();
 }

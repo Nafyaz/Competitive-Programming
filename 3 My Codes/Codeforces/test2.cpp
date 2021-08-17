@@ -12,17 +12,8 @@ using namespace std;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    double x,y,x1,y1; //points
-    scanf("%lf %lf %lf %lf",&x,&y,&x1,&y1);
-    double p=(x-x1)*(x-x1);
-    //cout<<p<<"\n";
-    printf("%lf \n",p);
-    double q=(y-y1)*(y-y1);
-    //cout<<q<<"\n";
-    printf("%lf \n",q);
-    double r=sqrt(p+q);
-    printf("%lf",r);
+    long long x = 10e9+7;
+
+    cout << x;
 
 }
