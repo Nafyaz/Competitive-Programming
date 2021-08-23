@@ -31,6 +31,9 @@ bool decipher(int start)
 {
     int i, r = 0, c;
 
+    if(start == s.size())
+        return 1;
+
     for(i = start; i < s.size(); i++)
     {
         c = s[i] - 'a';
@@ -50,7 +53,7 @@ bool decipher(int start)
         }
     }
 
-    return 1;
+    return 0;
 }
 
 int main()

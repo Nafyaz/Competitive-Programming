@@ -18,9 +18,9 @@ int main()
     for(i = 0; i < n; i++)
         sparse[i][0] = a[i];
 
-    for(j = 1; (1<<(j-1)) < n; j++)
+    for(j = 1; (1LL << j) <= n; j++)
     {
-        for(i = 0; i + (1<<(j-1)) < n; i++)
+        for(i = 0; i + (1LL << j) <= n; i++)
             sparse[i][j] = min(sparse[i][j-1], sparse[i + (1 << (j-1))][j-1]);
     }
 
