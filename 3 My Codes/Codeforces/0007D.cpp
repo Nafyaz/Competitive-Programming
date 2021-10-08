@@ -51,6 +51,9 @@ int findDegree(int i)
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
     int i, ans = 0;
     string stemp;
 

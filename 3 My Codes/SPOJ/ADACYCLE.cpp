@@ -1,11 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int dis[2009], cnt[2009], n;
+int dis[2009], n;
 bool mat[2009][2009], vis[2009];
 vector<int> adj[2009];
 
-void bfs(int s)
+int bfs(int s)
 {
     int i;
     for(i = 1; i <= n; i++)
@@ -22,6 +22,8 @@ void bfs(int s)
     while(!q.empty())
     {
         int u = q.front();
+        if(mat[u][s])
+            return dis[u];
         q.pop();
         for(auto v : adj[u])
         {
@@ -31,12 +33,12 @@ void bfs(int s)
                 q.push(v);
                 vis[v] = 1;
                 if(mat[v][s])
-                    cnt[s]--;
+                    return dis[v];
             }
-            if(!cnt[s])
-                return;
         }
     }
+
+    return INT_MAX;
 }
 
 int main()
@@ -49,23 +51,13 @@ int main()
         {
             scanf("%d", &mat[i][j]);
             if(mat[i][j])
-            {
-                cnt[j]++;
                 adj[i].push_back(j);
-            }
         }
-
     }
 
     for(i = 1; i <= n; i++)
     {
-        bfs(i);
-        ans = INT_MAX;
-        for(j = 1; j <= n; j++)
-        {
-            if(mat[j][i] && ans > dis[j])
-                ans = dis[j];
-        }
+        ans = bfs(i);
 
         if(ans == INT_MAX)
             printf("NO WAY\n");
@@ -73,3 +65,4 @@ int main()
             printf("%d\n", ans + 1);
     }
 }
+
