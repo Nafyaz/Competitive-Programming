@@ -11,7 +11,7 @@ void z_function(string s)
     {
         if(i <= r) //This condition is false when i=1
             Z[i] = min(r-i+1, Z[i-l]);
-        while(i+z[i] < n && s[z[i]] == s[i+z[i]])
+        while(i+Z[i] < n && s[Z[i]] == s[i+Z[i]])
             Z[i]++; //if Z[1] has previous value, it will cause problem here
 
         if(i+Z[i] - 1 > r)

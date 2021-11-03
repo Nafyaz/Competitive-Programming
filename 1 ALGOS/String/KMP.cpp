@@ -1,26 +1,26 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int F[200009], n;
-string Z;
+int LPS[200009], n;
+string s;
 
 void KMP()
 {
-    int i, j, n = Z.length();
+    int i, j, n = s.length();
 
-    F[0]=0;
+    LPS[0]=0;
 
     for (i = 1; i < n; i++)
     {
-        j = F[i-1];
+        j = LPS[i-1];
 
-        while (j > 0 && Z[i] != Z[j])
-            j = F[j-1];
+        while (j > 0 && s[i] != s[j])
+            j = LPS[j-1];
 
-        if (Z[i] == Z[j])
+        if (s[i] == s[j])
             j++;
 
-        F[i] = j;
+        LPS[i] = j;
     }
 }
 
@@ -28,15 +28,15 @@ int main()
 {
     string p, t;
     cin >> p >> t;
-    Z = p + '#' + t;
+    s = p + '#' + t;
 
     KMP();
 
     int i, cnt = 0;
 
-    for(i = p.size() + 1; i < Z.size(); i++)
+    for(i = p.size() + 1; i < s.size(); i++)
     {
-        if(F[i] == p.size())
+        if(LPS[i] == p.size())
             cnt++;
     }
     cout << cnt;

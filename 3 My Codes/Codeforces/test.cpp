@@ -1,9 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ff first
+#define ss second
 
 int main()
 {
-    string s = "abcde";
+    pair<int, int> p = {1, 2}, q;
+    q = p;
 
-    cout << s.substr(2);
+    cout << q.ff;
 }

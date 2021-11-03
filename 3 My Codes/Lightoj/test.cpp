@@ -1,41 +1,64 @@
-#include <iostream>
-#include<cmath>
-
+#include <cstdio>
+#include <cstring>
+#include <vector>
 using namespace std;
+const int N = 1010;
+vector<int> G[N];
+
+int left[N];
+int n, m, cas = 1;
+bool vis[N];
+void init()
+{
+    scanf("%d%d", &n, &m);
+    for (int i = 1; i <= n; i++)
+        G[i].clear();
+
+    int u, v;
+    for (int i = 1; i <= m; i++)
+    {
+        scanf("%d%d", &u, &v);
+        G[u].push_back(v);
+    }
+}
+
+bool dfs(int u)
+{
+    for (int i = 0; i < G[u].size(); i++)
+    {
+        int v = G[u][i];
+        if (vis[v]) continue;
+        vis[v] = true;
+        if (!left[v] || dfs(left[v]))
+        {
+            left[v] = u;
+            return true;
+        }
+    }
+    return false;
+}
+
+void solve()
+{
+    int ans = 0;
+    memset(left, 0, sizeof(left));
+    for (int i = 1; i <= n; i++)
+    {
+        memset(vis, 0, sizeof(vis));
+        if (dfs(i)) ans++;
+    }
+    printf("Case %d: %d\n", cas++, n - ans);
+
+}
+
 int main()
 {
-    int u,t;
-    cin>>t;
-    long double pie=3.141592653589;
-    for(u=0; u<t; u++)
+    int test;
+    scanf("%d", &test);
+    while (test--)
     {
-        double r,w,q,d,p,l,n,c;
-        int j;
-        cin>>l >>n >>c;
-        d=(1+(n*c));
-        p=(2*pie);
-        if(n!=0)
-        {
-            for(j=0;; j++)
-            {
-                q=p-((2*d*sin(p/2))-p)/(d*cos(p/2)-1);
-                if(abs(p-q)<1e-7)
-                {
-                    break;
-                }
-                else
-                {
-                    p=q;
-                }
-            }
-            r=(l/(2*sin(p/2)));
-            w=r-sqrt((r*r)-((l*l)/4));
-            printf("Case %d: %.10f\n",u+1,w);
-        }
-        else
-        {
-            printf("Case %d: 0\n",u+1);
-        }
+        init();
+        solve();
     }
     return 0;
 }
