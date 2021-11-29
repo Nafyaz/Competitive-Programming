@@ -2,30 +2,38 @@
 using namespace std;
 #define ll long long
 
-ll i, j, n, a[2003], health[2003][2003], cnt[2003][2003], ans;
+ll dp[2003][2003];
 
 int main()
 {
+    ll n, i, j, a[2003], ans;
+
     cin >> n;
 
-    for(i = 1; i <= n; i++)
-        cin >> a[i];
+    for(i = 1; i < 2003; i++)
+        dp[0][i] = -1;
 
     for(i = 1; i <= n; i++)
     {
-        for(j = 1; j <= i; j++)
-        {
-            health[i][j] = max(health[i][j], health[i-1][j]);
-            cnt[i][j] = max(cnt[i][j], cnt[i-1][j]);
+        cin >> a[i];
 
-            if(health[i-1][j-1] + a[i] >= 0)
+        for(j = 1; j <= n; j++)
+        {
+            if(i < j)
+                dp[i][j] = -1;
+            else
             {
-                health[i][j] = max(health[i][j], health[i-1][j-1] + a[i]);
-                cnt[i][j] = max(cnt[i][j], cnt[i-1][j-1]+1);
-                ans = max(ans, cnt[i][j]);
+                if(dp[i-1][j-1] < 0 && dp[i-1][j] < 0)
+                    dp[i][j] = -1;
+                else
+                    dp[i][j] = max(dp[i-1][j-1] + a[i], dp[i-1][j]);
             }
         }
     }
 
-    cout << ans;
+    ans = n;
+    while(dp[n][ans] < 0)
+        ans--;
+
+    cout << ans << "\n";
 }

@@ -70,5 +70,6 @@ void allinvmod()  //when N is prime
 
 int main()
 {
-    cout << bigmod2(17, 9, 55);
+//    cout << bigmod2(17, 9, 55);
+    cout << invmod(12, 1000000007);
 }

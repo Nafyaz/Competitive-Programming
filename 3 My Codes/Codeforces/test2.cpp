@@ -1,36 +1,24 @@
-#include<bits/stdc++.h>
+#include <iostream>
+#include <string.h>
 using namespace std;
-#define ll long long
-
-int a[100005];
-
+#define mod 1000000007
+int n,k,d,dp[105][105];
+int go(int s,int m)
+{
+    if (s>n)
+        return 0;
+    if (s==n)
+        return (m>=d);
+    if (dp[s][m]!=-1)
+        return dp[s][m];
+    int ans=0;
+    for (int i=1; i<=k; i++)
+        ans=(ans+go(s+i,max(m,i)))%mod;
+    return dp[s][m]=ans;
+}
 int main()
 {
-    int t, n, i, lcm, flag;
-
-    cin >> t;
-
-    while(t--)
-    {
-        cin >> n;
-        for(i = 0; i < n; i++)
-            cin >> a[i];
-
-        lcm = 1;
-        flag = 1;
-        for(i = 0; i < n; i++)
-        {
-            if(lcm > 1000000009)
-                break;
-            lcm = lcm*(i+2)/__gcd(lcm, i+2);
-            if(a[i] % lcm == 0)
-            {
-                flag = 0;
-                break;
-            }
-        }
-
-        cout << (flag? "YES\n" : "NO\n");
-    }
+    scanf("%d%d%d",&n,&k,&d);
+    memset(dp,-1,sizeof(dp));
+    printf("%d\n",go(0,0));
 }
-

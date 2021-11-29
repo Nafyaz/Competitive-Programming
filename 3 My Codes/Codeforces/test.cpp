@@ -1,12 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define ff first
-#define ss second
+int a[10] = {2, 4, 6, 8, 10, 1, 3, 5, 7, 9};
 
 int main()
 {
-    pair<int, int> p = {1, 2}, q;
-    q = p;
+    string s = "abcd";
 
-    cout << q.ff;
+    cout << (s.find('e') == s.npos);
 }

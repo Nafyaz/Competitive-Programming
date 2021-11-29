@@ -1,56 +1,36 @@
 #include<bits/stdc++.h>
 using namespace std;
-#include<ext/pb_ds/assoc_container.hpp>
-#include<ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
-template<typename T>
-using ordered_set = tree<T, null_type,less<T>, rb_tree_tag,tree_order_statistics_node_update>;
 #define ll long long
-#define ff first
-#define ss second
 
-ll n, k, d, dp[101], MOD = 1000000007;
+ll n, k, d;
+ll dp[102][2], MOD = 1000000007;
 
-ll call(ll sum, bool taken)
+ll call(ll sum, ll taken)
 {
-
-    if(sum <= 0 || sum < d && !taken)
-    {
-//        cout << sum << " " << taken << " " << "0" << endl;;
+    if(sum > n)
         return 0;
-    }
+    if(sum == n)
+        return taken;
 
-    int i, x = sum;
+    if(dp[sum][taken] != -1)
+        return dp[sum][taken];
 
-    if(dp[x] != 0)
-        return dp[x];
-
-    if(!taken)
+    ll ret = 0;
+    for(ll i = 1; i <= k; i++)
     {
-        for(i = 1; i <= k; i++)
-        {
-            if(i >= d && i <= sum)
-            {
-                dp[x]++;
-                dp[x] = (dp[x] + call(sum - i, 1))%MOD;
-            }
-            else
-                dp[x] = (dp[x] + call(sum - i, 0))%MOD;
-        }
+        if(i >= d || taken)
+            ret = (ret + call(sum + i, 1)) % MOD;
+        else
+            ret = (ret + call(sum + i, 0)) % MOD;
     }
 
-    else
-    {
-        for(i = 1; i <= k; i++)
-            dp[x] = (dp[x] + call(sum - i, 1))%MOD;
-    }
-
-//    cout << sum << " " << taken << " " << dp[x] << endl;
-    return dp[x];
+    return dp[sum][taken] = ret;
 }
 
 int main()
 {
     cin >> n >> k >> d;
-    cout << call(n, 0);
+
+    memset(dp, -1, sizeof dp);
+    cout << call(0, 0);
 }

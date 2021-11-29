@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int BIT[100009], a[100009], n;
+int BIT[100005], a[100005], n;
 
 int query(int i)
 {
@@ -24,5 +24,15 @@ void update(int i,int d)
 
 int main()
 {
+    int i;
+    cin >> n;
 
+    for(i = 1; i <= n; i++)
+    {
+        cin >> a[i];
+        update(i, a[i]);
+    }
+
+    cout << "Sum of First 10 elements: " << query(10) << "\n";
+    cout << "Sum of elements in [2, 7]: " << query(7) - query(1) << "\n";
 }
