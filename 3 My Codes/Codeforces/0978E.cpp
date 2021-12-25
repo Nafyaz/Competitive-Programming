@@ -2,17 +2,20 @@
 using namespace std;
 int main()
 {
-    long long n, w, i, prev = 0, x, mx = -1000010, mn = 1000010;
+    long long n, w, i, x, pass = 0, mn = 0, mx = 0;
 
-    scanf("%lld %lld", &n, &w);
+    cin >> n >> w;
+
     for(i = 0; i < n; i++)
     {
-        scanf("%lld", &x);
-        prev += x;
-        mx = max(prev, mx);
-        mn = min(prev, mn);
+        cin >> x;
+        pass += x;
+        mn = min(mn, pass);
+        mx = max(mx, pass);
     }
-    if(mn < 0)
-        mx -= mn;
-    printf("%lld", max(0LL, w - mx + 1));
+
+    if(mx - mn > w)
+        cout << 0;
+    else
+        cout << w - mx + mn + 1;
 }

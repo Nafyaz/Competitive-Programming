@@ -1,10 +1,17 @@
 #include<bits/stdc++.h>
 using namespace std;
-int a[10] = {2, 4, 6, 8, 10, 1, 3, 5, 7, 9};
+
+string operator+(string s2)
+{
+    s2.push_back('0');
+    return s2;
+}
 
 int main()
 {
-    string s = "abcd";
+    string s = "12345", t = "6789";
 
-    cout << (s.find('e') == s.npos);
+    t = s + t;
+
+    cout << s << "  " << t;
 }
