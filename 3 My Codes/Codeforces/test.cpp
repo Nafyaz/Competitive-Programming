@@ -9,9 +9,7 @@ string operator+(string s2)
 
 int main()
 {
-    string s = "12345", t = "6789";
+    int x = -3;
 
-    t = s + t;
-
-    cout << s << "  " << t;
+    cout << (floor)((double)x/2);
 }
