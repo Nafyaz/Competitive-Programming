@@ -4,8 +4,8 @@ using namespace std;
 
 int main()
 {
-    ll c[31];
-    ll n, L, i, j;
+    ll n, L, i;
+    ll c[32];
 
     cin >> n >> L;
 
@@ -13,20 +13,16 @@ int main()
         cin >> c[i];
 
     for(i = 1; i < n; i++)
-        c[i] = min(c[i-1], c[i]);
+        c[i] = min(2*c[i-1], c[i]);
 
-    for(i = n; i < 31; i++)
-        c[i] = c[i-1] * 2;
-
-    for(i = 0; l > 0; i++)
+    ll ans = LLONG_MAX, sum = 0;
+    for(i = n-1; i >= 0; i--)
     {
-
+        ll need = L / (1LL << i);
+        sum += need * c[i];
+        L -= need * (1LL << i);
+        ans = min(ans, sum + (L>0)*c[i]);
     }
-
-
-    ll ans = 0;
-    for(i = 0; i < n; i++)
-        ans += c[i]*bottleCnt[i];
 
     cout << ans;
 }

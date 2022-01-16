@@ -3,7 +3,7 @@ using namespace std;
 #define ff first
 #define ss second
 
-int parent[10009], n, m;
+int parent[200005], n, m;
 vector<pair<int, pair<int, int> > >edges;
 
 int Find(int a)
@@ -29,7 +29,7 @@ int kruskal()
 
     sort(edges.begin(), edges.end());
     int cnt = 0;
-    for(auto e : edge)
+    for(auto e : edges)
     {
         u = e.ss.ff;
         v = e.ss.ss;
@@ -38,7 +38,7 @@ int kruskal()
         if(Find(u) != Find(v))
         {
             Union(u, v);
-            ret += w;
+            ret |= w;
             cnt++;
             if(cnt == n-1)
                 return ret;
@@ -46,17 +46,30 @@ int kruskal()
     }
 }
 
-int main()
+void solve()
 {
-    int i, j;
+    edges.clear();
 
     cin >> n >> m;
-    for(i = 0; i < m; i++)
+    for(int i = 0; i < m; i++)
     {
         int a, b, c;
         cin >> a >> b >> c;
-        edge.push_back({c, {a, b}});
+        edges.push_back({c, {a, b}});
     }
 
-    kruskal();
+    cout << kruskal() << "\n";
+}
+
+int main()
+{
+    int t;
+
+    cin >> t;
+
+    while(t--)
+    {
+        solve();
+    }
+
 }
