@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define N 1000009
+#define N 10000007
 bool flag[N];
 vector<ll> primes;
 void sieve()

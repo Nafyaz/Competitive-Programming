@@ -52,5 +52,5 @@ int main()
 {
     sieve();
 
-    cout << NOD(36);
+    cout << NOD(60);
 }

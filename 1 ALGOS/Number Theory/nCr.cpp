@@ -23,9 +23,9 @@ ll bigmod(ll a, ll p, ll mod)
     if(p == 1)
         return a%mod;
 
-    ll res = bigmod(a, b>>1, mod);
+    ll res = bigmod(a, p>>1, mod);
     res = (res*res)%mod;
-    if(b&1)
+    if(p&1)
         return (a*res)%mod;
     return res;
 }

@@ -4,6 +4,7 @@ Check and remove this section while coding
 2. Use C++17 in global compiler settings.
 3. Turn on Wall, Wextra, Wshadow in warnings.
 4. Make tab spout 4 spaces
+5. Settings -> Compiler -> Linker Settings -> Other Linker Options: -Wl,--stack,268435456
 */
 
 /*
