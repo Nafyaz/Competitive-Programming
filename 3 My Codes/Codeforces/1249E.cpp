@@ -1,36 +1,12 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int n, c, a[200009], b[200009], t[200009], vis[200009];
-
-void func(int f)
-{
-    if(f == n)
-        return;
-
-    if(t[f] + a[f+1] < t[f+1])
-    {
-        t[f+1] = t[f] + a[f+1];
-        func(f+1);
-    }
-
-    int sum = 0;
-    for(int i = f+1; i <= n; i++)
-    {
-        sum += b[i];
-        if(t[f] + c + sum < t[i])
-        {
-            t[i] = t[f] + c + sum;
-            func(i);
-        }
-    }
-
-    return;
-}
-
 int main()
 {
-    int i;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    int n, c, i, a[200009], b[200009], t[2][200009];
 
     cin >> n >> c;
 
@@ -40,11 +16,16 @@ int main()
         cin >> b[i];
 
     for(i = 1; i <= n; i++)
-        t[i] = INT_MAX;
-    t[0] = 0;
+        t[0][i] = t[1][i] = INT_MAX;
 
-    func(0);
+    t[0][1] = 0;
+    t[1][1] = c;
+    cout << "0 ";
+    for(i = 2; i <= n; i++)
+    {
+        t[0][i] = min(t[0][i-1] + a[i-1], t[1][i-1] + a[i-1]);
+        t[1][i] = min(t[0][i-1] + b[i-1] + c, t[1][i-1] + b[i-1]);
 
-    for(i = 0; i < n; i++)
-        cout << t[i] << " ";
+        cout << min(t[0][i], t[1][i]) << " ";
+    }
 }

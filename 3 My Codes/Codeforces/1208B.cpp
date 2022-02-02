@@ -1,16 +1,51 @@
 #include<bits/stdc++.h>
 using namespace std;
-int n,i,j,t,ans,a[2008],c[2008];
-map<int,int> m;
-bitset<2000> b;
+
+int n;
+int a[2003];
+map<int, int> freq;
+
 int main()
 {
-    for(scanf("%d",&n); i<n; scanf("%d",a+i),m.find(a[i])==m.end()?m[a[i]]=t++:0,a[i]=m[a[i]],++i);
-    for(ans=i=n; i--;)
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+
+    int i, j, ans;
+
+    cin >> n;
+
+    for(i = 0; i < n; i++)
+        cin >> a[i];
+
+    ans = 0;
+    for(i = 0; i < n; i++)
     {
-        for(j=n; j--; b[a[j]]=1<++c[a[j]]);
-        for(b.any()?0:ans=0,j=i+1; j--; b[a[j]]=1<--c[a[j]],b.any()?0:ans=min(ans,i-j+1));
-        for(j=t; j--; b[j]=c[j]=0);
+        if(freq.find(a[i]) == freq.end())
+        {
+            freq[a[i]] = 1;
+            j = i;
+            ans = max(ans, i+1);
+        }
+        else
+            break;
     }
-    printf("%d\n",ans),exit(0);
+
+    for(i = n-1; i >= 0; i--)
+    {
+        while(freq[a[i]] != 0 && j >= 0)
+        {
+            freq[a[j]]--;
+            j--;
+        }
+
+        if(freq[a[i]] == 0)
+        {
+            freq[a[i]]++;
+            ans = max(ans, j+1+n-i);
+        }
+        else
+            break;
+    }
+
+    cout << n - ans;
 }

@@ -1,26 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ff first
+#define ss second
+
 int main()
 {
-    int n, i, j, k;
-    double u, v;
+    int n, i;
+    double weight, price, k;
     vector <pair <double, double> > loot;
 
     cin >> n >> k;
     for(i = 0; i < n; i++)
     {
-        cin >> u >> v;
-        loot.push_back(v/u, u);
+        cin >> weight >> price;
+        loot.push_back({price/weight, weight});
     }
 
-    sort(loot.begin(), loot.end(), greater<double>());
+    sort(loot.begin(), loot.end(), greater<pair<double, double>>());
 
-    double sum = 0, ;
+//    for(i = 0; i < n; i++)
+//        cout << loot[i].ff << " " << loot[i].ss << "\n";
+
+    double profit = 0;
     for(i = 0; i < n; i++)
     {
-        if(sum > k)
-            break;
-        sum += loot[i].first();
+        weight = min(k, loot[i].ss);
+        price = loot[i].ff * weight;
 
+        k -= weight;
+        profit += price;
     }
+
+    cout << profit;
 }

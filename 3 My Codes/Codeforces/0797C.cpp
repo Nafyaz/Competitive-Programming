@@ -6,29 +6,63 @@ using namespace std;
 
 int main()
 {
-    int i, j, k;
+    int i;
+    char smallestRem;
     string s, t, u, temp;
     cin >> s;
 
     map <char, int> mp;
 
-    for(auto u : s)
-        mp[u]++;
+    for(auto it : s)
+        mp[it]++;
 
-    for(auto u : mp)
+    for(i = 0; i < s.size(); i++)
     {
-        if(u.ss == 0)
-            continue;
-        for(i = 0; i < s.size(); i++)
+        for(auto it : mp)
         {
-            mp[u]--;
-            if(s[i] == u.ff)
+            if(it.ss != 0)
             {
-                temp = s.substr(0, i + 1);
-                t = t +  ;
+                smallestRem = it.ff;
                 break;
+            }
+        }
+
+        if(s[i] != smallestRem)
+        {
+            if(!t.empty() && t.back() <= smallestRem)
+            {
+                u.push_back(t.back());
+                t.pop_back();
+                i--;
+            }
+            else
+            {
+                t.push_back(s[i]);
+                mp[s[i]]--;
+            }
+        }
+        else
+        {
+            if(!t.empty() && t.back() <= smallestRem)
+            {
+                u.push_back(t.back());
+                t.pop_back();
+                i--;
+            }
+            else
+            {
+                u.push_back(s[i]);
+                mp[s[i]]--;
             }
         }
     }
 
+    while(!t.empty())
+    {
+        u.push_back(t.back());
+        t.pop_back();
+    }
+
+    cout << u;
 }
+// bacb

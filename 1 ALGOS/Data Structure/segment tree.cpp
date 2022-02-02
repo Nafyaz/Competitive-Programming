@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define sz 100009
+#define sz 100005
 
 int n, k;
 int x[sz];

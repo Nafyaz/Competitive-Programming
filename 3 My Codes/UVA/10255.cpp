@@ -34,8 +34,8 @@ bool circuit_check(int stx, int sty, int edx, int edy)
 
 int solve(int x, int y, int cnt)
 {
-    print_board();
-    cout << "-------------------------\n";
+//    print_board();
+//    cout << "-------------------------\n";
 
     board[x][y] = cnt;
 

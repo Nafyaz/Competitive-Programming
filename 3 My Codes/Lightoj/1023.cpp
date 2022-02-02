@@ -1,18 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
-int ar[26];
-void func(int n, int k)
-{
-
-}
 int main()
 {
-    int t, n, k, caseno = 0;
-    scanf("%d", &t);
-    while(t--)
+    string s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", t;
+    int T, n, k, caseno = 0;
+    scanf("%d", &T);
+    while(T--)
     {
         scanf("%d %d", &n, &k);
-        func(n, k);
-        memset(ar, 1, n-1);
+        t = s.substr(0, n);
+
+        cout << "Case " << ++caseno << ":\n";
+        do
+        {
+            cout << t << "\n";
+        }while(next_permutation(t.begin(), t.end()) && --k);
     }
 }
