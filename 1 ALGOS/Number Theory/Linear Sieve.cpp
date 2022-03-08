@@ -25,14 +25,14 @@ void linSieve()
 void linSieve2()
 {
     int i, j;
-    for (i = 2; i <= N; ++i)
+    for (i = 2; i < N; ++i)
     {
         if (leastFactor[i] == 0)
         {
             leastFactor[i] = i;
             primes.push_back(i);
         }
-        for (j = 0; j < (int)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] <= N; ++j)
+        for (j = 0; j < (int)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < N; ++j)
         {
             leastFactor[i * primes[j]] = primes[j];
         }

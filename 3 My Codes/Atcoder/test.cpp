@@ -3,15 +3,14 @@ using namespace std;
 
 int main()
 {
-//    ios_base::sync_with_stdio(0);
-//    cin.tie(0);
-//
-    int q, a[10] = {9, 9, 9, 6, 6, 4, 3, 1, -4, -4};
+    freopen("in.txt")
+    int n = 1000, i;
+    cout << "1000 0 1000\n";
 
-    while(1)
-    {
-        cin >> q;
-
-        cout << upper_bound(a, a+10, q, greater<int>()) - a << "\n";
-    }
+    for(i = 1; i <= n; i++)
+        cout << "1 ";
+    cout << "\n";
+    for(i = 1; i <= n; i++)
+        cout << "1000000 ";
+    cout << "\n";
 }

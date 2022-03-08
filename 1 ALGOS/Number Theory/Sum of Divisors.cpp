@@ -4,7 +4,27 @@ using namespace std;
 #define N 1000009
 
 bool flag[N];
+int leastFactor[N];
 vector<ll> primes;
+ll sod[N];
+
+void linSieve()
+{
+    int i, j;
+
+    for(i = 2; i < N; i++)
+    {
+        if(leastFactor[i] == 0)
+        {
+            leastFactor[i] = i;
+            primes.push_back(i);
+
+        }
+        for(j = 0; j < (int)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < N; j++)
+            leastFactor[i*primes[j]] = primes[j];
+    }
+}
+
 
 void sieve()
 {
@@ -30,13 +50,34 @@ void sieve()
     }
 }
 
+ll linSOD(ll n)
+{
+    ll lf, c, p, ret = 1;
+
+    while(n > 1)
+    {
+        lf = leastFactor[n];
+        p = 1;
+
+        for(c = 0; n%lf == 0; c++)
+        {
+            n /= lf;
+            p *= lf;
+        }
+
+        ret *= (p*lf - 1)/(lf - 1);
+    }
+
+    return ret;
+}
+
 ll SOD(ll n)
 {
     ll i, c, ret = 1;
 
     for(i = 0; primes[i]*primes[i] <= n; i++)
     {
-        int p = 1;
+        ll p = 1;
         for(c = 0; n % primes[i] == 0; c++)
         {
             n /= primes[i];
@@ -48,6 +89,17 @@ ll SOD(ll n)
     if(n > 1)
         ret *= (n*n - 1) / (n - 1);
     return ret;
+}
+
+void allSOD()
+{
+    ll i, j;
+
+    for(i = 1; i < N; i++)
+    {
+        for(j = i; j < N; j += i)
+            sod[j] += i;
+    }
 }
 
 int main()

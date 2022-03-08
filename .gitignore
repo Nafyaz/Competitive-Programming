@@ -1,4 +1,4 @@
-.exe
-.o
-notebook-2.pdf
-notebook.tex
+*.exe
+*.o
+1 ALGOS/notebook-2.pdf
+1 ALGOS/notebook.tex

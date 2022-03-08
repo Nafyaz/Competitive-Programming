@@ -1,15 +1,14 @@
 //https://codeforces.com/blog/entry/20762
+//https://codeforces.com/contest/1/submission/13861109
 
 #include<bits/stdc++.h>
 using namespace std;
-
+#define n 4
 //index is ID
-//int previous[10] = {1000, 1100, 1150, 1150, 1200, 1250, 1450, 1500, 1700, 1800};
-//int actual[10] = {9, 8, 5, 7, 10, 4, 3, 2, 1, 6};
 
-int previous[10] = {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000};
-int actual[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-int New[10];
+int prevRating[n] = {1500, 1851, 1953, 2382};
+int actualPos[n] = {2, 4, 1, 3};
+int newRating[n];
 
 double Pij(int ri, int rj)
 {
@@ -22,16 +21,16 @@ double findSeed(int i, int ri)
     //what is the seed of ith person if he had rating ri
 
     double seed = 1;
-    for(int j = 0; j < 10; j++)
+    for(int j = 0; j < n; j++)
     {
         if(j != i)
-            seed += Pij(previous[j], ri);
+            seed += Pij(prevRating[j], ri);
     }
 
     return seed;
 }
 
-int findNew(int i, double m)
+int findNew(int i, double newSeed)
 {
     //Finds new rating of person i
 
@@ -40,10 +39,10 @@ int findNew(int i, double m)
 
     for(int r = 0; r < 4000; r++)
     {
-        diff = abs(findSeed(i, r) - m);
+        diff = abs(findSeed(i, r) - newSeed);
 
 //        if(i == 0)
-//            cout << m << " " << r << " " << diff << "\n";
+//            cout << newSeed << " " << r << " " << diff << "\n";
 
         if(diff < mnDiff)
         {
@@ -57,32 +56,15 @@ int findNew(int i, double m)
 
 int main()
 {
-    double seed, m;
+    double seed, newSeed;
 
-    for(int i = 0; i < 10; i++)
+    for(int i = 0; i < n; i++)
     {
-        seed = findSeed(i, previous[i]);
+        seed = findSeed(i, prevRating[i]);
 
-        m = sqrt(seed * actual[i]);
+        newSeed = sqrt(seed * actualPos[i]);
 
-        New[i] = findNew(i, m);
-        cout << New[i] << " ";
+        newRating[i] = findNew(i, newSeed);
+        cout << newRating[i] << " ";
     }
-
-    cout << "\n";
-
-    for(int i = 0; i < 10; i++)
-        previous[i] = New[i];
-    swap(actual[0], actual[1]);
-    for(int i = 0; i < 10; i++)
-    {
-        seed = findSeed(i, previous[i]);
-
-        m = sqrt(seed * actual[i]);
-
-        New[i] = findNew(i, m);
-
-        cout << New[i] << " ";
-    }
-
 }

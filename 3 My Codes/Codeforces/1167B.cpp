@@ -1,48 +1,47 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int a[6] = {4, 8, 15, 16, 23, 42}, b[6];
-pair <int, int> func(int x)
+int a, b, c, d;
+
+bool findA0(int x)
 {
-    int flag = 0;
-    pair <int, int> p;
-
-    for(i = 0; i < 6; i++)
-    {
-        for(j = 0; j < 6; j++)
-        {
-            if(allpair[i][j] == x)
-            {
-                p.first = a[i];
-                p.second = a[j];
-                flag = 1;
-                break;
-            }
-        }
-        if(flag)
-            break;
-    }
-    return p;
+    return (a%x == 0 && b%x == 0 && c%x == 0 && d%x == 0);
 }
-
-
 
 int main()
 {
-    int allpair[6][6];
-    int i, j, x, y, flag1, flag2;
+    int i, ans[6];
 
+    cout << "? 1 2\n";
+    cin >> a;
+    cout << "? 1 3\n";
+    cin >> b;
+    cout << "? 1 4\n";
+    cin >> c;
+    cout << "? 1 5\n";
+    cin >> d;
+
+    if(findA0(42))
+        ans[0] = 42;
+    else if(findA0(23))
+        ans[0] = 23;
+    else if(findA0(16))
+        ans[0] = 16;
+    else if(findA0(15))
+        ans[0] = 15;
+    else if(findA0(8))
+        ans[0] = 8;
+    else if(findA0(4))
+        ans[0] = 4;
+
+    ans[1] = a/ans[0];
+    ans[2] = b/ans[0];
+    ans[3] = c/ans[0];
+    ans[4] = d/ans[0];
+
+    ans[5] = 7418880/ans[0]/ans[1]/ans[2]/ans[3]/ans[4];
+
+    cout << "! ";
     for(i = 0; i < 6; i++)
-    {
-        for(j = 0; j < 6; j++)
-            allpair[i][j] = a[i] * a[j];
-    }
-
-    cout << '!' << 1 << " " << 2 << endl;
-    cin << x;
-    cout << '!' << 1 << " " << 3 << endl;
-    cin << y;
-
-
-
+        cout << ans[i] << " ";
 }

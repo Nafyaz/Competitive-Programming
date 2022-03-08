@@ -5,7 +5,7 @@ int a[100009], sparse[100009][20], Log[100009];
 
 int main()
 {
-    int n, i, j;
+    int n, i, j, len;
     cin >> n;
 
     Log[1] = 0;
@@ -18,10 +18,11 @@ int main()
     for(i = 0; i < n; i++)
         sparse[i][0] = a[i];
 
-    for(j = 1; (1LL << j) <= n; j++)
+    for(j = 1; j < n; j++)
     {
-        for(i = 0; i + (1LL << j) <= n; i++)
-            sparse[i][j] = min(sparse[i][j-1], sparse[i + (1 << (j-1))][j-1]);
+        len = (1LL << j);
+        for(i = 0; i + len - 1 < n; i++)
+            sparse[i][j] = min(sparse[i][j-1], sparse[i + len/2][j-1]);
     }
 
     int q, k;
