@@ -52,12 +52,12 @@ int main()
     {
         if(u.ss)
         {
-            cout << "#" << " ";
+            cout << odd << " ";
             odd += 2;
         }
         else
         {
-            cout << " " << " ";
+            cout << even << " ";
             even += 2;
         }
 

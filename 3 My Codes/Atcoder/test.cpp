@@ -3,14 +3,9 @@ using namespace std;
 
 int main()
 {
-    freopen("in.txt")
-    int n = 1000, i;
-    cout << "1000 0 1000\n";
+    long long p = 17;
+    long long q = pow(10, p);
+    long long r = log10(q) + 1;
 
-    for(i = 1; i <= n; i++)
-        cout << "1 ";
-    cout << "\n";
-    for(i = 1; i <= n; i++)
-        cout << "1000000 ";
-    cout << "\n";
+    cout << p << " " << q << " " << r;
 }
