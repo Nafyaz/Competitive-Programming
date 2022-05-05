@@ -4,41 +4,41 @@ using namespace std;
 
 int n, k;
 int x[sz];
-int tree[4*sz];
+int Tree[4*sz];
 
 void build(int node, int s, int e)
 {
     if(s == e)
     {
-        tree[node] = x[s];
+        Tree[node] = x[s];
         return;
     }
 
-    int mid = (s+e)/2;
+    int mid = (s+e)/2, left = 2*node+1, right = 2*node+2;
 
-    build(2*node, s, mid);
-    build(2*node+1, mid+1, e);
+    build(left, s, mid);
+    build(right, mid+1, e);
 
-    tree[node] = tree[2*node] * tree[2*node+1];
+    Tree[node] = Tree[left] * Tree[right];
 }
 
 void update(int node, int s, int e, int idx, int val)
 {
     if(s == e)
     {
-        tree[node] = val;
+        Tree[node] = val;
         x[idx] = val;
         return;
     }
 
-    int mid = (s+e)/2;
+    int mid = (s+e)/2, left = 2*node+1, right = 2*node+2;
 
     if(idx <= mid)
-        update(2*node, s, mid, idx, val);
+        update(left, s, mid, idx, val);
     else
-        update(2*node+1, mid+1, e, idx, val);
+        update(right, mid+1, e, idx, val);
 
-    tree[node] = tree[2*node] * tree[2*node+1];
+    Tree[node] = Tree[left] * Tree[right];
 }
 
 int query(int node, int s, int e, int l, int r)
@@ -47,11 +47,11 @@ int query(int node, int s, int e, int l, int r)
         return 1;
 
     if(l <= s && r >= e)
-        return tree[node];
+        return Tree[node];
 
-    int mid = (s+e)/2;
-    int p1 = query(2*node, s, mid, l, r);
-    int p2 = query(2*node+1, mid+1, e, l, r);
+    int mid = (s+e)/2, left = 2*node+1, right = 2*node+2;
+    int p1 = query(left, s, mid, l, r);
+    int p2 = query(right, mid+1, e, l, r);
 
     return p1*p2;
 }

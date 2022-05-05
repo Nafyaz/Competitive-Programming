@@ -7,7 +7,7 @@ vector<int> adj[N];
 vector<int> path;
 int in[N];
 
-void topsort(int n)
+void topsort()
 {
     queue<int> Q;
     int i;
@@ -20,7 +20,7 @@ void topsort(int n)
     {
         int node = Q.front();
         Q.pop();
-        path.push_back(u);
+        path.push_back(node);
         for(auto u : adj[node])
         {
             in[u]--;
