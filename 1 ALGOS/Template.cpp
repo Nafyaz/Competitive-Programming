@@ -21,7 +21,8 @@ using namespace __gnu_pbds;
 template<typename T>
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define ll long long
-#define pii pair<int, int>
+#define show(x) cout << #x << ": " << x << "; ";
+#define pll pair<ll, ll>
 #define ff first
 #define ss second
 #define pb push_back
@@ -29,8 +30,22 @@ using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistic
 #define maxN 200005
 #define mod 1000000007
 
+void solve()
+{
+    
+}
+
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+
+    ll T;
+
+    cin >> T;
+
+    while(T--);
+    {
+        solve();
+    }
 }
