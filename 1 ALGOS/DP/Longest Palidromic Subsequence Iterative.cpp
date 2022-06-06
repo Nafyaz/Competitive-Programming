@@ -31,6 +31,4 @@ int main()
             cout << lps[i][j] << " ";
         cout << "\n";
     }
-
-//    cout << lps[1][n];
 }

@@ -101,11 +101,3 @@ void allSOD()
             sod[j] += i;
     }
 }
-
-int main()
-{
-    sieve();
-    cout << SOD(81);
-}
-
-

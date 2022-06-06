@@ -27,10 +27,3 @@ ll mulmod2(ll a, ll b, ll mod)
     }
     return res;
 }
-
-int main()
-{
-    ll a, b, mod;
-    cin >> a >> b >> mod;
-    cout << mulmod2(a%mod, b%mod, mod);
-}

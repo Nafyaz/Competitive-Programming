@@ -55,8 +55,3 @@ int query(int node, int s, int e, int l, int r)
 
     return p1*p2;
 }
-
-int main()
-{
-
-}

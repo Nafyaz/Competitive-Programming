@@ -38,5 +38,4 @@ int main()
     v.push_back({0, 0});
 
     cout << ClosestPair(v);
-
 }

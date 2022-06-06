@@ -48,8 +48,3 @@ void solve()
             cout << path[i] << ' ';
     }
 }
-
-int main()
-{
-
-}

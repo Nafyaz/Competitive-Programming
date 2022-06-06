@@ -72,9 +72,3 @@ struct line
         return areParallel(l1, l2) && (abs(l1.c - l2.c) < EPS);
     }
 };
-
-
-int main()
-{
-
-}

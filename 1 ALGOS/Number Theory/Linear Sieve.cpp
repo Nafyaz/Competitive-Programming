@@ -44,9 +44,6 @@ int main()
     linSieve();
 
     int mx = 0;
-//    for(int i = 1; i < primes.size(); i++)
-//        mx = max(mx, primes[i] - primes[i-1]);
-
     for(int i = 0; i < 10; i++)
         cout << primes[i] << " ";
 }

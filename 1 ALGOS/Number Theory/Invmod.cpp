@@ -67,9 +67,3 @@ void allinvmod()  //when N is prime
     for(i = 2; i < N; i++)
         inv[i] = ((-N/i*inv[N%i]) % N + N) % N;
 }
-
-int main()
-{
-//    cout << bigmod2(17, 9, 55);
-    cout << invmod(12, 1000000007);
-}

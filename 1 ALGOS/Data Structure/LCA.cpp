@@ -83,22 +83,6 @@ int main()
     while(q--)
     {
         cin >> u >> v;
-//        cout << level[u] << " " << level[v] << endl;
-//        cout << anc[7][0] << endl;
         cout << query(u, v) << endl;
     }
 }
-/*
-10
-1 3
-1 7
-3 2
-3 10
-2 6
-5 7
-8 5
-5 9
-7 4
-1
-7 1
-*/

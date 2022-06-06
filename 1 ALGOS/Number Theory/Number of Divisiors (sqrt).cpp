@@ -47,10 +47,3 @@ ll NOD(ll n)
 
     return ret;
 }
-
-int main()
-{
-    sieve();
-
-    cout << NOD(60);
-}

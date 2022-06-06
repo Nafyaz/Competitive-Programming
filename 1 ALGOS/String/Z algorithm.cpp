@@ -21,8 +21,3 @@ void z_function(string s)
         }
     }
 }
-
-int main()
-{
-
-}

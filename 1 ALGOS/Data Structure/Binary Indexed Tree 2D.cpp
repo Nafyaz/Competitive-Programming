@@ -33,8 +33,3 @@ int query(int x, int y)
     }
     return sum;
 }
-
-int main()
-{
-
-}

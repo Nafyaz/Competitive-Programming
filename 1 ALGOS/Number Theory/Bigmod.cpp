@@ -33,6 +33,5 @@ ll bigmod2(ll a, ll b, ll mod)
 int main()
 {
     ll a, b, mod;
-//    cin >> a >> b >> mod;
     cout << bigmod2(7, 5*29, 91);
 }

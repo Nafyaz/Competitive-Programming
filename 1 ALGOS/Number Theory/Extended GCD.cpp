@@ -54,9 +54,3 @@ bool LDEall(int a, int b, int c, int t, int &x, int &y)
 
     return 0;
 }
-
-int main()
-{
-    int a, b;
-    cout <<
-}

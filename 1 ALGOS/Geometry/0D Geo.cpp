@@ -35,8 +35,3 @@ struct point
     }
 
 };
-
-int main()
-{
-
-}
