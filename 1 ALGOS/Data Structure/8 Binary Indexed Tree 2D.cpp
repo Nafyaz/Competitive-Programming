@@ -1,6 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 int mx = 100, my = 100;
 BIT[mx][my];
 
