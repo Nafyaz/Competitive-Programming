@@ -1,13 +1,8 @@
-#include<bits/stdc++.h>
-using namespace std;
+ll lcs[MAXN][MAXN];
 
-int lcs[3009][3009];
-
-int main()
+void getLCS(string a, string b)
 {
-    string a, b;
-    int i, j, n, m;
-    cin >> a >> b;
+    ll i, j, n, m;
 
     n = a.size();
     m = b.size();

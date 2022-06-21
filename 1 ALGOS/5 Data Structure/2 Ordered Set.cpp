@@ -5,7 +5,7 @@ template<typename T>
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 
-ordered_set<int> OS;
+ordered_set<int> OS, OS2;
 
 OS.insert(10);
 OS.insert(20);
@@ -22,3 +22,6 @@ cout << (OS.find(30) == OS.end()) << "\n";
 
 //Delete 30
 OS.erase(30);
+
+//Swap two policy based data structure in O(1)
+OS.swap(OS2);

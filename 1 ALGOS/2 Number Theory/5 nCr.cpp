@@ -12,15 +12,11 @@ Non-prime mod M
     5.  O(M): Use Chinese Remainder Theorem
 */
 
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-
 ll fact[2000006];
 ll inv[2000006];
 ll dp[500][500];
 
-ll findFact(ll n, ll mod);
+ll getFact(ll n, ll mod);
 ll bigmod(ll a, ll p, ll mod);
 ll invmod(ll a, ll mod);
 
@@ -41,7 +37,11 @@ ll nCr2(ll n, ll r, ll mod)
 {
     if(n < r)
         return 0;
-    return ((findFact(n, mod) * invmod(findFact(r, mod), mod))%mod * invmod(findFact(n-r, mod), mod))%mod;
+
+    ll ret = getFact(n, mod);
+    ret = (ret * invmod(getFact(r, mod), mod)) % mod;
+    ret = (ret * invmod(getFact(n-r, mod), mod)) % mod;
+    return ret;
 }
 
 ll nCr3(ll n, ll r, ll mod)
@@ -77,44 +77,4 @@ ll nCr4(ll n, ll r, ll mod)
 ll nCr5(ll n, ll r, ll mod)
 {
     return -1;
-}
-
-int main()
-{
-    cout << nCr1(5, 3) << "\n";
-    cout << nCr2(5, 3, 101) << "\n";
-    cout << nCr4(5, 3, 101) << "\n";
-}
-
-ll findFact(ll n, ll mod)
-{
-    if(fact[n])
-        return fact[n];
-    if(n == 0 || n == 1)
-        return 1;
-
-    fact[n] = (n*findFact(n-1, mod))%mod;
-    return fact[n];
-}
-
-ll bigmod(ll a, ll p, ll mod)
-{
-    if(p == 0)
-        return 1;
-    if(p == 1)
-        return a%mod;
-
-    ll res = bigmod(a, p>>1, mod);
-    res = (res*res)%mod;
-    if(p&1)
-        return (a*res)%mod;
-    return res;
-}
-
-ll invmod(ll a, ll mod)
-{
-    if(inv[a])
-        return inv[a];
-
-    return inv[a] = bigmod(a, mod-2, mod);
 }

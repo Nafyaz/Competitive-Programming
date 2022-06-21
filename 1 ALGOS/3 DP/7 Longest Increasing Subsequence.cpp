@@ -1,11 +1,8 @@
-#include<bits/stdc++.h>
-using namespace std;
+ll a[MAXN], p[MAXN], n, last;
 
-int a[100], p[100], n, last;
-
-int lis()
+ll getLIS()
 {
-    int i, j;
+    ll i, j;
 
     for(i = 0; i < n; i++)
         dp[i] = 1;
@@ -22,7 +19,7 @@ int lis()
         }
     }
 
-    int ret = 0, last = -1;
+    ll ret = 0, last = -1;
     for(i = 0; i < n; i++)
     {
         if(ret < dp[i])
@@ -33,14 +30,4 @@ int lis()
     }
 
     return ret;
-}
-
-int main()
-{
-    cin >> n;
-
-    for(int i = 0; i < n; i++)
-        cin >> a[i];
-
-    cout << lis();
 }

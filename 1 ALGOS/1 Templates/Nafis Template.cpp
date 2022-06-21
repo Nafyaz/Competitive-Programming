@@ -20,9 +20,8 @@ using namespace std;
 #define pll pair<ll, ll>
 #define ff first
 #define ss second
-
-#define mod 1000000007
-#define maxN 200005
+#define MOD 1000000007
+#define MAXN 2000006
 
 void solve(ll caseno)
 {

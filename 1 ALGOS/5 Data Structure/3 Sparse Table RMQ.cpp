@@ -1,6 +1,6 @@
-ll arr[maxN], sparse[maxN][20], Log[maxN];
+ll arr[MAXN], sparse[MAXN][20], Log[MAXN];
 
-ll findMin(ll bg, ll ed)
+ll query(ll bg, ll ed)
 {
     ll k = Log[ed-bg+1];
     return min(sparse[bg][k], sparse[ed - (1 << k) + 1][k]);
@@ -11,7 +11,7 @@ void init()
     ll n, i, j;
 
     Log[1] = 0;
-    for(i = 2; i < maxN; i++)
+    for(i = 2; i < MAXN; i++)
         Log[i] = Log[i/2] + 1;
 
     cin >> n;

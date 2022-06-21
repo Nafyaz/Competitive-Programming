@@ -1,8 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-#define ll long long
-
 ll bigmod(ll a, ll b, ll mod)
 {
     if(b == 0)
@@ -28,10 +23,4 @@ ll bigmod2(ll a, ll b, ll mod)
         b >>= 1;
     }
     return res;
-}
-
-int main()
-{
-    ll a, b, mod;
-    cout << bigmod2(7, 5*29, 91);
 }
