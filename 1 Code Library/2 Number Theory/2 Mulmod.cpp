@@ -1,8 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-#define ll long long
-
 ll mulmod(ll a, ll b, ll mod)
 {
     if(b == 0)
@@ -17,13 +12,16 @@ ll mulmod(ll a, ll b, ll mod)
 
 ll mulmod2(ll a, ll b, ll mod)
 {
-    ll res = 0;
+    ll ret = 0;
+
     while(b)
     {
         if(b&1)
-            res = (res + a)%mod;
-        res = (res << 1)%mod;
-        b >>= 1;
+            ret += a;
+        
+        a = a*2;
+        b /= 2;
     }
-    return res;
+
+    return ret;
 }

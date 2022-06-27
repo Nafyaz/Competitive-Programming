@@ -6,6 +6,7 @@ Check and remove this section while coding
 4. Make tab spout 4 spaces
 5. Settings -> Compiler -> Linker Settings -> Other Linker Options: -Wl,--stack,268435456
 6. Settings -> Environment -> General Settings -> Terminal to launch console programs -> select gnome
+7. Do you have graph paper with you?
 */
 
 /*
