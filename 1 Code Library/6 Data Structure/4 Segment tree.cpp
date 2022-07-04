@@ -1,5 +1,5 @@
-ll arr[maxN];
-ll Tree[4*maxN];
+ll arr[MAXN];
+ll Tree[4*MAXN];
 
 void Build(ll node, ll bg, ll ed)
 {
@@ -35,10 +35,10 @@ void Update(ll node, ll bg, ll ed, ll idx, ll val)
     else
         Update(rightNode, mid+1, ed, idx, val);
 
-    Tree[node] = Tree[left] + Tree[right];
+    Tree[node] = Tree[leftNode] + Tree[rightNode];
 }
 
-ll query(ll node, ll bg, ll ed, ll l, ll r)
+ll Query(ll node, ll bg, ll ed, ll l, ll r)
 {
     if(bg > r || ed < l)
         return 0;
@@ -49,8 +49,8 @@ ll query(ll node, ll bg, ll ed, ll l, ll r)
     ll leftNode = 2*node, rightNode = 2*node + 1;
     ll mid = (bg + ed)/2;
 
-    ll p1 = query(leftNode, bg, mid, l, r);
-    ll p2 = query(rightNode, mid+1, ed, l, r);
+    ll p1 = Query(leftNode, bg, mid, l, r);
+    ll p2 = Query(rightNode, mid+1, ed, l, r);
 
     return p1 + p2;
 }

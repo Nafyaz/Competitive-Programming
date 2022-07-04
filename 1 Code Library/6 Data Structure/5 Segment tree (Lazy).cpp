@@ -1,5 +1,5 @@
-ll arr[maxN];
-ll Tree[4*maxN], Lazy[4*maxN];
+ll arr[MAXN];
+ll Tree[4*MAXN], Lazy[4*MAXN];
 
 void Build(ll node, ll bg, ll ed)
 {

@@ -1,7 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-
 ll trie[6800009][2], len[6800009];
 ll id;
 

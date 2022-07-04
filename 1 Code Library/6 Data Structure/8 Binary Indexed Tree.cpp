@@ -1,5 +1,6 @@
+// Always 1 indexed
 ll n;
-ll a[maxN], BIT[maxN];
+ll a[MAXN], BIT[MAXN];
 
 void Update(ll i, ll d)
 {

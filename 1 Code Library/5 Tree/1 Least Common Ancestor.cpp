@@ -1,3 +1,4 @@
+// Important Note: parent of 1 is 1
 int n;
 vector<int> adj[MAXN];
 int parent[MAXN], level[MAXN], anc[MAXN][21];
@@ -40,15 +41,15 @@ int getLCA(int u, int v)
         swap(u, v);
 
     int i;
-    for(i = log2(n) + 1; i >= 0; i--)
+    for(i = 20; i >= 0; i--)
     {
         if(level[anc[u][i]] >= level[v])        
-            u = anc[u][i];          
+            u = anc[u][i];
     }
 
     if(u == v)
         return u;
-    for(i = log2(n) + 1; i >= 0; i--)
+    for(i = 20; i >= 0; i--)
     {
         if(anc[u][i] != anc[v][i])
         {

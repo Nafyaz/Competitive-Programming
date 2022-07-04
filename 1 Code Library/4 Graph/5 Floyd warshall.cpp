@@ -1,32 +1,23 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-#define ll long long
-
 ll n;
-vector <pair<ll, ll>> adj[10009];
-ll dis[10009][10009];
+vector <pair<ll, ll>> adj[MAXN];
+ll dis[MAXN][MAXN];
 
-int main()
+void floyd_warshall()
 {
-    ll i, j, k, m, u, v, w;
+    ll i, j, k;
 
-    cin >> n >> m;
-
+    memset(dist, -1, sizeof dist);
     for(i = 1; i <= n; i++)
     {
-        for(j = 1; j <= n; j++)
-            dis[i][j] = INT_MAX;
-    }
+        dist[i][i] = 0;
 
-    for(i = 1; i <= n; i++)
-        dis[i][i] = 0;
-
-    for(i = 0; i < m; i++)
-    {
-        cin >> u >> v >> w;
-        adj[u].push_back({w, v});
-        dis[u][v] = w;
+        for(auto u : adj[i])
+        {
+            if(dist[i][u.ss] == -1)
+                dist[i][u.ss] = dist[u.ss][i] = c;
+            else
+                dist[i][u.ss] = dist[u.ss][i] = min(dist[i][u.ss], u.ff);
+        }
     }
 
     for(k = 1; k <= n; k++)
@@ -34,15 +25,15 @@ int main()
         for(i = 1; i <= n; i++)
         {
             for(j = 1; j <= n; j++)
-                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
+            {
+                if(dist[i][k] != -1 && dist[k][j] != -1)
+                {
+                    if(dist[i][j] == -1)
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    else
+                        dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
         }
     }
-
-    for(i = 1; i <= n; i++)
-    {
-        for(j = 1; j <= n; j++)
-            cout << dis[i][j] << " ";
-        cout << endl;
-    }
 }
-

@@ -1,62 +1,43 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ff first
-#define ss second
+ll root[MAXN], n, m;
+vector<pair<ll, pll>>>edges;
 
-int parent[10009], n, m;
-vector<pair<int, pair<int, int> > >edges;
-
-int Find(int a)
+ll Find(ll a)
 {
-    if(parent[a] == a)
+    if(root[a] == a)
         return a;
-    parent[a] = Find(parent[a]);
-    return parent[a];
+    root[a] = Find(root[a]);
+    return root[a];
 }
 
-void Union(int a, int b)
+void Union(ll a, ll b)
 {
     a = Find(a);
     b = Find(b);
-    parent[a] = b;
+
+    root[max(a, b)] = min(a, b);
 }
 
-int kruskal()
+ll kruskal()
 {
-    int i, u, v, w, ret = 0;
-    for(i = 0; i <= n; i++)
-        parent[i] = i;
+    ll i, ret = 0;
+    for(i = 1; i <= n; i++)
+        root[i] = i;
 
     sort(edges.begin(), edges.end());
-    int cnt = 0;
-    for(auto e : edge)
+    ll cnt = 0;
+    for(auto [c, e] : edge)
     {
-        u = e.ss.ff;
-        v = e.ss.ss;
-        w = e.ff;
+        [a, b] = e;
 
-        if(Find(u) != Find(v))
+        if(Find(a) != Find(b))
         {
-            Union(u, v);
-            ret += w;
+            Union(a, b);
+            ret += c;
             cnt++;
             if(cnt == n-1)
                 return ret;
         }
     }
-}
 
-int main()
-{
-    int i, j;
-
-    cin >> n >> m;
-    for(i = 0; i < m; i++)
-    {
-        int a, b, c;
-        cin >> a >> b >> c;
-        edge.push_back({c, {a, b}});
-    }
-
-    kruskal();
+    return -1;
 }

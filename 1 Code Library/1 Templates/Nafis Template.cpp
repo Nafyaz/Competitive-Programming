@@ -24,7 +24,7 @@ using namespace std;
 #define MOD 1000000007
 #define MAXN 2000006
 
-void solve(ll caseno)
+void solve(int caseno)
 {
     
 }
@@ -34,7 +34,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    ll T, caseno = 0;
+    int T, caseno = 0;
 
     cin >> T;
 
