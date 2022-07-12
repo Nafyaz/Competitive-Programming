@@ -1,3 +1,6 @@
+// Node e dhukar sathe sathe lazy clear kora lagbe.
+// Shei node amar desired range er vitore thakuk, othoba na thakuk.
+// Naile WA khabi sure.
 ll arr[MAXN];
 ll Tree[4*MAXN], Lazy[4*MAXN];
 

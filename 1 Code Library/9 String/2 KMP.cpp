@@ -1,12 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int LPS[200009], n;
+int LPS[MAXN], n;
 string s;
 
 void KMP()
 {
-    int i, j, n = s.length();
+    int i, j;
+    n = s.length();
 
     LPS[0]=0;
 

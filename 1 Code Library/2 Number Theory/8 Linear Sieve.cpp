@@ -1,49 +1,37 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define N 10000007
+ll leastFactor[MAX];
+bool isComposite[MAX];
+vector<ll> primes;
 
-int leastFactor[N];
-bool flag[N];
-vector<int> primes;
 void linSieve()
 {
-    int i, j;
-    for(i = 2; i < N; i++)
-    {
-        if (!flag[i])
-            primes.push_back(i);
-
-        for(j = 0; j < (int)primes.size() && i*primes[j] < N; j++)
-        {
-            flag[i * primes[j]] = 1;
-            if(i % primes[j] == 0)
-                break;
-        }
-    }
-}
-
-void linSieve2()
-{
-    int i, j;
-    for (i = 2; i < N; ++i)
+    ll i, j;
+    for (i = 2; i < MAX; ++i)
     {
         if (leastFactor[i] == 0)
         {
             leastFactor[i] = i;
             primes.push_back(i);
         }
-        for (j = 0; j < (int)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < N; ++j)
+        for (j = 0; j < (ll)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < MAXN; ++j)
         {
             leastFactor[i * primes[j]] = primes[j];
         }
     }
 }
 
-int main()
+void linSieve2()
 {
-    linSieve();
+    ll i, j;
+    for(i = 2; i < N; i++)
+    {
+        if (!isComposite[i])
+            primes.push_back(i);
 
-    int mx = 0;
-    for(int i = 0; i < 10; i++)
-        cout << primes[i] << " ";
+        for(j = 0; j < (ll)primes.size() && i*primes[j] < MAXN; j++)
+        {
+            isComposite[i * primes[j]] = 1;
+            if(i % primes[j] == 0)
+                break;
+        }
+    }
 }
