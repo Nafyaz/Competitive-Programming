@@ -1,6 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 int egcd(int a, int b, int& x, int& y)
 {
     if (b == 0)
