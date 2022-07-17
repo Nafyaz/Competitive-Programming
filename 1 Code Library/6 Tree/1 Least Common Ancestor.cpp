@@ -21,14 +21,9 @@ void LCA_init()
 
     int i, j;
     for(i = 1; i <= n; i++)
-    {
         anc[i][0] = parent[i];
 
-        for(j = 1; j <= 20; j++)
-            anc[i][j] = 1;
-    }
-
-    for(j = 1; (1<<j) <= n; j++)
+    for(j = 1; j < 21; j++)
     {
         for(i = 1; i <= n; i++)
             anc[i][j] = anc[anc[i][j-1]][j-1];
@@ -41,14 +36,15 @@ int getLCA(int u, int v)
         swap(u, v);
 
     int i;
-    for(i = 20; i >= 0; i--)
+    for(i = 20; i >= 0; i--) 
     {
-        if(level[anc[u][i]] >= level[v])        
+        if(level[anc[u][i]] >= level[v])
             u = anc[u][i];
     }
 
     if(u == v)
         return u;
+
     for(i = 20; i >= 0; i--)
     {
         if(anc[u][i] != anc[v][i])

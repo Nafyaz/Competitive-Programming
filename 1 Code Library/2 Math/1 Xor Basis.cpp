@@ -1,18 +1,27 @@
-int basis[d]; // basis[i] keeps the mask of the vector whose f value is i
+// basis[i] keeps the mask of the vector whose f value is i
+int basis[d];
 
-int sz; // Current size of the basis
+// Current size of the basis
+int sz;
 
-void insertVector(int mask) {
-	for (int i = 0; i < d; i++) {
-		if ((mask & 1 << i) == 0) continue; // continue if i != f(mask)
+void insertVector(int mask) 
+{
+	for (int i = 0; i < d; i++) 
+    {
+        // continue if i != f(mask)
+		if ((mask & 1 << i) == 0) 
+            continue; 
 
-		if (!basis[i]) { // If there is no basis vector with the i'th bit set, then insert this vector into the basis
+        // If there is no basis vector with the i'th bit set, then insert this vector into the basis
+		if (!basis[i]) 
+        { 
 			basis[i] = mask;
 			++sz;
 			
 			return;
 		}
 
-		mask ^= basis[i]; // Otherwise subtract the basis vector from this vector
+        // Otherwise subtract the basis vector from this vector
+		mask ^= basis[i]; 
 	}
 }
