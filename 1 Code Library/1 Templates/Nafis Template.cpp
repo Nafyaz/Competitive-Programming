@@ -35,7 +35,7 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int T, caseno = 0;
+    int T = 1, caseno = 0;
 
     cin >> T;
 
