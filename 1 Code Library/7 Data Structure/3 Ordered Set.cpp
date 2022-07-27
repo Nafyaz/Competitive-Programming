@@ -11,10 +11,10 @@ OS.insert(10);
 OS.insert(20);
 OS.insert(30);
 
-//Find 2nd smallest element
+//Find 2nd smallest element O(log(n))
 cout << *(OS.find_by_order(1)) << "\n";
 
-//Counting elements strictly less than 15
+//Counting elements strictly less than 15 O(log(n))
 cout << OS.order_of_key(15) << "\n";
 
 //Check existence of 30

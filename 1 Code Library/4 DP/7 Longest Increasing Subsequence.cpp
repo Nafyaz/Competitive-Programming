@@ -2,8 +2,24 @@ ll n, last;
 ll a[MAXN], p[MAXN];
 ll dp[MAXN];
 
-// O(n^2)
+// O(nlogn)
 ll getLIS()
+{
+    ll i, pos;
+	vector<ll> dp;
+	for (i = 0; i < n; i++)
+    {
+		pos = lower_bound(dp.begin(), dp.end(), a[i]) - dp.begin();
+		if (pos == dp.size()) 
+			dp.push_back(a[i]);
+        else         
+			dp[pos] = a[i];
+	}
+	return dp.size();
+}
+
+// O(n^2)
+ll getLIS2()
 {
     ll i, j;
 
@@ -33,20 +49,4 @@ ll getLIS()
     }
 
     return ret;
-}
-
-// O(nlogn)
-ll getLIS2()
-{
-    ll i, pos;
-	vector<ll> dp;
-	for (i = 0; i < n; i++)
-    {
-		pos = lower_bound(dp.begin(), dp.end(), a[i]) - dp.begin();
-		if (pos == dp.size()) 
-			dp.push_back(a[i]);
-        else         
-			dp[pos] = a[i];
-	}
-	return dp.size();
 }
