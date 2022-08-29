@@ -20,7 +20,7 @@ ll bigmod2(ll a, ll p, ll MOD)
         if(p&1)
             res = (res*a)%MOD;
         a = (a*a)%MOD;
-        p /= 1;
+        p /= 2;
     }
     return res;
 }

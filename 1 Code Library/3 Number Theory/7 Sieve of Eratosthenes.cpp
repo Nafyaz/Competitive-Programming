@@ -1,10 +1,9 @@
-ll N = MAXN;
 bool flag[MAXN];
-vector<ll> primes;
+vector<LL> primes;
 
 void sieve()
 {
-    ll i, j;
+    LL i, j;
 
     flag[2] = 1;
     for(i = 3; i < MAXN; i += 2)
