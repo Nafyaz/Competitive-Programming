@@ -6,7 +6,7 @@ ll query(ll bg, ll ed)
     return min(sparse[bg][k], sparse[ed - (1 << k) + 1][k]);
 }
 
-void init()
+void rmq_init()
 {
     ll n, i, j;
 

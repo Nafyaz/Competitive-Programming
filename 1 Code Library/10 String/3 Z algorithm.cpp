@@ -1,11 +1,7 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-int Z[100005];
-
-void z_function(string s)
+vector<int> z_function(string s)
 {
     int i, l, r, n = s.size();
+    vector<int> Z(n);
     Z[0] = 0;
     for(i = 1, l = 0, r = 0; i < n; i++)
     {
@@ -20,4 +16,6 @@ void z_function(string s)
             r = i+Z[i]-1;
         }
     }
+
+    return Z;
 }
