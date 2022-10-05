@@ -1,12 +1,12 @@
-ll inv[MAXN];
+LL inv[MAXN];
 
 //only if mod is prime and gcd(a, mod) = 1
-ll invmod(ll a, ll mod)
+LL invmod(LL a, LL mod)
 {
     return bigmod(a, mod-2, mod);
 }
 
-ll egcd(ll a, ll m, ll& x, ll& y)
+LL egcd(LL a, LL m, LL& x, LL& y)
 {
     if(m == 0)
     {
@@ -15,8 +15,8 @@ ll egcd(ll a, ll m, ll& x, ll& y)
         return a;
     }
 
-    ll x1, y1;
-    ll d = egcd(m, a%m, x1, y1);
+    LL x1, y1;
+    LL d = egcd(m, a%m, x1, y1);
 
     x = y1;
     y = x1 - y1*(a/m);
@@ -25,18 +25,18 @@ ll egcd(ll a, ll m, ll& x, ll& y)
 }
 
 //when gcd(a, mod) = 1
-ll invod2(ll a, ll mod)  
+LL invod2(LL a, LL mod)
 {
-    ll x, y;
+    LL x, y;
     egcd(a, mod, x, y);
 
     return (x%mod + mod) % mod;
 }
 
 //when N is prime
-void allinvmod() 
+void allinvmod()
 {
-    ll i;
+    LL i;
     inv[1] = 1;
     for(i = 2; i < N; i++)
         inv[i] = ((-N/i*inv[N%i]) % N + N) % N;

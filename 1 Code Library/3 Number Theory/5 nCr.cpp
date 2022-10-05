@@ -12,15 +12,15 @@ Non-prime mod M
     5.  O(M): Use Chinese Remainder Theorem
 */
 
-ll fact[2000006];
-ll inv[2000006];
-ll dp[500][500];
+LL fact[2000006];
+LL inv[2000006];
+LL dp[500][500];
 
-ll getFact(ll n, ll mod);
-ll bigmod(ll a, ll p, ll mod);
-ll invmod(ll a, ll mod);
+LL getFact(LL n, LL mod);
+LL bigmod(LL a, LL p, LL mod);
+LL invmod(LL a, LL mod);
 
-ll nCr1(ll n, ll r)
+LL nCr1(LL n, LL r)
 {
     if(n < r)
         return 0;
@@ -33,23 +33,23 @@ ll nCr1(ll n, ll r)
     return n * nCr1(n-1, r-1) / r;
 }
 
-ll nCr2(ll n, ll r, ll mod)
+LL nCr2(LL n, LL r, LL mod)
 {
     if(n < r)
         return 0;
 
-    ll ret = getFact(n, mod);
+    LL ret = getFact(n, mod);
     ret = (ret * invmod(getFact(r, mod), mod)) % mod;
     ret = (ret * invmod(getFact(n-r, mod), mod)) % mod;
     return ret;
 }
 
-ll nCr3(ll n, ll r, ll mod)
+LL nCr3(LL n, LL r, LL mod)
 {
     if(n < r)
         return 0;
 
-    ll ret = 1;
+    LL ret = 1;
     while(r)
     {
         ret = (ret * nCr2(n%mod, r%mod))%mod;
@@ -60,7 +60,7 @@ ll nCr3(ll n, ll r, ll mod)
     return ret;
 }
 
-ll nCr4(ll n, ll r, ll mod)
+LL nCr4(LL n, LL r, LL mod)
 {
     if(n < r)
         return 0;
@@ -74,7 +74,7 @@ ll nCr4(ll n, ll r, ll mod)
     return dp[n][r] = (nCr4(n-1, r-1, mod) + nCr4(n-1, r, mod)) % mod;
 }
 
-ll nCr5(ll n, ll r, ll mod)
+LL nCr5(LL n, LL r, LL mod)
 {
     return -1;
 }

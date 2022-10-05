@@ -22,25 +22,26 @@ typedef pair<LL, LL> pLL;
 #define ff first
 #define ss second
 #define show(x) cout << #x << ": " << x << "; "
-const int MOD = 1000000007;
-const int MAXN = 2000006;
+#define INF 1000000000000015
+#define MOD 1000000007
+#define MAXN 2000006
 
 void solve(int caseno)
 {
-    
+	
 }
 
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
 
-    int T = 1, caseno = 0;
+	int T = 1, caseno = 0;
 
-    cin >> T;
+	cin >> T;
 
-    while(T--)
-    {
-        solve(++caseno);
-    }
+	while(T--)
+	{
+		solve(++caseno);
+	}
 }

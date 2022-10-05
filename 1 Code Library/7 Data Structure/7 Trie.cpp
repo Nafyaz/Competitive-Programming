@@ -1,13 +1,15 @@
-ll trie[6800009][2], len[6800009];
-ll id;
+// Sometimes you need to use Add(0) at first
 
-void Add(ll x)
+LL trie[MAXN][2], len[MAXN];
+LL id;
+
+void Add(LL x)
 {
-    ll r = 0;
+    LL r = 0;
 
-    for(ll i = 34; i >= 0; i--)
+    for(LL i = 34; i >= 0; i--)
     {
-        ll bit = ((x & (1LL << i)) >> i);
+        LL bit = ((x & (1LL << i)) >> i);
 
         if(trie[r][bit] == 0)
             trie[r][bit] = ++id;
@@ -17,35 +19,15 @@ void Add(ll x)
     }
 }
 
-void Erase(ll x)
+void Erase(LL x)
 {
-    ll r = 0;
+    LL r = 0;
 
-    for(ll i = 34; i >= 0; i--)
+    for(LL i = 34; i >= 0; i--)
     {
-        ll bit = ((x & (1LL << i)) >> i);
+        LL bit = ((x & (1LL << i)) >> i);
 
         r = trie[r][bit];
         len[r]--;
-    }
-}
-
-int main()
-{
-    ll q, x;
-    string s;
-
-    Add(0); //Majhemoddhe 0 dhukano lagbe
-
-    cin >> q;
-
-    while(q--)
-    {
-        cin >> s >> x;
-
-        if(s == "+")
-            Add(x);
-        else if(s == "-")
-            Erase(x);
     }
 }

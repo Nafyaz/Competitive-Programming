@@ -1,9 +1,9 @@
 // Important Note: parent of 1 is 1
-int n;
-vector<int> adj[MAXN];
-int parent[MAXN], level[MAXN], anc[MAXN][21];
+LL n;
+vector<LL> adj[MAXN];
+LL parent[MAXN], level[MAXN], anc[MAXN][21];
 
-void dfs(int cur, int p, int l)
+void dfs(LL cur, LL p, LL l)
 {
     parent[cur] = p;
     level[cur] = l;
@@ -19,7 +19,7 @@ void LCA_init()
 {
     dfs(1, 1, 0);
 
-    int i, j;
+    LL i, j;
     for(i = 1; i <= n; i++)
         anc[i][0] = parent[i];
 
@@ -30,13 +30,13 @@ void LCA_init()
     }
 }
 
-int getLCA(int u, int v)
+LL getLCA(LL u, LL v)
 {
     if(level[u] < level[v])
         swap(u, v);
 
-    int i;
-    for(i = 20; i >= 0; i--) 
+    LL i;
+    for(i = 20; i >= 0; i--)
     {
         if(level[anc[u][i]] >= level[v])
             u = anc[u][i];

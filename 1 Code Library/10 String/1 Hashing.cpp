@@ -1,12 +1,12 @@
-ll base = 31;
+LL base = 31;
 
-ll n, p[MAXN];
-ll preHash[MAXN];
-ll sufHash[MAXN];
+LL n, p[MAXN];
+LL preHash[MAXN];
+LL sufHash[MAXN];
 
 void initHash()
 {
-    ll i;
+    LL i;
 
     p[0] = 1;
     for(i = 1; i < MAXN; i++)
@@ -15,7 +15,7 @@ void initHash()
 
 void createHash (string s)
 {
-    ll i;
+    LL i;
 
     n = s.size();
 

@@ -1,11 +1,8 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 int n, m;
-bool vis[10009];
-int tin[10009], low[10009], timer;
-vector<int> adj[10009];
-vector<int> bridge[10009];
+bool vis[MAXN];
+int tin[MAXN], low[MAXN], timer;
+vector<int> adj[MAXN];
+vector<int> bridge[MAXN];
 
 void dfs(int v, int p = -1)
 {
@@ -51,20 +48,4 @@ void findBR()
         if(!vis[i])
             dfs(i);
     }
-}
-
-int main()
-{
-    int i, j, u, v;
-    cin >> n >> m;
-    for(i = 0; i < m; i++)
-    {
-        cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    findBR();
-
-    cout << bridge.size();
 }

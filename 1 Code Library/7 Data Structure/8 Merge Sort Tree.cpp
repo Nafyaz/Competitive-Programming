@@ -1,10 +1,10 @@
-vector<ll>Tree[4*maxN];
-ll arr[maxN];
+vector<LL>Tree[4*MAXN];
+LL arr[MAXN];
 
-vector<ll> merge(vector<ll> v1, vector<ll> v2)
+vector<LL> merge(vector<LL> v1, vector<LL> v2)
 {
-    ll i = 0, j = 0;
-    vector<ll> ret;
+    LL i = 0, j = 0;
+    vector<LL> ret;
 
     while(i < v1.size() || j < v2.size())
     {
@@ -36,7 +36,7 @@ vector<ll> merge(vector<ll> v1, vector<ll> v2)
     return ret;
 }
 
-void Build(ll node, ll bg, ll ed)
+void Build(LL node, LL bg, LL ed)
 {
     if(bg == ed)
     {
@@ -44,25 +44,25 @@ void Build(ll node, ll bg, ll ed)
         return;
     }
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg+ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg+ed)/2;
 
-    Build(leftNode, bg, mid); 
+    Build(leftNode, bg, mid);
     Build(rightNode, mid+1, ed);
 
     Tree[node] = merge(Tree[leftNode], Tree[rightNode]);
 }
- 
-ll query(ll node, ll bg, ll ed, ll l, ll r, ll k)
-{
-    if(ed < l || bg > r)    
-        return 0;
-    
-    if(l <= bg && ed <= r)    
-        return upper_bound(Tree[node].begin(), Tree[node].end(), k) - Tree[node].begin();    
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+LL query(LL node, LL bg, LL ed, LL l, LL r, LL k)
+{
+    if(ed < l || bg > r)
+        return 0;
+
+    if(l <= bg && ed <= r)
+        return upper_bound(Tree[node].begin(), Tree[node].end(), k) - Tree[node].begin();
+
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     return query(leftNode, bg, mid, l, r, k) + query(rightNode, mid+1, ed, l, r, k);
 }

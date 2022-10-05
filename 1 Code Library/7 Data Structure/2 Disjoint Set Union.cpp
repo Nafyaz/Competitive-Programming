@@ -1,15 +1,15 @@
-ll root[MAXN];
+LL leader[MAXN];
 
-int Find(int x) 
+LL Find(LL x)
 {
-    if (x == root[x])
+    if (x == leader[x])
         return x;
-    return root[x] = find_set(root[x]);
+    return leader[x] = find_set(leader[x]);
 }
 
-void Union(int x, int y) {
+void Union(LL x, LL y) {
     x = Find(x);
     y = Find(y);
-    
-    root[max(x, y)] = min(x, y);
+
+    leader[max(x, y)] = min(x, y);
 }

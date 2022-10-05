@@ -1,30 +1,30 @@
-ll root[MAXN], n, m;
-vector<pair<ll, pll>>>edges;
+LL leader[MAXN], n, m;
+vector<pair<LL, pLL>>>edges;
 
-ll Find(ll a)
+LL Find(LL a)
 {
-    if(root[a] == a)
+    if(leader[a] == a)
         return a;
-    root[a] = Find(root[a]);
-    return root[a];
+    leader[a] = Find(leader[a]);
+    return leader[a];
 }
 
-void Union(ll a, ll b)
+void Union(LL a, LL b)
 {
     a = Find(a);
     b = Find(b);
 
-    root[max(a, b)] = min(a, b);
+    leader[max(a, b)] = min(a, b);
 }
 
-ll kruskal()
+LL kruskal()
 {
-    ll i, ret = 0;
+    LL i, ret = 0;
     for(i = 1; i <= n; i++)
-        root[i] = i;
+        leader[i] = i;
 
     sort(edges.begin(), edges.end());
-    ll cnt = 0;
+    LL cnt = 0;
     for(auto [c, e] : edge)
     {
         [a, b] = e;

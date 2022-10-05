@@ -1,7 +1,7 @@
-vector<int> z_function(string s)
+vector<LL> z_function(string s)
 {
-    int i, l, r, n = s.size();
-    vector<int> Z(n);
+    LL i, l, r, n = s.size();
+    vector<LL> Z(n);
     Z[0] = 0;
     for(i = 1, l = 0, r = 0; i < n; i++)
     {

@@ -1,32 +1,8 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-#define N 100009
-bool flag[N];
+bool flag[MAXN];
 vector<int> primes;
-ll phi[N];
+ll phi[MAXN];
 
-void sieve()
-{
-    int i, j;
-    flag[0] = flag[1] = 1;
-    for(i = 4; i < N; i += 2)
-        flag[i] = 1;
-    for(i = 3; i * i < N; i += 2)
-    {
-        if(!flag[i])
-        {
-            for(j = i * i; j < N; j += 2 * i)
-                flag[j] = 1;
-        }
-    }
-
-    for(i = 2; i < N; i++)
-    {
-        if(!flag[i])
-            primes.push_back(i);
-    }
-}
+void sieve() {}
 
 ll findPhi(ll n)
 {
@@ -52,14 +28,14 @@ ll findPhi(ll n)
 void sievephi()
 {
     ll i, j;
-    for(i = 1; i < N; i++)
+    for(i = 1; i < MAXN; i++)
         phi[i] = i;
 
-    for(i = 2; i < N; i++)
+    for(i = 2; i < MAXN; i++)
     {
         if(phi[i] == i)
         {
-            for(j = i; j < N; j += i)
+            for(j = i; j < MAXN; j += i)
                 phi[j] = phi[j] / i * (i - 1);
         }
     }
@@ -95,17 +71,4 @@ void segsievephi(ll a, ll b)
         if(val[i - a] > 1)
             phi[i - a] = phi[i - a] / val[i - a] * (val[i - a] - 1);
     }
-}
-
-int main()
-{
-    sieve();
-
-    int n;
-    cin >> n;
-    cout << findPhi(n) << endl;
-
-    sievephi();
-    for(int i = 1; i <= n; i++)
-        cout << phi[i] << " ";
 }

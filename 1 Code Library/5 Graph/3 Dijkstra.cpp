@@ -1,44 +1,33 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-#define ff first
-#define ss second
+LL n;
+vector <pLL> adj[MAXN];
+LL dis[MAXN], par[MAXN];
 
-ll n;
-vector <pair<ll, ll>> adj[505];
-ll dis[505], par[505];
-
-void init()
+void dijkstra(LL s)
 {
-    for(ll i = 1; i <= n; i++)
+    for(LL i = 1; i <= n; i++)
     {
-        dis[i] = INT_MAX;
+        dis[i] = INF;
         par[i] = -1;
     }
-}
 
-void dijkstra(ll s)
-{
-    init();
-
-    set <pair<ll, ll> > q;
+    set<pLL> q;
 
     dis[s] = 0;
     q.insert({0, s});
 
     while(!q.empty())
     {
-        pair<ll, ll> p = *q.begin();
+        pLL p = *q.begin();
         q.erase(q.begin());
 
-        ll node = p.ss;
+        LL node = p.ss;
         if(p.ff > dis[node])
             continue;
 
         for (auto u : adj[node])
         {
-            ll len = u.ff;
-            ll to = u.ss;
+            LL len = u.ff;
+            LL to = u.ss;
             if (dis[node] + len < dis[to])
             {
                 dis[to] = dis[node] + len;
@@ -47,24 +36,4 @@ void dijkstra(ll s)
             }
         }
     }
-}
-
-int main()
-{
-    ll i, m, s;
-
-    cin >> n >> m;
-    for(i = 0; i < m; i++)
-    {
-        ll a, b, c;
-        cin >> a >> b >> c;
-        adj[a].push_back({c, b});
-        adj[b].push_back({c, a});
-    }
-
-    cin >> s;
-    dijkstra(s);
-
-    for(i = 1; i <= n; i++)
-        cout << i << ": " << dis[i] << endl;
 }

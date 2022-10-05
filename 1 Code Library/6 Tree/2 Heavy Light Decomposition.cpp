@@ -1,16 +1,9 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define ll long long
-#define ff first
-#define ss second
-
-const int N = 30000 + 5;
-int n, a[N];
-vector<int> adj[N];
-int parent[N], level[N], anc[N][21];//for lca
-int heavy[N], subsize[N];
-int chainHead[N], chainNo, basePos[N], chainIdx[N];//for hld
-int base[N], cnt, tree[N*4];//for segment tree
+int n, a[MAXN];
+vector<int> adj[MAXN];
+int parent[MAXN], level[MAXN], anc[MAXN][21];//for lca
+int heavy[MAXN], subsize[MAXN];
+int chainHead[MAXN], chainNo, basePos[MAXN], chainIdx[MAXN];//for hld
+int base[MAXN], cnt, Tree[MAXN*4];//for segment Tree
 
 int dfs(int node, int pr, int l)
 {
@@ -107,7 +100,7 @@ void build_tree(int node, int s, int e)
 {
     if(s == e)
     {
-        tree[node] = base[s];
+        Tree[node] = base[s];
         return;
     }
 
@@ -116,7 +109,7 @@ void build_tree(int node, int s, int e)
     build_tree(left, s, mid);
     build_tree(right, mid+1, e);
 
-    tree[node]= tree[left] + tree[right];
+    Tree[node]= Tree[left] + Tree[right];
 }
 
 void update_tree(int node, int s, int e, int pos, int val)
@@ -126,7 +119,7 @@ void update_tree(int node, int s, int e, int pos, int val)
     if(s == e)
     {
         base[s] = val;
-        tree[node] = val;
+        Tree[node] = val;
         return;
     }
 
@@ -135,7 +128,7 @@ void update_tree(int node, int s, int e, int pos, int val)
     update_tree(left, s, mid, pos, val);
     update_tree(right, mid+1, e, pos, val);
 
-    tree[node] = tree[left] + tree[right];
+    Tree[node] = Tree[left] + Tree[right];
 }
 
 int query_tree(int node, int s, int e, int lo, int hi)
@@ -143,7 +136,7 @@ int query_tree(int node, int s, int e, int lo, int hi)
     if(hi < s || lo > e)
         return 0;
     if(lo <= s && hi >= e)
-        return tree[node];
+        return Tree[node];
 
     int mid = (s+e)/2, left = 2*node, right = 2*node+1;
     int p1 = query_tree(left, s, mid, lo, hi);

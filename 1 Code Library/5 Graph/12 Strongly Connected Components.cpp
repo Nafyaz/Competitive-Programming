@@ -1,9 +1,5 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-const int N = 10009;
-vector <int> g[N], gr[N];
-bool vis[N];
+vector <int> g[MAXN], gr[MAXN];
+bool vis[MAXN];
 vector<int> order, component;
 
 void dfs1(int v)

@@ -1,17 +1,17 @@
 // Complexity O(VE^2)
-ll n;
-ll cap[109][109], parent[109];
+LL n;
+LL cap[109][109], parent[109];
 bool vis[109];
-vector<ll> adj[109];
+vector<LL> adj[109];
 
-ll bfs(ll s, ll t)
+LL bfs(LL s, LL t)
 {
     memset(vis, 0, sizeof vis);
 
-    ll cur, flow, new_flow;
-    
-    queue<pll> q;
-    q.push({INT_MAX, s});
+    LL cur, flow, new_flow;
+
+    queue<pLL> q;
+    q.push({INF, s});
     vis[s] = 1;
 
     while(!q.empty())
@@ -26,7 +26,7 @@ ll bfs(ll s, ll t)
             {
                 parent[nxt] = cur;
                 new_flow = min(flow, cap[cur][nxt]);
-                
+
                 if(nxt == t)
                     return new_flow;
 
@@ -39,10 +39,10 @@ ll bfs(ll s, ll t)
     return 0;
 }
 
-ll maxflow(ll s, ll t)
+LL maxflow(LL s, LL t)
 {
-    ll prev, cur;
-    ll flow = 0, new_flow;
+    LL prev, cur;
+    LL flow = 0, new_flow;
 
     while(new_flow = bfs(s, t))
     {
@@ -60,7 +60,6 @@ ll maxflow(ll s, ll t)
 }
 
 /*
-
 memset(cap, 0, sizeof cap);
 
 cap[a][b] += w;

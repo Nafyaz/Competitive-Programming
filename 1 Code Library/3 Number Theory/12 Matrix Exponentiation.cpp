@@ -1,9 +1,9 @@
-typedef vector<vector<ll>> Mat;
+typedef vector<vector<LL>> Mat;
 
 Mat Mul(Mat A, Mat B)
 {
-    Mat ret(A.size(), vector<ll>(B[0].size()));
-    ll i, j, k;
+    Mat ret(A.size(), vector<LL>(B[0].size()));
+    LL i, j, k;
 
     for(i = 0; i < ret.size(); i++)
     {
@@ -17,11 +17,11 @@ Mat Mul(Mat A, Mat B)
     return ret;
 }
 
-Mat Pow(Mat A, ll p)
+Mat Pow(Mat A, LL p)
 {
-    Mat ret(A.size(), vector<ll>(A[0].size()));
+    Mat ret(A.size(), vector<LL>(A[0].size()));
 
-    for(ll i = 0; i < ret.size(); i++)
+    for(LL i = 0; i < ret.size(); i++)
         ret[i][i] = 1;
 
     while(p)

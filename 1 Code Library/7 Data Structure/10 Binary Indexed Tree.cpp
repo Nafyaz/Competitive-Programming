@@ -1,8 +1,8 @@
 // Always 1 indexed
-ll n;
-ll a[MAXN], BIT[MAXN];
+LL n;
+LL a[MAXN], BIT[MAXN];
 
-void Update(ll i, ll d)
+void Update(LL i, LL d)
 {
     while(i <= n)
     {
@@ -11,15 +11,15 @@ void Update(ll i, ll d)
     }
 }
 
-ll Query(ll i)
+LL Query(LL i)
 {
-    ll sum = 0;
+    LL sum = 0;
     while(i > 0)
     {
         sum += BIT[i];
         i -= i & (-i);
     }
-    
+
     return sum;
 }
 

@@ -1,10 +1,10 @@
 // Node e dhukar sathe sathe lazy clear kora lagbe.
 // Shei node amar desired range er vitore thakuk, othoba na thakuk.
 // Naile WA khabi sure.
-ll arr[MAXN];
-ll Tree[4*MAXN], Lazy[4*MAXN];
+LL arr[MAXN];
+LL Tree[4*MAXN], Lazy[4*MAXN];
 
-void Build(ll node, ll bg, ll ed)
+void Build(LL node, LL bg, LL ed)
 {
     if(bg == ed)
     {
@@ -13,8 +13,8 @@ void Build(ll node, ll bg, ll ed)
         return;
     }
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     Build(leftNode, bg, mid);
     Build(rightNode, mid+1, ed);
@@ -23,10 +23,10 @@ void Build(ll node, ll bg, ll ed)
     Lazy[node] = 0;
 }
 
-void updateRange(ll node, ll bg, ll ed, ll l, ll r, ll val)
+void updateRange(LL node, LL bg, LL ed, LL l, LL r, LL val)
 {
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     if(Lazy[node] != 0)
     {
@@ -59,10 +59,10 @@ void updateRange(ll node, ll bg, ll ed, ll l, ll r, ll val)
     Tree[node] = Tree[leftNode] + Tree[rightNode];
 }
 
-ll queryRange(ll node, ll bg, ll ed, ll l, ll r)
-{    
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+LL queryRange(LL node, LL bg, LL ed, LL l, LL r)
+{
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     if(Lazy[node] != 0)
     {
@@ -81,8 +81,8 @@ ll queryRange(ll node, ll bg, ll ed, ll l, ll r)
     if(l <= bg && ed <= r)
         return Tree[node];
 
-    ll p1 = queryRange(leftNode, bg, mid, l, r);
-    ll p2 = queryRange(rightNode, mid + 1, ed, l, r);
-    
+    LL p1 = queryRange(leftNode, bg, mid, l, r);
+    LL p2 = queryRange(rightNode, mid + 1, ed, l, r);
+
     return (p1 + p2);
 }

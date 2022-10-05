@@ -1,10 +1,10 @@
-ll leastFactor[MAX];
+LL leastFactor[MAX];
 bool isComposite[MAX];
-vector<ll> primes;
+vector<LL> primes;
 
 void linSieve()
 {
-    ll i, j;
+    LL i, j;
     for (i = 2; i < MAX; ++i)
     {
         if (leastFactor[i] == 0)
@@ -12,7 +12,7 @@ void linSieve()
             leastFactor[i] = i;
             primes.push_back(i);
         }
-        for (j = 0; j < (ll)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < MAXN; ++j)
+        for (j = 0; j < (LL)primes.size() && primes[j] <= leastFactor[i] && i*primes[j] < MAXN; ++j)
         {
             leastFactor[i * primes[j]] = primes[j];
         }
@@ -21,13 +21,13 @@ void linSieve()
 
 void linSieve2()
 {
-    ll i, j;
+    LL i, j;
     for(i = 2; i < N; i++)
     {
         if (!isComposite[i])
             primes.push_back(i);
 
-        for(j = 0; j < (ll)primes.size() && i*primes[j] < MAXN; j++)
+        for(j = 0; j < (LL)primes.size() && i*primes[j] < MAXN; j++)
         {
             isComposite[i * primes[j]] = 1;
             if(i % primes[j] == 0)

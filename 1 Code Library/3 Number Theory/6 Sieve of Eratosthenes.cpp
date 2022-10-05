@@ -9,7 +9,7 @@ void sieve()
     for(i = 3; i < MAXN; i += 2)
         flag[i] = 1;
 
-    for(i = 3; i * i < MAXN; i+=2)
+    for(i = 3; i*i < MAXN; i += 2)
     {
         if(flag[i])
         {

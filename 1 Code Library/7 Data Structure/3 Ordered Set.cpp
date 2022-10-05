@@ -5,7 +5,7 @@ template<typename T>
 using ordered_set = tree<T, null_type,less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 
-ordered_set<ll> OS, OS2;
+ordered_set<LL> OS, OS2;
 
 OS.insert(10);
 OS.insert(20);

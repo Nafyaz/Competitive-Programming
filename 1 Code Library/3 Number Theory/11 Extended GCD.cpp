@@ -1,4 +1,4 @@
-int egcd(int a, int b, int& x, int& y)
+LL egcd(LL a, LL b, LL& x, LL& y)
 {
     if (b == 0)
     {
@@ -6,20 +6,20 @@ int egcd(int a, int b, int& x, int& y)
         y = 0;
         return a;
     }
-    int x1, y1;
-    int d = egcd(b, a % b, x1, y1);
+    LL x1, y1;
+    LL d = egcd(b, a % b, x1, y1);
     x = y1;
     y = x1 - y1 * (a / b);
     return d;
 }
 
-int egcd2(int a, int b, int& x, int& y)
+LL egcd2(LL a, LL b, LL& x, LL& y)
 {
     x = 1, y = 0;
-    int x1 = 0, y1 = 1, a1 = a, b1 = b;
+    LL x1 = 0, y1 = 1, a1 = a, b1 = b;
     while (b1)
     {
-        int q = a1 / b1;
+        LL q = a1 / b1;
         tie(x, x1) = make_tuple(x1, x - q * x1);
         tie(y, y1) = make_tuple(y1, y - q * y1);
         tie(a1, b1) = make_tuple(b1, a1 - q * b1);
@@ -27,7 +27,10 @@ int egcd2(int a, int b, int& x, int& y)
     return a1;
 }
 
-bool LDE(int a, int b, int c, int &x0, int &y0, int &d) {
+// Linear Diophantine Equation
+// a*x + b*y = c
+bool LDE(LL a, LL b, LL c, LL &x0, LL &y0, LL &d)
+{
     d = egcd(abs(a), abs(b), x0, y0);
     if (c % d)
         return 0;
@@ -39,9 +42,9 @@ bool LDE(int a, int b, int c, int &x0, int &y0, int &d) {
     return 1;
 }
 
-bool LDEall(int a, int b, int c, int t, int &x, int &y)
+bool LDEall(LL a, LL b, LL c, LL t, LL &x, LL &y)
 {
-    int d;
+    LL d;
     if(LDE(a, b, c, x, y, d))
     {
         x = x + b*t;

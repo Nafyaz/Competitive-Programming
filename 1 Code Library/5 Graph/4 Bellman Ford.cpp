@@ -1,6 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-
 struct edge
 {
     int a, b, cost;
@@ -8,7 +5,6 @@ struct edge
 
 int n, m, v;
 vector<edge> e;
-const int INF = 1000000000;
 
 void solve()
 {

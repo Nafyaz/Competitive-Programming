@@ -1,10 +1,10 @@
-ll n;
-vector <pair<ll, ll>> adj[MAXN];
-ll dis[MAXN][MAXN];
+LL n;
+vector<pLL> adj[MAXN];
+LL dis[MAXN][MAXN];
 
 void floyd_warshall()
 {
-    ll i, j, k;
+    LL i, j, k;
 
     memset(dist, -1, sizeof dist);
     for(i = 1; i <= n; i++)

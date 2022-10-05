@@ -1,12 +1,9 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-int pal[300009], n;
+LL pal[300009], n;
 string s = "#";
 
 void manacher()
 {
-    int i, l, r, k;
+    LL i, l, r, k;
 
     for(i = 0, l = 0, r = -1; i < n; i++)
     {
@@ -31,7 +28,7 @@ void manacher()
 
 int main()
 {
-    int i, ans = 0;
+    LL i, ans = 0;
     string stemp;
 
     cin >> n >> stemp;

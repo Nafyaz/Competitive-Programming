@@ -1,11 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-const int N = 100005;
 int n;
-vector<int> adj[N];
+vector<int> adj[MAXN];
 vector<int> path;
-int in[N];
+int in[MAXN];
 
 void topsort()
 {

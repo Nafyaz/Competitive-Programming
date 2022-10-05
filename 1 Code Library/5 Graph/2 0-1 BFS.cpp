@@ -1,10 +1,10 @@
-vector<pll> adj[MAXN];
-ll dist[MAXN];
+vector<pLL> adj[MAXN];
+LL dist[MAXN];
 
-void bfs01(ll cur)
+void bfs01(LL cur)
 {
-    ll nxt, d;
-    dequeu<pll> dq;
+    LL nxt, d;
+    dequeu<pLL> dq;
     dq.push_back({0, cur});
     dist[cur] = 0;
 
@@ -16,7 +16,7 @@ void bfs01(ll cur)
 
         if(dist[nxt] < d)
             continue;
-        
+
         for(auto [nxt, d2] : adj[cur])
         {
             if(dist[nxt] == -1 || d + d2 < dist[nxt])

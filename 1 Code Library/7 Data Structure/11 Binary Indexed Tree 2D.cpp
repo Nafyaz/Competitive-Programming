@@ -1,9 +1,9 @@
-int mx = 100, my = 100;
+LL mx = 100, my = 100;
 BIT[mx][my];
 
-void update(int x, int y, int val)
+void update(LL x, LL y, LL val)
 {
-    int y1;
+    LL y1;
     while (x <= mx)
     {
         y1 = y;
@@ -15,9 +15,9 @@ void update(int x, int y, int val)
         x += (x & -x);
     }
 }
-int query(int x, int y)
+LL query(LL x, LL y)
 {
-    int y1, sum = 0;
+    LL y1, sum = 0;
     while(x)
     {
         y1 = y;

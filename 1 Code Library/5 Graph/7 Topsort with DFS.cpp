@@ -1,10 +1,6 @@
-#include<bits/stdc++.h>
-using namespace std;
-
-const int N = 100005;
-vector<int> adj[N];
+vector<int> adj[MAX];
 stack<int> st;
-int col[N];
+int col[MAX];
 
 bool dfs(int s)
 {
@@ -22,29 +18,12 @@ bool dfs(int s)
     return ret;
 }
 
-int main()
+//Run it for all nodes
+for(i = 1; i <= node; i++)
 {
-    int i, node, edge;
-    cin >> node >> edge;
-    for(i = 1; i <= edge; i++)
+    if(col[i] == 0 && dfs(i) == 0)
     {
-        int u, v;
-        cin >> u >> v;
-        adj[u].push_back(v);
-    }
-    for(i = 1; i <= node; i++)
-    {
-        if(col[i] == 0 && dfs(i) == 0)
-        {
-            cout << "impossible";
-            return 0;
-        }
-    }
-    while(!st.empty())
-    {
-        cout << st.top() << " ";
-        st.pop();
+        cout << "impossible";
+        return 0;
     }
 }
-
-

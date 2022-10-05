@@ -1,10 +1,9 @@
-int LPS[MAXN], n;
-string s;
+// Longest Prefix which is also a Suffix
+LL LPS[MAXN], n;
 
-void KMP()
+void KMP(string s)
 {
-    int i, j;
-    n = s.size();
+    LL i, j, n = s.size();
 
     LPS[0]=0;
 
@@ -20,22 +19,4 @@ void KMP()
 
         LPS[i] = j;
     }
-}
-
-int main()
-{
-    string p, t;
-    cin >> p >> t;
-    s = p + '#' + t;
-
-    KMP();
-
-    int i, cnt = 0;
-
-    for(i = p.size() + 1; i < s.size(); i++)
-    {
-        if(LPS[i] == p.size())
-            cnt++;
-    }
-    cout << cnt;
 }

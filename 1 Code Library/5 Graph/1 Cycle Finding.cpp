@@ -1,14 +1,14 @@
-ll n;
-vector<ll> adj[MAXN];
-ll color[MAXN], parent[MAXN];
-ll cycle_start, cycle_end;
+LL n;
+vector<LL> adj[MAXN];
+LL color[MAXN], parent[MAXN];
+LL cycle_start, cycle_end;
 
-bool dfs(ll cur, ll p)
+bool dfs(LL cur, LL p)
 {
     parent[cur] = p;
     color[cur] = 1;
 
-    for (ll nxt : adj[cur])
+    for (LL nxt : adj[cur])
     {
         if (color[nxt] == 0)
         {
@@ -32,7 +32,7 @@ void find_cycle()
     fill(parent, parent+n, -1);
     cycle_start = -1;
 
-    ll i;
+    LL i;
 
     for (i = 0; i < n; i++)
     {
@@ -44,15 +44,15 @@ void find_cycle()
         cout << "Acyclic" << "\n";
     else
     {
-        vector<ll> cycle;
+        vector<LL> cycle;
         cycle.push_back(cycle_start);
-        for (ll v = cycle_end; v != cycle_start; v = parent[v])
+        for (LL v = cycle_end; v != cycle_start; v = parent[v])
             cycle.push_back(v);
         cycle.push_back(cycle_start);
         reverse(cycle.begin(), cycle.end());
 
         cout << "Cycle found: ";
-        for (ll v : cycle)
+        for (LL v : cycle)
             cout << v << " ";
         cout << "\n";
     }

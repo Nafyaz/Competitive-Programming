@@ -1,7 +1,7 @@
-ll arr[MAXN];
-ll Tree[4*MAXN];
+LL arr[MAXN];
+LL Tree[4*MAXN];
 
-void Build(ll node, ll bg, ll ed)
+void Build(LL node, LL bg, LL ed)
 {
     if(bg == ed)
     {
@@ -9,8 +9,8 @@ void Build(ll node, ll bg, ll ed)
         return;
     }
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     Build(leftNode, bg, mid);
     Build(rightNode, mid+1, ed);
@@ -18,7 +18,7 @@ void Build(ll node, ll bg, ll ed)
     Tree[node] = Tree[leftNode] + Tree[rightNode];
 }
 
-void Update(ll node, ll bg, ll ed, ll idx, ll val)
+void Update(LL node, LL bg, LL ed, LL idx, LL val)
 {
     if(bg == ed)
     {
@@ -27,8 +27,8 @@ void Update(ll node, ll bg, ll ed, ll idx, ll val)
         return;
     }
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
     if(idx <= mid)
         Update(leftNode, bg, mid, idx, val);
@@ -38,7 +38,7 @@ void Update(ll node, ll bg, ll ed, ll idx, ll val)
     Tree[node] = Tree[leftNode] + Tree[rightNode];
 }
 
-ll Query(ll node, ll bg, ll ed, ll l, ll r)
+LL Query(LL node, LL bg, LL ed, LL l, LL r)
 {
     if(bg > r || ed < l)
         return 0;
@@ -46,11 +46,11 @@ ll Query(ll node, ll bg, ll ed, ll l, ll r)
     if(l <= bg && ed <= r)
         return Tree[node];
 
-    ll leftNode = 2*node, rightNode = 2*node + 1;
-    ll mid = (bg + ed)/2;
+    LL leftNode = 2*node, rightNode = 2*node + 1;
+    LL mid = (bg + ed)/2;
 
-    ll p1 = Query(leftNode, bg, mid, l, r);
-    ll p2 = Query(rightNode, mid+1, ed, l, r);
+    LL p1 = Query(leftNode, bg, mid, l, r);
+    LL p2 = Query(rightNode, mid+1, ed, l, r);
 
     return p1 + p2;
 }
